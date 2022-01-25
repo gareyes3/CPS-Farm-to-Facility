@@ -40,6 +40,8 @@ Reduction = -((2/(2.45/24))**0.3)
 0.5*6
 
 
+
+
 totals= []
 for i in list(range(1,1000)):
     time = 2
