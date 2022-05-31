@@ -12,8 +12,8 @@ library(tidyverse)
 library(ggplot2)
 library(scales)
 
-#setwd("C:/Users/Gustavo Reyes/Box/CPS Project- Farm to Facility/Papers/CSV Data")
-setwd("C:/Users/gareyes3/Box Sync/CPS Project- Farm to Facility/Papers/CSV Data")
+setwd("C:/Users/Gustavo Reyes/Box/CPS Project- Farm to Facility/Papers/CSV Data")
+#setwd("C:/Users/gareyes3/Box Sync/CPS Project- Farm to Facility/Papers/CSV Data")
 ```
 
 
@@ -79,6 +79,9 @@ labels_x = c("Baseline-NI" = "Baseline",
 
 FSdf$System<-c(rep("No Intervention", 14),rep("All Interventions", 8))
 
+hline_data <- data.frame(y = c(0, -3.4927), Baseline_System = factor(c("No Intervention", "All Intervention")), 
+                         stringsAsFactors = FALSE)
+
 pfs = ggplot(data= FSdf, aes(x = fct_reorder(Name, abs(FS)), y = FS, fill = System))+
   geom_col()+
   coord_flip()
@@ -86,15 +89,19 @@ pfs = ggplot(data= FSdf, aes(x = fct_reorder(Name, abs(FS)), y = FS, fill = Syst
 
   pfs+
   theme(text = element_text(size=24))+
-  geom_hline(yintercept = -3.492672,linetype="dotted", size = 2)+
-    geom_hline(yintercept = 0,linetype="dashed",size = 2)+
+  #geom_hline(yintercept = -3.492672,linetype="dotted", size = 2)+
+   # geom_hline(yintercept = 0,linetype="dashed",size = 2)+
   ylab("Factor Sensitivity Index")+
   xlab("Scenario/ Intervention")+
   scale_x_discrete(labels = labels_x)+
   theme(text = element_text(size=26), axis.text = element_text(size = 26))+
-  theme(legend.text=element_text(size=20),legend.title=element_text(size=20))+
+  theme(legend.text=element_text(size=18),legend.title=element_text(size=18))+
   #scale_x_discrete(limits=rev)+
-  ggtitle("Factor Sensitivity Analysis (FS)")
+  geom_hline(data = hline_data, 
+       aes(yintercept = y, linetype = Baseline_System),size =2)+
+  ggtitle("Factor Sensitivity Analysis (FS)")+
+    scale_linetype_manual(values = c("No Intervention" = "dotted", "All Intervention" = "dashed"), 
+                        name = "")
 
   ggsave("FS.png", width = 40, height = 30, units = "cm", dpi = 600)
 
@@ -124,20 +131,20 @@ NI_Summ<-NI_1_ProgInt %>%
 NI_Summ_3<-NI_3_ProgInt %>% 
   group_by(Type,variable ) %>% 
   summarize(mean= mean(value),h95 =mean + margin_calc(value),l95 =mean - margin_calc(value)) %>% 
-  mutate(ContScen = "10% Clustered Contamaination") %>% 
+  mutate(ContScen = "10% Clustered Contamination") %>% 
   drop_na()
 #1%
 NI_Summ_2<-NI_2_ProgInt %>% 
   group_by(Type,variable ) %>% 
   summarize(mean= mean(value),h95 =mean + margin_calc(value),l95 =mean - margin_calc(value)) %>% 
-    mutate(ContScen = "1% Clustered Contamaination") %>% 
+    mutate(ContScen = "1% Clustered Contamination") %>% 
   drop_na()
 
 Binded_all<-bind_rows(NI_Summ,NI_Summ_3,NI_Summ_2)
 
 
 Binded_all$variable<-factor(Binded_all$variable, levels=order_progression)
-Binded_all$ContScen<-factor(Binded_all$ContScen, levels=c("Random Contamination","10% Clustered Contamaination","1% Clustered Contamaination"))
+Binded_all$ContScen<-factor(Binded_all$ContScen, levels=c("Random Contamination","10% Clustered Contamination","1% Clustered Contamination"))
 
 
 ggplot(data= Binded_all, aes(x= variable,y = mean, group= Type, color = Type, linetype=Type, fill = Type))+
@@ -147,11 +154,11 @@ ggplot(data= Binded_all, aes(x= variable,y = mean, group= Type, color = Type, li
   theme(text = element_text(size=24))+
    scale_y_continuous(trans='log10',
                       labels = trans_format("log10", math_format(10^.x)))+
-  labs(y= "Total CFUs in System", x="Process Stage")+
+  labs(y= "Total Cells in System", x="Process Stage")+
   #ggtitle("1) Random Contamination")+
-  facet_wrap(~ ContScen, ncol = 2)
+  facet_wrap(~ ContScen, ncol = 3)
 
-ggsave("contprog.png", width = 40, height = 35, units = "cm", dpi = 600)
+ggsave("contprog.png", width = 45, height = 25, units = "cm", dpi = 600)
   
 
 
@@ -199,7 +206,7 @@ ggplot(data = Binded_Con, aes(x = variable, y =value, fill = `Cont Scenario`))+
                       labels = trans_format("log10", math_format(10^.x)))+
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))+
   theme(text = element_text(size=24))+
-  labs(x= "Sampling Step", y = "Total CFUs in System")+
+  labs(x= "Sampling Step", y = "Total Cells in System")+
   facet_wrap(~Process)
 
 ggsave("Cont_Sampling.png", width = 40, height = 35, units = "cm", dpi = 600)
