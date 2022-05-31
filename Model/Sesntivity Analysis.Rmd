@@ -165,6 +165,8 @@ Sens_DF_T25<-Sens_DF %>%
 
 
 ```{r}
+
+
 ggplot(data = Sens_DF, aes(x=fct_reorder(rownames(Sens_DF), abs(original)),y=original, fill = Cateogry))+
   geom_bar(stat = "identity", position = "identity")+
   geom_errorbar(aes(ymin=minci, ymax=maxci), width=.1,col="blue")+
@@ -173,8 +175,10 @@ ggplot(data = Sens_DF, aes(x=fct_reorder(rownames(Sens_DF), abs(original)),y=ori
   ggtitle("Sensitivity Analysis on Final CFU in System")+
   coord_flip()+
   theme(plot.title = element_text(hjust = 0.5))+
-  theme(text = element_text(size=13))
+  theme(text = element_text(size=26), axis.text = element_text(size = 24))+
+  theme(legend.text=element_text(size=16),legend.title=element_text(size=20))+
 
-ggsave("SensitivityPlot", height = 40, width =30, dpi = 600)
+
+ggsave(filename= "SensitivityPlot.png", path = "C:/Users/gareyes3/Box Sync/CPS Project- Farm to Facility/Papers/CSV Data", height = 15, width =20, dpi = 600)
 ```
 

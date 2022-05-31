@@ -35,6 +35,7 @@ from matplotlib.ticker import ScalarFormatter
 import seaborn as sns
 import sys
 import Trial_MainLoop_PH
+import scipy.stats as st
 
 
 reload(MainModel3z)
@@ -511,6 +512,19 @@ INT_Combined=pd.concat([Outputdf_INT_1,Outputdf_INT_3,Outputdf_INT_2])
 #Compating two scenarios
 def logredcomp  (df1,dfbaseline):
     return np.log10(df1[1]["After CS Samp"].mean() /dfbaseline[1]["After CS Samp"].mean())
+
+def logredcomp_q  (df1,dfbaseline):
+    q90= np.log10(df1[1]["After CS Samp"].quantile (0.95) /dfbaseline[1]["After CS Samp"].mean())
+    q10= np.log10(df1[1]["After CS Samp"].quantile (0.15) /dfbaseline[1]["After CS Samp"].mean())
+    return [q90,q10]
+
+def red_CFU (df1,dfbaseline):
+    sub =(df1[1]["After CS Samp"]-dfbaseline[1]["After CS Samp"])
+    return [sub.mean(), sub.quantile(0.95), sub.quantile(0.05)]
+    
+
+red_CFU(Baseline_NI_Sp_Wash_1, Baseline_NI_1)
+
 
 #spray wash
 logredcomp(Baseline_NI_Sp_Wash_1, Baseline_NI_1)

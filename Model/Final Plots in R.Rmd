@@ -182,8 +182,6 @@ Con_S %>%
   group_by(variable) %>% 
   summarise(mean(value), quantile(value, 0.05), quantile(value, 0.95))
   
-
-
 Con_S_AI %>% 
   group_by(variable) %>% 
   summarise(mean(value), quantile(value, 0.05), quantile(value, 0.95))
