@@ -11,9 +11,10 @@ editor_options:
 library(tidyverse)
 library(ggplot2)
 library(scales)
+library(forcats)
 
 setwd("C:/Users/Gustavo Reyes/Box/CPS Project- Farm to Facility/Papers/CSV Data")
-#setwd("C:/Users/gareyes3/Box Sync/CPS Project- Farm to Facility/Papers/CSV Data")
+setwd("C:/Users/gareyes3/Box/CPS Project- Farm to Facility/Papers/CSV Data")
 ```
 
 
@@ -291,4 +292,24 @@ ggplot(data= Final_Exps, aes(x =fct_reorder(`Sampling Plan`, `Relative Differenc
   ggsave("EXposure.png", width = 40, height = 28, units = "cm", dpi = 600)
 ```
 
+##Expossure comparison Chart
+
+```{r}
+
+Exposure_Chart<-read_csv("Exposure_Chart_df.csv")
+Exposure_Chart<-Exposure_Chart[-1]
+
+Exposure_Chart<-Exposure_Chart %>% 
+  mutate(log10cont = log10(Final_CFU_Acc_Portion_mean))
+
+ggplot(data = Exposure_Chart, aes(x = fct_reorder(Sampling_Plan, desc(log10cont)) ,y = log10cont))+
+  geom_point()+
+  facet_wrap(~Cont_Spread)+
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
+  
+
+
+
+
+```
 

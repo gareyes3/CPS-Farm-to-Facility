@@ -867,6 +867,50 @@ Outputs_Df_AI_1=F_Outputs_Table(List_of_Outs_AI_1)
 Outputs_Df_AI_2=F_Outputs_Table(List_of_Outs_AI_2)
 Outputs_Df_AI_3=F_Outputs_Table(List_of_Outs_AI_3)    
 
+
+##For outputs for new chart
+Outputs_Df_AI_1["Final_CFU_Acc_Portion_mean"]
+Outputs_Df_AI_1["Sampling_Plan"] = "Baseline PHS4D PHS4H PHSInt HTrad RSTrad FPSTrad CS".split()
+Outputs_Df_AI_1["Baseline_Scenario"] = "All Intervention"
+Outputs_Df_AI_1["Cont_Spread"] = "Random"
+A1=Outputs_Df_AI_1[["Final_CFU_Acc_Portion_mean","Cont_Spread","Sampling_Plan","Baseline_Scenario"]]
+
+Outputs_Df_AI_2["Final_CFU_Acc_Portion_mean"]
+Outputs_Df_AI_2["Sampling_Plan"] = "Baseline PHS4D PHS4H PHSInt HTrad RSTrad FPSTrad CS".split()
+Outputs_Df_AI_2["Baseline_Scenario"] = "All Intervention"
+Outputs_Df_AI_2["Cont_Spread"] = "1% Cluster"
+A2=Outputs_Df_AI_2[["Final_CFU_Acc_Portion_mean","Cont_Spread","Sampling_Plan","Baseline_Scenario"]]
+
+Outputs_Df_AI_3["Final_CFU_Acc_Portion_mean"]
+Outputs_Df_AI_3["Sampling_Plan"] = "Baseline PHS4D PHS4H PHSInt HTrad RSTrad FPSTrad CS".split()
+Outputs_Df_AI_3["Baseline_Scenario"] = "All Intervention"
+Outputs_Df_AI_3["Cont_Spread"] = "10% Cluster"
+A3=Outputs_Df_AI_3[["Final_CFU_Acc_Portion_mean","Cont_Spread","Sampling_Plan","Baseline_Scenario"]]
+
+#NI
+Outputs_Df_NI_1["Final_CFU_Acc_Portion_mean"]
+Outputs_Df_NI_1["Sampling_Plan"] = "Baseline PHS4D PHS4H PHSInt HTrad RSTrad FPSTrad CS".split()
+Outputs_Df_NI_1["Baseline_Scenario"] = "All Intervention"
+Outputs_Df_NI_1["Cont_Spread"] = "Random"
+N1=Outputs_Df_NI_1[["Final_CFU_Acc_Portion_mean","Cont_Spread","Sampling_Plan","Baseline_Scenario"]]
+
+Outputs_Df_NI_2["Final_CFU_Acc_Portion_mean"]
+Outputs_Df_NI_2["Sampling_Plan"] = "Baseline PHS4D PHS4H PHSInt HTrad RSTrad FPSTrad CS".split()
+Outputs_Df_NI_2["Baseline_Scenario"] = "All Intervention"
+Outputs_Df_NI_2["Cont_Spread"] = "1% Cluster"
+N2=Outputs_Df_NI_2[["Final_CFU_Acc_Portion_mean","Cont_Spread","Sampling_Plan","Baseline_Scenario"]]
+
+Outputs_Df_NI_3["Final_CFU_Acc_Portion_mean"]
+Outputs_Df_NI_3["Sampling_Plan"] = "Baseline PHS4D PHS4H PHSInt HTrad RSTrad FPSTrad CS".split()
+Outputs_Df_NI_3["Baseline_Scenario"] = "All Intervention"
+Outputs_Df_NI_3["Cont_Spread"] = "10% Cluster"
+N3=Outputs_Df_NI_3[["Final_CFU_Acc_Portion_mean","Cont_Spread","Sampling_Plan","Baseline_Scenario"]]
+
+Exposure_Chart_df= pd.concat([A1,A2,A3,N1,N2,N3])
+
+Exposure_Chart_df.to_csv("C:\\Users\\gareyes3\\Box\\CPS Project- Farm to Facility\\Papers\\CSV Data\\Exposure_Chart_df.csv")
+
+
 #Sampling Results:
 
 def sampling_power(df,Step_Acc):
