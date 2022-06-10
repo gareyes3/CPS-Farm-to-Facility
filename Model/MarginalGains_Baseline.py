@@ -513,6 +513,10 @@ INT_Combined=pd.concat([Outputdf_INT_1,Outputdf_INT_3,Outputdf_INT_2])
 def logredcomp  (df1,dfbaseline):
     return np.log10(df1[1]["After CS Samp"].mean() /dfbaseline[1]["After CS Samp"].mean())
 
+def logredcomp_1  (df1,dfbaseline):
+    a=  dfbaseline[1]["After CS Samp"]- df1[1]["After CS Samp"] 
+    return a
+
 def logredcomp_q  (df1,dfbaseline):
     q90= np.log10(df1[1]["After CS Samp"].quantile (0.95) /dfbaseline[1]["After CS Samp"].mean())
     q10= np.log10(df1[1]["After CS Samp"].quantile (0.15) /dfbaseline[1]["After CS Samp"].mean())
@@ -523,8 +527,9 @@ def red_CFU (df1,dfbaseline):
     return [sub.mean(), sub.quantile(0.95), sub.quantile(0.05)]
     
 
-red_CFU(Baseline_NI_Sp_Wash_1, Baseline_NI_1)
 
+
+st.t.interval(alpha=0.95, df=1000, loc=1.27, scale=0.5) 
 
 #spray wash
 logredcomp(Baseline_NI_Sp_Wash_1, Baseline_NI_1)
@@ -545,6 +550,7 @@ logredcomp(Baseline_NI_Holding_2, Baseline_NI_2)
 logredcomp(Baseline_AI_1, Baseline_NI_1)
 logredcomp(Baseline_AI_3, Baseline_NI_3)
 logredcomp(Baseline_AI_2, Baseline_NI_2)
+
 
 
 H= sns.catplot(x ="MeanComparison", y = "ScenarioN", col="Cont_Spread",
@@ -724,6 +730,9 @@ Outputs_Df_NI_3=F_Outputs_Table(List_of_Outs_NI_3)
 def sampling_power(df,Step_Acc):
     return len(df[0][df[0][Step_Acc] ==0])/10000
 
+def sampling_power_2(df,Step_Acc):
+    return len(df[0][df[0][Step_Acc] ==0])
+
 Step_Acc_List = "PH_Wei_Acc PH_Wei_Acc PH_Wei_Acc PH_Wei_Acc H_Wei_Acc R_Wei_Acc FP_Wei_Acc C_Wei_Acc".split()
 
 Powers_NI = []
@@ -732,6 +741,16 @@ for i in list(range(8)):
     Powers_NI.append(Power_1)
     
 Powers_NI
+
+Powers_NI_N = []
+for i in list(range(8)):
+    Power_1= sampling_power_2(List_of_Outs_NI_1[i],Step_Acc_List[i])
+    Powers_NI_N.append(Power_1)
+    
+Powers_NI_N
+
+
+
 
 #Scenario 2: 
     
@@ -742,6 +761,13 @@ for i in list(range(8)):
     
 Powers_NI_2
 
+Powers_NI_N_2 = []
+for i in list(range(8)):
+    Power_1= sampling_power_2(List_of_Outs_NI_2[i],Step_Acc_List[i])
+    Powers_NI_N_2.append(Power_1)
+    
+Powers_NI_N_2
+
 #Scenario 3
 
 Powers_NI_3 = []
@@ -750,6 +776,13 @@ for i in list(range(8)):
     Powers_NI_3.append(Power_1)
     
 Powers_NI_3
+
+Powers_NI_N_3 = []
+for i in list(range(8)):
+    Power_1= sampling_power_2(List_of_Outs_NI_3[i],Step_Acc_List[i])
+    Powers_NI_N_3.append(Power_1)
+    
+Powers_NI_N_3
 
 #Plot of contamination levels at sampling stage.
 
@@ -870,41 +903,42 @@ Outputs_Df_AI_3=F_Outputs_Table(List_of_Outs_AI_3)
 
 ##For outputs for new chart
 Outputs_Df_AI_1["Final_CFU_Acc_Portion_mean"]
+Outputs_Df_AI_1["MeanComparison"]
 Outputs_Df_AI_1["Sampling_Plan"] = "Baseline PHS4D PHS4H PHSInt HTrad RSTrad FPSTrad CS".split()
 Outputs_Df_AI_1["Baseline_Scenario"] = "All Intervention"
 Outputs_Df_AI_1["Cont_Spread"] = "Random"
-A1=Outputs_Df_AI_1[["Final_CFU_Acc_Portion_mean","Cont_Spread","Sampling_Plan","Baseline_Scenario"]]
+A1=Outputs_Df_AI_1[["Final_CFU_Acc_Portion_mean","Prevalence_Acc_Mean","Prevalence_Comparison","MeanComparison","Cont_Spread","Sampling_Plan","Baseline_Scenario"]]
 
 Outputs_Df_AI_2["Final_CFU_Acc_Portion_mean"]
 Outputs_Df_AI_2["Sampling_Plan"] = "Baseline PHS4D PHS4H PHSInt HTrad RSTrad FPSTrad CS".split()
 Outputs_Df_AI_2["Baseline_Scenario"] = "All Intervention"
 Outputs_Df_AI_2["Cont_Spread"] = "1% Cluster"
-A2=Outputs_Df_AI_2[["Final_CFU_Acc_Portion_mean","Cont_Spread","Sampling_Plan","Baseline_Scenario"]]
+A2=Outputs_Df_AI_2[["Final_CFU_Acc_Portion_mean","Prevalence_Acc_Mean","Prevalence_Comparison", "MeanComparison","Cont_Spread","Sampling_Plan","Baseline_Scenario"]]
 
 Outputs_Df_AI_3["Final_CFU_Acc_Portion_mean"]
 Outputs_Df_AI_3["Sampling_Plan"] = "Baseline PHS4D PHS4H PHSInt HTrad RSTrad FPSTrad CS".split()
 Outputs_Df_AI_3["Baseline_Scenario"] = "All Intervention"
 Outputs_Df_AI_3["Cont_Spread"] = "10% Cluster"
-A3=Outputs_Df_AI_3[["Final_CFU_Acc_Portion_mean","Cont_Spread","Sampling_Plan","Baseline_Scenario"]]
+A3=Outputs_Df_AI_3[["Final_CFU_Acc_Portion_mean","Prevalence_Acc_Mean","Prevalence_Comparison","MeanComparison","Cont_Spread","Sampling_Plan","Baseline_Scenario"]]
 
 #NI
 Outputs_Df_NI_1["Final_CFU_Acc_Portion_mean"]
 Outputs_Df_NI_1["Sampling_Plan"] = "Baseline PHS4D PHS4H PHSInt HTrad RSTrad FPSTrad CS".split()
-Outputs_Df_NI_1["Baseline_Scenario"] = "All Intervention"
+Outputs_Df_NI_1["Baseline_Scenario"] = "No Intervention"
 Outputs_Df_NI_1["Cont_Spread"] = "Random"
-N1=Outputs_Df_NI_1[["Final_CFU_Acc_Portion_mean","Cont_Spread","Sampling_Plan","Baseline_Scenario"]]
+N1=Outputs_Df_NI_1[["Final_CFU_Acc_Portion_mean","Prevalence_Acc_Mean","Prevalence_Comparison","MeanComparison","Cont_Spread","Sampling_Plan","Baseline_Scenario"]]
 
 Outputs_Df_NI_2["Final_CFU_Acc_Portion_mean"]
 Outputs_Df_NI_2["Sampling_Plan"] = "Baseline PHS4D PHS4H PHSInt HTrad RSTrad FPSTrad CS".split()
-Outputs_Df_NI_2["Baseline_Scenario"] = "All Intervention"
+Outputs_Df_NI_2["Baseline_Scenario"] = "No Intervention"
 Outputs_Df_NI_2["Cont_Spread"] = "1% Cluster"
-N2=Outputs_Df_NI_2[["Final_CFU_Acc_Portion_mean","Cont_Spread","Sampling_Plan","Baseline_Scenario"]]
+N2=Outputs_Df_NI_2[["Final_CFU_Acc_Portion_mean","Prevalence_Acc_Mean","Prevalence_Comparison","MeanComparison","Cont_Spread","Sampling_Plan","Baseline_Scenario"]]
 
 Outputs_Df_NI_3["Final_CFU_Acc_Portion_mean"]
 Outputs_Df_NI_3["Sampling_Plan"] = "Baseline PHS4D PHS4H PHSInt HTrad RSTrad FPSTrad CS".split()
-Outputs_Df_NI_3["Baseline_Scenario"] = "All Intervention"
+Outputs_Df_NI_3["Baseline_Scenario"] = "No Intervention"
 Outputs_Df_NI_3["Cont_Spread"] = "10% Cluster"
-N3=Outputs_Df_NI_3[["Final_CFU_Acc_Portion_mean","Cont_Spread","Sampling_Plan","Baseline_Scenario"]]
+N3=Outputs_Df_NI_3[["Final_CFU_Acc_Portion_mean","Prevalence_Acc_Mean","Prevalence_Comparison","MeanComparison","Cont_Spread","Sampling_Plan","Baseline_Scenario"]]
 
 Exposure_Chart_df= pd.concat([A1,A2,A3,N1,N2,N3])
 
@@ -925,6 +959,15 @@ for i in list(range(8)):
     
 Powers_AI
 
+
+Powers_AI_N = []
+for i in list(range(8)):
+    Power_1= sampling_power_2(List_of_Outs_AI_1[i],Step_Acc_List[i])
+    Powers_AI_N.append(Power_1)
+    
+Powers_AI_N
+
+
 #Scenario 2: 
     
 Powers_AI_2 = []
@@ -934,6 +977,14 @@ for i in list(range(8)):
     
 Powers_AI_2
 
+
+Powers_AI_N_2 = []
+for i in list(range(8)):
+    Power_1= sampling_power_2(List_of_Outs_AI_2[i],Step_Acc_List[i])
+    Powers_AI_N_2.append(Power_1)
+    
+Powers_AI_N_2
+
 #Scenario 3
 
 Powers_AI_3 = []
@@ -942,6 +993,14 @@ for i in list(range(8)):
     Powers_AI_3.append(Power_1)
     
 Powers_AI_3
+
+
+Powers_AI_N_3 = []
+for i in list(range(8)):
+    Power_1= sampling_power_2(List_of_Outs_AI_3[i],Step_Acc_List[i])
+    Powers_AI_N_3.append(Power_1)
+    
+Powers_AI_N_3
 
 powers_df = pd.DataFrame({
     "1NI": Powers_NI,

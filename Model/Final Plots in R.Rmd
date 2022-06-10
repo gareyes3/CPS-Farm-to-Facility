@@ -13,7 +13,7 @@ library(ggplot2)
 library(scales)
 library(forcats)
 
-setwd("C:/Users/Gustavo Reyes/Box/CPS Project- Farm to Facility/Papers/CSV Data")
+#setwd("C:/Users/Gustavo Reyes/Box/CPS Project- Farm to Facility/Papers/CSV Data")
 setwd("C:/Users/gareyes3/Box/CPS Project- Farm to Facility/Papers/CSV Data")
 ```
 
@@ -93,7 +93,7 @@ pfs = ggplot(data= FSdf, aes(x = fct_reorder(Name, abs(FS)), y = FS, fill = Syst
   #geom_hline(yintercept = -3.492672,linetype="dotted", size = 2)+
    # geom_hline(yintercept = 0,linetype="dashed",size = 2)+
   ylab("Factor Sensitivity Index")+
-  xlab("Scenario/ Intervention")+
+  xlab("Scenario or Intervention")+
   scale_x_discrete(labels = labels_x)+
   theme(text = element_text(size=26), axis.text = element_text(size = 26))+
   theme(legend.text=element_text(size=18),legend.title=element_text(size=18))+
@@ -140,6 +140,15 @@ NI_Summ_2<-NI_2_ProgInt %>%
   summarize(mean= mean(value),h95 =mean + margin_calc(value),l95 =mean - margin_calc(value)) %>% 
     mutate(ContScen = "1% Clustered Contamination") %>% 
   drop_na()
+
+#GettingSummaryStats. for intervention effect. 
+
+NI_Summ %>% 
+  filter(variable == "After CS Samp") %>% 
+  mutate(logchange= log10(mean/1372),
+         logchange95l = log10(h95/1372),
+         logchange95h = log10(l95/1372)
+         )
 
 Binded_all<-bind_rows(NI_Summ,NI_Summ_3,NI_Summ_2)
 
@@ -299,17 +308,70 @@ ggplot(data= Final_Exps, aes(x =fct_reorder(`Sampling Plan`, `Relative Differenc
 Exposure_Chart<-read_csv("Exposure_Chart_df.csv")
 Exposure_Chart<-Exposure_Chart[-1]
 
-Exposure_Chart<-Exposure_Chart %>% 
-  mutate(log10cont = log10(Final_CFU_Acc_Portion_mean))
+unique(Exposure_Chart$Cont_Spread)
+levels_1<-c("Baseline", "PHS4D", "PHS4H", "PHSInt", "HTrad", "RSTrad", "FPSTrad", "CS")
+levels_2<-c("Baseline", "CS", "PHS4D", "HTrad", "RSTrad","PHS4H", "FPSTrad", "PHSInt")
 
-ggplot(data = Exposure_Chart, aes(x = fct_reorder(Sampling_Plan, desc(log10cont)) ,y = log10cont))+
-  geom_point()+
+Exposure_Chart$Cont_Spread<-factor(Exposure_Chart$Cont_Spread, levels = c("Random", "10% Cluster", "1% Cluster"))
+
+
+Exposure_Chart<-Exposure_Chart %>% 
+  mutate(log10cont = log10(Final_CFU_Acc_Portion_mean),)
+
+#Exposure.
+ggplot(data = Exposure_Chart,aes(x = factor(Sampling_Plan, levels =levels_2 ) ,y = MeanComparison, group = Baseline_Scenario,color = Baseline_Scenario))+
+  theme_bw()+
+  geom_point(size = 2.5)+
+  #geom_col(data = Exposure_Chart, aes(x =factor(Sampling_Plan, levels =levels_2), y = log10cont))+
   facet_wrap(~Cont_Spread)+
-  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))+
+  labs(y= "Relative Exposure", x = "Sampling Plan", color= "Baseline Scenario")+
+  scale_y_continuous(labels = percent)+
+  geom_line(aes(group = Sampling_Plan),
+            color="black",
+            alpha = 0.7 ,
+            arrow = arrow(length=unit(0.15,"cm"), ends="last", type = "closed"))+
+  ggtitle("Relative Exposure")
+
+  scale_color_manual(values = c("Baseline" = "black", "PHS4D" = "red","PHS4H" = "black","PHSInt" = "black","HTrad" = "black","RSTrad" = "black","FPSTrad" = "black","CS" = "black"))
+ 
+  
+#PRevalence
+  
+ggplot(data = Exposure_Chart,aes(x = factor(Sampling_Plan, levels =levels_2 ) ,y =Prevalence_Comparison, group = Baseline_Scenario,color = Baseline_Scenario))+
+  theme_bw()+
+  geom_point(size = 2.5)+
+  #geom_col(data = Exposure_Chart, aes(x =factor(Sampling_Plan, levels =levels_2), y = log10cont))+
+  facet_wrap(~Cont_Spread)+
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))+
+  labs(y= "Relative Prevalence of Contaminated Packages", x = "Sampling Plan", color= "Baseline Scenario")+
+  scale_y_continuous(labels = percent)+
+  geom_line(aes(group = Sampling_Plan),
+            color="black",
+            alpha = 0.7 ,
+            arrow = arrow(length=unit(0.15,"cm"), ends="last", type = "closed"))+
+  ggtitle("Relative Prevalence")
+  
+  
+#Cont 
+  ggplot(data = Exposure_Chart,aes(y = factor(Sampling_Plan, levels =levels_2 ) ,x = log10cont, group = Baseline_Scenario,fill = Baseline_Scenario))+
+  theme_bw()+
+  geom_col(position = "dodge")+
+  #geom_point(size = 2.5)+
+  #geom_col(data = Exposure_Chart, aes(x =factor(Sampling_Plan, levels =levels_2), y = log10cont))+
+  facet_wrap(~Cont_Spread)+
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))+
+  labs(y= "Log10 Total Cells Exposure", x = "Sampling Plan", color= "Baseline Scenario")+
+  #scale_y_continuous(labels = percent)+
+  #geom_line(aes(group = Sampling_Plan),
+            #color="black",
+            #alpha = 0.7 ,
+            #arrow = arrow(length=unit(0.15,"cm"), ends="first", type = "closed"))+
+  ggtitle("Total Cells Exposure")
   
 
 
-
-
 ```
+
+
 
