@@ -14,7 +14,8 @@ library(scales)
 library(forcats)
 
 #setwd("C:/Users/Gustavo Reyes/Box/CPS Project- Farm to Facility/Papers/CSV Data")
-setwd("C:/Users/gareyes3/Box/CPS Project- Farm to Facility/Papers/CSV Data")
+setwd("C:/Users/reyes/Box Sync/CPS Project- Farm to Facility/Papers/CSV Data")
+#setwd("C:/Users/gareyes3/Box/CPS Project- Farm to Facility/Papers/CSV Data")
 ```
 
 
@@ -319,7 +320,7 @@ Exposure_Chart<-Exposure_Chart %>%
   mutate(log10cont = log10(Final_CFU_Acc_Portion_mean),)
 
 #Exposure.
-ggplot(data = Exposure_Chart,aes(x = factor(Sampling_Plan, levels =levels_2 ) ,y = MeanComparison, group = Baseline_Scenario,color = Baseline_Scenario))+
+ggplot(data = Exposure_Chart,aes(x = factor(Sampling_Plan, levels =levels_1 ) ,y = MeanComparison, group = Baseline_Scenario,color = Baseline_Scenario))+
   theme_bw()+
   geom_point(size = 2.5)+
   #geom_col(data = Exposure_Chart, aes(x =factor(Sampling_Plan, levels =levels_2), y = log10cont))+
@@ -338,7 +339,7 @@ ggplot(data = Exposure_Chart,aes(x = factor(Sampling_Plan, levels =levels_2 ) ,y
   
 #PRevalence
   
-ggplot(data = Exposure_Chart,aes(x = factor(Sampling_Plan, levels =levels_2 ) ,y =Prevalence_Comparison, group = Baseline_Scenario,color = Baseline_Scenario))+
+ggplot(data = Exposure_Chart,aes(x = factor(Sampling_Plan, levels =levels_1 ) ,y =Prevalence_Comparison, group = Baseline_Scenario,color = Baseline_Scenario))+
   theme_bw()+
   geom_point(size = 2.5)+
   #geom_col(data = Exposure_Chart, aes(x =factor(Sampling_Plan, levels =levels_2), y = log10cont))+
