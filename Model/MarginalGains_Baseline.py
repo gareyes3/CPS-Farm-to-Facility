@@ -411,9 +411,9 @@ Melted_Prog_DF_NI_2["Scenario"] = "1% Cluster"
 Melted_Prog_DF_NI_3["Scenario"] = "10% Cluster"
 
 ##Exporting to CSV
-Melted_Prog_DF_NI_1.to_csv(path_or_buf = "C:\\Users\\Gustavo Reyes\\Box\\CPS Project- Farm to Facility\\Papers\\CSV Data\\Melted_Prog_DF_NI_1.csv")
-Melted_Prog_DF_NI_2.to_csv(path_or_buf = "C:\\Users\\Gustavo Reyes\\Box\\CPS Project- Farm to Facility\\Papers\\CSV Data\\Melted_Prog_DF_NI_2.csv")
-Melted_Prog_DF_NI_3.to_csv(path_or_buf = "C:\\Users\\Gustavo Reyes\\Box\\CPS Project- Farm to Facility\\Papers\\CSV Data\\Melted_Prog_DF_NI_3.csv")
+Melted_Prog_DF_NI_1.to_csv(path_or_buf = "C:\\Users\\Gustavo Reyes\\Box\\CPS Project- Farm to Facility\\Papers\\CSV Data\\Melted_Prog_DF_NI_1-Final.csv")
+Melted_Prog_DF_NI_2.to_csv(path_or_buf = "C:\\Users\\Gustavo Reyes\\Box\\CPS Project- Farm to Facility\\Papers\\CSV Data\\Melted_Prog_DF_NI_2-Final.csv")
+Melted_Prog_DF_NI_3.to_csv(path_or_buf = "C:\\Users\\Gustavo Reyes\\Box\\CPS Project- Farm to Facility\\Papers\\CSV Data\\Melted_Prog_DF_NI_3-Final.csv")
 
 ###Plots, Replaced by R plots
 All_Melted = pd.concat([Melted_Prog_DF_NI_1,Melted_Prog_DF_NI_2,Melted_Prog_DF_NI_3])
@@ -750,8 +750,6 @@ for i in list(range(8)):
 Powers_NI_N
 
 
-
-
 #Scenario 2: 
     
 Powers_NI_2 = []
@@ -815,7 +813,7 @@ Sampling_Loc_NI_3["Cont Scenario"] = "10% Cluster"
 Sampling_Loc_Melt = pd.concat([Sampling_Loc_NI_1,Sampling_Loc_NI_2,Sampling_Loc_NI_3])
 
 #Exporting to CSV
-Sampling_Loc_Melt.to_csv("C:\\Users\\gareyes3\\Box Sync\\CPS Project- Farm to Facility\\Papers\\CSV Data\\ContSamp.csv")
+Sampling_Loc_Melt.to_csv("C:\\Users\\Gustavo Reyes\\Box\\CPS Project- Farm to Facility\\Papers\\CSV Data\\ContSamp-Final.csv")
 
 H=sns.catplot(x="variable", y="value", hue = "Cont Scenario", kind = "bar" ,
 data=Sampling_Loc_Melt)
@@ -942,7 +940,9 @@ N3=Outputs_Df_NI_3[["Final_CFU_Acc_Portion_mean","Prevalence_Acc_Mean","Prevalen
 
 Exposure_Chart_df= pd.concat([A1,A2,A3,N1,N2,N3])
 
-Exposure_Chart_df.to_csv("C:\\Users\\gareyes3\\Box\\CPS Project- Farm to Facility\\Papers\\CSV Data\\Exposure_Chart_df.csv")
+Exposure_Chart_df.to_csv("C:\\Users\\Gustavo Reyes\\Box\\CPS Project- Farm to Facility\\Papers\\CSV Data\\Exposure_Chart_df-Final.csv")
+
+
 
 
 #Sampling Results:
@@ -1024,7 +1024,7 @@ Sampling_Loc_AI_3["Cont Scenario"] = "10% Cluster"
 Sampling_Loc_Melt_AI = pd.concat([Sampling_Loc_AI_1,Sampling_Loc_AI_2,Sampling_Loc_AI_3])
 
 #Export CSV
-Sampling_Loc_Melt_AI.to_csv("C:\\Users\\gareyes3\\Box Sync\\CPS Project- Farm to Facility\\Papers\\CSV Data\\ContSamp_AI.csv")
+Sampling_Loc_Melt_AI.to_csv("C:\\Users\\Gustavo Reyes\\Box\\CPS Project- Farm to Facility\\Papers\\CSV Data\\ContSamp_AI-Final.csv")
 
 H=sns.catplot(x="variable", y="value", hue = "Cont Scenario", kind = "bar" ,
 data=Sampling_Loc_Melt)
