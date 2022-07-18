@@ -13,8 +13,8 @@ library(ggplot2)
 library(scales)
 library(forcats)
 
-#setwd("C:/Users/Gustavo Reyes/Box/CPS Project- Farm to Facility/Papers/CSV Data")
-setwd("C:/Users/reyes/Box Sync/CPS Project- Farm to Facility/Papers/CSV Data")
+setwd("C:/Users/Gustavo Reyes/Box/CPS Project- Farm to Facility/Papers/CSV Data")
+#setwd("C:/Users/reyes/Box Sync/CPS Project- Farm to Facility/Papers/CSV Data")
 #setwd("C:/Users/gareyes3/Box/CPS Project- Farm to Facility/Papers/CSV Data")
 ```
 
@@ -23,11 +23,11 @@ setwd("C:/Users/reyes/Box Sync/CPS Project- Farm to Facility/Papers/CSV Data")
 ## Factor Sensitivity plot
 
 ```{r}
-FSdf<-read_csv("FSdf.csv")
+FSdf<-read_csv("FSdf-Final.csv")
 
-log10(4388/13740302)
+#log10(4388/13740302)
 
-FSdf$FS<-c(0,-1.2769679063, -1.7998346791, -0.8368652945, -0.0747038970, -1.2406815098, 0.0373676179, -0.0048823063, -0.1545419933, -0.5291657397, -0.0500426243, -0.1400479579, -0.1535739862, -0.0009942127,-3.492672, -3.516924,-3.497117, -3.597166, -3.495334, -3.500707, -3.499108, -3.49573)
+#FSdf$FS<-c(0,-1.2769679063, -1.7998346791, -0.8368652945, -0.0747038970, -1.2406815098, 0.0373676179, -0.0048823063, -0.1545419933, -0.5291657397, -0.0500426243, -0.1400479579, -0.1535739862, -0.0009942127,-3.492672, -3.516924,-3.497117, -3.597166, -3.495334, -3.500707, -3.499108, -3.49573)
 ```
 
 ```{r}
@@ -81,7 +81,7 @@ labels_x = c("Baseline-NI" = "Baseline",
 
 FSdf$System<-c(rep("No Intervention", 14),rep("All Interventions", 8))
 
-hline_data <- data.frame(y = c(0, -3.4927), Baseline_System = factor(c("No Intervention", "All Intervention")), 
+hline_data <- data.frame(y = c(0, -3.4), Baseline_System = factor(c("No Intervention", "All Intervention")), 
                          stringsAsFactors = FALSE)
 
 pfs = ggplot(data= FSdf, aes(x = fct_reorder(Name, abs(FS)), y = FS, fill = System))+
@@ -105,7 +105,7 @@ pfs = ggplot(data= FSdf, aes(x = fct_reorder(Name, abs(FS)), y = FS, fill = Syst
     scale_linetype_manual(values = c("No Intervention" = "dotted", "All Intervention" = "dashed"), 
                         name = "")
 
-  ggsave("FS.png", width = 40, height = 30, units = "cm", dpi = 600)
+  ggsave("FS-Final.png", width = 40, height = 30, units = "cm", dpi = 600)
 
 
 ```
@@ -113,9 +113,9 @@ pfs = ggplot(data= FSdf, aes(x = fct_reorder(Name, abs(FS)), y = FS, fill = Syst
 
 ## Contmainationation progression
 ```{r}
-NI_1_ProgInt<-read_csv("Melted_Prog_DF_NI_1.csv")
-NI_2_ProgInt<-read_csv("Melted_Prog_DF_NI_2.csv")
-NI_3_ProgInt<-read_csv("Melted_Prog_DF_NI_3.csv")
+NI_1_ProgInt<-read_csv("Melted_Prog_DF_NI_1-Final.csv")
+NI_2_ProgInt<-read_csv("Melted_Prog_DF_NI_2-Final.csv")
+NI_3_ProgInt<-read_csv("Melted_Prog_DF_NI_3-Final.csv")
 
 order_progression<-unique(NI_1_ProgInt$variable) #getting exact order of events
 
@@ -151,6 +151,14 @@ NI_Summ %>%
          logchange95h = log10(l95/1372)
          )
 
+
+log10(0.4705123/1583.4578) #this to calculate the CI from the paper
+log10(65.7962957/1583.4578)
+log10(0.4705123/1583.4578) #this to calculate the CI from the paper
+log10(199.4115526/1583.4578)
+
+
+
 Binded_all<-bind_rows(NI_Summ,NI_Summ_3,NI_Summ_2)
 
 
@@ -169,7 +177,7 @@ ggplot(data= Binded_all, aes(x= variable,y = mean, group= Type, color = Type, li
   #ggtitle("1) Random Contamination")+
   facet_wrap(~ ContScen, ncol = 3)
 
-ggsave("contprog.png", width = 45, height = 25, units = "cm", dpi = 600)
+ggsave("contprog-Final.png", width = 45, height = 25, units = "cm", dpi = 600)
   
 
 
@@ -182,8 +190,8 @@ ggsave("contprog.png", width = 45, height = 25, units = "cm", dpi = 600)
 ## Contamination at sampling Point
 
 ```{r}
-Con_S<-read_csv("ContSamp.csv")
-Con_S_AI<-read_csv("ContSamp_AI.csv")
+Con_S<-read_csv("ContSamp-Final.csv")
+Con_S_AI<-read_csv("ContSamp_AI-Final.csv")
 
 Con_S$Process<-"No Intervetion"
 Con_S_AI$Process<-"All Interventions"
@@ -205,8 +213,10 @@ Binded_Con$variable<-factor(Binded_Con$variable, levels=Order_ConS)
 Binded_Con$`Cont Scenario`<-factor(Binded_Con$`Cont Scenario`, levels=c("Random","10% Cluster","1% Cluster"))
 
 Binded_Con %>% 
-  group_by(variable,`Cont Scenario` ) %>% 
-  summarise(quantile = quantile(value, 0.05))
+  group_by(variable) %>% 
+  summarise(mean = mean(value), quantile5 = quantile(value, 0.05),quantile95 = quantile(value, 0.95))
+
+
 
 
 ggplot(data = Binded_Con, aes(x = variable, y =value, fill = `Cont Scenario`))+
@@ -218,7 +228,7 @@ ggplot(data = Binded_Con, aes(x = variable, y =value, fill = `Cont Scenario`))+
   labs(x= "Sampling Step", y = "Total Cells in System")+
   facet_wrap(~Process)
 
-ggsave("Cont_Sampling.png", width = 40, height = 35, units = "cm", dpi = 600)
+ggsave("Cont_Sampling-Final.png", width = 40, height = 35, units = "cm", dpi = 600)
 
 options("device")
 
@@ -299,7 +309,7 @@ ggplot(data= Final_Exps, aes(x =fct_reorder(`Sampling Plan`, `Relative Differenc
   scale_y_continuous(labels = scales::percent)
   #geom_hline(yintercept = 13740302,linetype="dotted")+
   #geom_hline(yintercept = 4532,linetype="dashed")
-  ggsave("EXposure.png", width = 40, height = 28, units = "cm", dpi = 600)
+  ggsave("EXposure-Final.png", width = 40, height = 28, units = "cm", dpi = 600)
 ```
 
 ##Expossure comparison Chart
@@ -322,7 +332,9 @@ Exposure_Chart<-Exposure_Chart %>%
 #Exposure.
 ggplot(data = Exposure_Chart,aes(x = factor(Sampling_Plan, levels =levels_1 ) ,y = MeanComparison, group = Baseline_Scenario,color = Baseline_Scenario))+
   theme_bw()+
-  geom_point(size = 2.5)+
+  geom_point(size = 4)+
+  theme(text = element_text(size=26), axis.text = element_text(size = 24))+
+  theme(legend.text=element_text(size=16),legend.title=element_text(size=20))+
   #geom_col(data = Exposure_Chart, aes(x =factor(Sampling_Plan, levels =levels_2), y = log10cont))+
   facet_wrap(~Cont_Spread)+
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))+
@@ -331,8 +343,9 @@ ggplot(data = Exposure_Chart,aes(x = factor(Sampling_Plan, levels =levels_1 ) ,y
   geom_line(aes(group = Sampling_Plan),
             color="black",
             alpha = 0.7 ,
-            arrow = arrow(length=unit(0.15,"cm"), ends="last", type = "closed"))+
+            arrow = arrow(length=unit(0.3,"cm"), ends="last", type = "closed"))+
   ggtitle("Relative Exposure")
+ggsave("Relative Exposure-Final.png", width = 40, height = 28, units = "cm", dpi = 600)
 
   scale_color_manual(values = c("Baseline" = "black", "PHS4D" = "red","PHS4H" = "black","PHSInt" = "black","HTrad" = "black","RSTrad" = "black","FPSTrad" = "black","CS" = "black"))
  
@@ -341,7 +354,9 @@ ggplot(data = Exposure_Chart,aes(x = factor(Sampling_Plan, levels =levels_1 ) ,y
   
 ggplot(data = Exposure_Chart,aes(x = factor(Sampling_Plan, levels =levels_1 ) ,y =Prevalence_Comparison, group = Baseline_Scenario,color = Baseline_Scenario))+
   theme_bw()+
-  geom_point(size = 2.5)+
+  geom_point(size = 4)+
+  theme(text = element_text(size=26), axis.text = element_text(size = 24))+
+  theme(legend.text=element_text(size=16),legend.title=element_text(size=20))+
   #geom_col(data = Exposure_Chart, aes(x =factor(Sampling_Plan, levels =levels_2), y = log10cont))+
   facet_wrap(~Cont_Spread)+
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))+
@@ -350,8 +365,9 @@ ggplot(data = Exposure_Chart,aes(x = factor(Sampling_Plan, levels =levels_1 ) ,y
   geom_line(aes(group = Sampling_Plan),
             color="black",
             alpha = 0.7 ,
-            arrow = arrow(length=unit(0.15,"cm"), ends="last", type = "closed"))+
+            arrow = arrow(length=unit(0.3,"cm"), ends="last", type = "closed"))+
   ggtitle("Relative Prevalence")
+ggsave("Relative Prevalence-Final.png", width = 40, height = 28, units = "cm", dpi = 600)
   
   
 #Cont 
