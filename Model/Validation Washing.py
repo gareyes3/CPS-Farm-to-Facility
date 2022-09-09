@@ -182,7 +182,7 @@ def F_Washing_ProcLines (df , Wash_Rate, Cdf):
     L_Xw = []
     L_Xl = []
     for i in Times_W:
-        Xs = np.random.triangular(0.003,0.055,0.149)
+        #Xs = np.random.triangular(0.003,0.055,0.149)
         index =i
         #Defining Initial Contamination
         Time = i
@@ -220,12 +220,112 @@ def F_Washing_ProcLines (df , Wash_Rate, Cdf):
             Xl = 0
         L_Xl.append(Xl)
         AvCont = Xl
-        outs = [df, L_Xl, L_Xw]
-    return (outs) 
+    outs = [df, L_Xl, L_Xw]
+    return outs 
 
 chlorine_levs =  F_Chloride_lvl (Time_Wash=36)
 
 outs_val = F_Washing_ProcLines (df =df_conts , Wash_Rate = 100, Cdf =chlorine_levs )
+
+#Plot of the Xl
+plt.plot(outs_val[1])
+plt.xlabel('Time in 1/100 of a minute')
+plt.ylabel('XL (MPN/g)')
+
+#Plot of the  Xw
+plt.plot(outs_val[2])
+plt.xlabel('Time in 1/100 of a minute')
+plt.ylabel('XW (MPN/g)')
+
+##%
+
+#With Cont on the lettuce not the spinash, expeactation here is that LW will se reduction but still higher because contmaination is in lettuces. 
+
+df_conts = pd.DataFrame(
+    {'CFU': [79432]*3600,
+     'Weight': 1,
+    })
+
+#df_conts.at[80,"CFU"] = 100000
+
+def F_Washing_ProcLines (df , Wash_Rate, Cdf):
+    WashT = 36#len(df.index) #1 minute intervals
+    #DF_Clvl = F_DF_Clvl(WashT)
+    
+    Times_W = np.arange(0, WashT, 0.01).tolist()
+    Times_W = [round(num,2) for num in Times_W]
+    
+    Timeint = 0.01
+    
+    Blw = 0.38 #ml/g min: is the pathogen binding rate to pieces of shredded lettuce heads
+    alphablw = 0.75*Timeint #Inactivation rate of pathogen via FC L/mgmin
+    V = (3200 *1000) #L #From Luo et al 2012. 
+    Rate = Wash_Rate/2.2  #45.45 #kg/min #From Luo et al 2012. 
+    Wash_Time = 0.46 #min 
+    c1 = 1/Wash_Time #Reciprocal of average time. 
+    L = (Rate*1000)/(c1) #g of lettuce in the tank at the same time
+    Xl = 0
+    Xw =0  #pathogen in process water MPN/ml
+    
+    L_Xw = []
+    L_Xl = []
+    index = 0
+    for i in Times_W:
+        Xs = np.random.triangular(0.003,0.055,0.149)
+        #Defining Initial Contamination
+        AvCont = df.at[index,"CFU"] /(df.at[index,"Weight"]*454)
+        #AvCont_CFU = df.at[i,"CFU"]
+        #AvContAfter = AvCont*10**-0.8
+        C = float(Cdf.loc[Cdf['Time'] == i, 'C'])
+        Bws =Timeint*((((AvCont)-(AvCont*Xs))*(Rate*1000))/V)
+        #Bws = ((AvCont- AvContAfter)*Rate)/V
+        #print(Bws)
+        CXWfirst = Bws - (Blw*Xw*(L/V))
+        CXw =  CXWfirst - (alphablw*Xw*C)
+        print(CXw, "CXw")
+        Xw = Xw+CXw
+        if Xw<0:
+            Xw = 0
+        L_Xw.append(Xw)
+        Xl = (AvCont)
+        #print(Xl)
+        #CXL23t = (alpha*Xl*C) - (c1*Xl)
+        #print(CXL23t, "CXL23t")
+        if C>0.5:
+            CXL23t = 0.214*np.log(C)+0.220
+        if C<0.5:
+            CXL23t = 0
+        print(C, "C")
+        print(CXL23t, "CXL23")
+        Xl = Xl*(10**-CXL23t)
+        CXl = (Blw*Xw)  #- (alpha*Xl*C) - (c1*Xl)
+        #print(Blw*Xw, "fist section")
+        #print(CXl, "CXL")
+        #print(Xl, "XL")
+        Xl =Xl +CXl
+        if Xl < 0:
+            Xl = 0
+        L_Xl.append(Xl)
+        AvCont = Xl
+        CFU_2 = AvCont*((df.at[index,"Weight"]*454))
+        if CFU_2<1:
+            CFU_2= np.random.binomial(1,CFU_2)
+        elif CFU_2>1:
+            partial =math.modf(CFU_2)
+            part1= np.random.binomial(1,partial[0])
+            part2= partial[1]
+            CFU_2 = part1+part2
+        df.at[index,"CFU"] =  CFU_2
+        index= index+1
+    outs = [df, L_Xl, L_Xw]
+    return outs 
+
+chlorine_levs =  F_Chloride_lvl (Time_Wash=36)
+
+outs_val = F_Washing_ProcLines (df =df_conts , Wash_Rate = 100, Cdf =chlorine_levs )
+
+
+df2=  outs_val[0]
 
 #Plot of the Xl
 plt.plot(outs_val[1])
