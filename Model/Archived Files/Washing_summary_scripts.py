@@ -117,8 +117,9 @@ def F_Chloride_lvl (Time_Wash):
     })
     return Cdf
 
-plt.plot(F_Chloride_lvl(60)["C"])
-
+plt.plot(F_Chloride_lvl(36)["C"])
+plt.xlabel('Time in 1/100 of a minute')
+plt.ylabel('FC Levels')
     
     
 import numpy as np
@@ -330,10 +331,13 @@ plt.plot(chlorine_levs['C'])
 
 #Plot of the Xl
 plt.plot(outs_val[1])
+plt.xlabel('Time in 1/100 of a minute')
+plt.ylabel('XL (MPN/g)')
 
 #Plot of the  Xw
 plt.plot(outs_val[2])
-
+plt.xlabel('Time in 1/100 of a minute')
+plt.ylabel('XW (MPN/g)')
 
 #Updting Washing -----------------------------------------------------------------
 

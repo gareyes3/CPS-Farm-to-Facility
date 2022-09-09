@@ -16,10 +16,6 @@ import itertools
 from matplotlib import pyplot as plt
 
 
-
-
-
-
 '''
 #Setup
 Time_Wash=Agg_WashTime
@@ -177,10 +173,6 @@ def Washing_ProcLines (List_GB):
     
 
     
-
-
-
-
 
 
 
