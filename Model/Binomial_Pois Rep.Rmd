@@ -1,0 +1,28 @@
+---
+title: "Untitled"
+output: html_document
+date: '2022-10-04'
+---
+
+```{r}
+binomial_r<-rbinom(1000000, 1, 10^-2)
+hist(binomial_r,breaks = 20)
+sum(binomial_r==1)
+(10213/1000000)*100
+
+poisson_r<-replicate(1000000,sum(rpois(1,10^-2)))
+hist(poisson_r,breaks = 20)
+
+sum(poisson_r==2)
+sum(poisson_r==1)
+53/10000
+9985/10000
+
+
+(25*32)/13200
+
+132000/3
+
+((1/44)*100)*3
+```
+
