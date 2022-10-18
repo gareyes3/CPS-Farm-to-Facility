@@ -38,6 +38,8 @@ Limit_PH = 0
 RR_PH_Trad = "Lot" #Reject by Sublot
 
 
+
+
 #Intesne pre-harvest sampling
 test_unit_PH_Int = "Lot"
 sample_size_PH_Int = 375

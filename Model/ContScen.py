@@ -41,7 +41,7 @@ def F_systematic_C(df, Hazard_lvl,No_Cont_Clusters,Cluster_Size, Partition_Weigh
         #using multinomial creating array to contaminated the desired outputs
         #probaility defined by the number of partitions. 
         Contamination_Pattern = rng.multinomial(Hazard_lvl_percluster,[1/No_Cont_PartitionUnits]*No_Cont_PartitionUnits,1)
-        df.at[x_random_consecutive_rows,'CFU']= df.loc[x_random_consecutive_rows,'CFU'] + Contamination_Pattern[0]
+        df.loc[x_random_consecutive_rows,'CFU']= df.loc[x_random_consecutive_rows,'CFU'] + Contamination_Pattern[0]
     return df
         
 def F_Crew_C(df, Hazard_lvl,No_Cont_Clusters, Cluster_Size, Partition_Weight):

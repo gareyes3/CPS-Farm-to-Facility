@@ -410,8 +410,8 @@ def Applying_dieoff (df,Dieoff):
     new_vector=[]
     for i in vector: 
         CFU_1 = i
-        #new_cont=rng.poisson(10**Dieoff, CFU_1).sum()
-        new_cont = rng.binomial(CFU_1,10**Dieoff)
+        new_cont=np.random.poisson(10**Dieoff, CFU_1).sum()
+        #new_cont = np.random.binomial(CFU_1,10**Dieoff)
         new_vector.append(new_cont)
     df["CFU"] = new_vector
     return df
@@ -421,7 +421,7 @@ def F_Simple_Reduction(df, Reduction):
     new_vector=[]
     for i in vector: 
         CFU_1 = i
-        new_cont = rng.binomial(CFU_1,10**-Reduction)
+        new_cont = np.random.binomial(CFU_1,10**-Reduction)
         #new_cont=rng.poisson(10**-Reduction, CFU_1).sum()
         new_vector.append(new_cont)
     df["CFU"] = new_vector
@@ -433,8 +433,8 @@ def F_Simple_Reduction_PLines(gb2, Reduction):
         new_vector=[]
         for i in vector: 
             CFU_1 = i
-            #new_cont = rng.binomial(CFU_1,10**-Reduction)
-            new_cont=rng.poisson(10**-Reduction, CFU_1).sum()
+            new_cont = np.random.binomial(CFU_1,10**-Reduction)
+            #new_cont=rng.poisson(10**-Reduction, CFU_1).sum()
             new_vector.append(new_cont)
         j["CFU"] = new_vector
     return gb2
@@ -465,6 +465,7 @@ def F_Growth(DF,Temperature, TimeD ):
                 TotalGrowth = (TotalGrowthRate*TimeD)
             else:
                 TotalGrowth  = -DieoffRate * TimeD
+            '''
             if TotalGrowth>=0:
                 GrowthCeil = math.ceil(TotalGrowth)
                 Difference = TotalGrowth-GrowthCeil
@@ -472,7 +473,8 @@ def F_Growth(DF,Temperature, TimeD ):
                 Updated_CFUs = rng.binomial(MaxCont,10**Difference)
             else:
                 Updated_CFUs= rng.binomial(Total_CFU,10**TotalGrowth)
-            #Updated_CFUs=rng.poisson(10**TotalGrowth, Total_CFU).sum()
+            '''
+            Updated_CFUs=rng.poisson(10**TotalGrowth, Total_CFU).sum()
         else:
             Updated_CFUs = Total_CFU
         New_CFUs.append(Updated_CFUs)
@@ -505,13 +507,6 @@ def Growth_Function_Lag(DF, Temperature,Time,Lag_Consumed_Prev):
     return outputs
 
 
-
-#Washing
-'''
-def F_Washing (DF, LogRedWash):
-    DF.CFU=DF.CFU*10**-LogRedWash 
-    return DF
-'''
 #%% Contamination Functions
 
 #Calculation of E.coli in Water

@@ -34,7 +34,7 @@ from matplotlib import pyplot as plt
 from matplotlib.ticker import ScalarFormatter
 import seaborn as sns
 import sys
-import Trial_MainLoop_PH
+#import Trial_MainLoop_PH
 import scipy.stats as st
 
 
@@ -72,7 +72,8 @@ def scenario_function(Cont_Scen_no,
                       HSTrad = False,
                       RSTrad = False,
                       FPSTrad = False,
-                      CSampling = False
+                      CSampling = False,
+                      Compliance_50 = False
                       ):
     ''' Docstring
     Select the scenarios from the arguements to run the scenario function. 
@@ -127,6 +128,24 @@ def scenario_function(Cont_Scen_no,
     
     reload(SCInputz)
     
+    
+    #Compliance Section
+    if Compliance_50 == True:
+        #Holding Randomization
+        if np.random.uniform()<0.5:
+           Holding = True
+        #Precooling Ranodmization:
+        if np.random.uniform()<0.5:
+            Pre_Cooling = True
+        #Washing Randomization
+        if np.random.uniform()<0.5:
+            Washing = True
+        #PRewash Randomization
+        if np.random.uniform()<0.5:
+            PreS_Wash = True
+        #Sanitation Randomization
+        if np.random.uniform()<0.5:
+            Sanitation = True
     
     #Management of System Control: 
     
@@ -302,6 +321,11 @@ This chunk of code runs 6 systems talked on the effect of individual interventio
 Baseline_NI_1 =  scenario_function(Cont_Scen_no=1)
 Baseline_NI_2 =  scenario_function(Cont_Scen_no=2)
 Baseline_NI_3 =  scenario_function(Cont_Scen_no=3)
+
+Baseline_50_1 =  scenario_function(Cont_Scen_no=1, Compliance_50=True)
+Baseline_50_2 =  scenario_function(Cont_Scen_no=2)
+Baseline_50_3 =  scenario_function(Cont_Scen_no=3)
+
 
 #Effect of Holding
 Baseline_NI_Holding_1 =  scenario_function(Cont_Scen_no=1,Holding=True)
