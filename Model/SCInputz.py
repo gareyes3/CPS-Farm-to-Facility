@@ -18,7 +18,7 @@ Sensitivity_Analysis = False
 
 N_Iterations= 10000
 Field_Weight= 100000 #total lb in field
-slot_weight = 10000 #weight of the sublot in field.
+slot_weight = 25_000 #weight of the sublot in field.
 Partition_Weight = 50 #Partition weight for contamination Events, Partition to have better definition of field. 
 
 slot_number = int(Field_Weight/slot_weight) #Number of sublots per field
@@ -30,30 +30,28 @@ Partition_Units = int(Field_Weight/Partition_Weight) #Number of partition units 
 #Sampling Inputs. 
 
 #Pre_Harvest   
-test_unit_PH = "Sublot"
-sample_size_PH = 37.5 # (Input) g #Sample Size in grams for Pre Harvest
-n_samples_slot_PH = 1 # (Input) Samples per sublot of product
-No_Grabs_PH = 6 #Number of graps per sample. stratified per sample. 
+test_unit_PH = "Lot"
+sample_size_PH = 375 # (Input) g #Sample Size in grams for Pre Harvest
+n_samples_slot_PH = 4 # (Input) Samples per lot (100K lb) of product
+No_Grabs_PH = 15 #Number of graps per sample. stratified per sample. 
 Limit_PH = 0
 RR_PH_Trad = "Lot" #Reject by Sublot
 
 
-
-
 #Intesne pre-harvest sampling
-test_unit_PH_Int = "Lot"
+test_unit_PH_Int = "Sublot"
 sample_size_PH_Int = 375
-n_samples_lot_PH_Int = 10 # (Input) Samples per lot of product'
-No_Grabs_PH_Int = 60
+n_samples_lot_PH_Int = 4 # (Input) Samples per sublot of product'
+No_Grabs_PH_Int = 15
 RR_PH_Int = "Lot"
-test_unit_PH_Int = "Lot"
+test_unit_PH_Int = "Sublot"
     
 
 #Harvest Inputs: 
-test_unit_H = "Sublot"
-sample_size_H = 37.5 #g #Sample Size in grams
-n_samples_slot_H = 1 # Samples per lot of product
-No_Grabs_H = 6 
+test_unit_H = "Lot"
+sample_size_H = 375 #g #Sample Size in grams
+n_samples_slot_H = 4 # Samples per lot of product
+No_Grabs_H = 15
 Limit_H = 0
 RR_H_Trad  = "Lot"
 #aggregative_prehavest sampling
@@ -63,19 +61,20 @@ if ScenCondz.HS_Agg ==True:
 
 
 #Receiving sampling:
-test_unit_R = "PalletNo"
-n_samples_pallet = 1 #samples taken per pallet
-sample_size_R = 15 #375 #g #Sample Size in grams Receiving
-No_Grabs_R = np.random.choice([2,3])
+test_unit_R = "Lot"
+n_samples_pallet = 4 #samples taken per pallet
+sample_size_R = 375 #375 #g #Sample Size in grams Receiving
+No_Grabs_R = 15#np.random.choice([2,3])
 Limit_R =0
 RR_R_Trad= "Lot"
 
 
-#Finished Product Sampling: 
-test_unit_FP = "HourProd"
-sample_size_FP = 200 #g #Sample Size in grams
+#Finished Product Sampling:
+N_Strat_FP = 4
+test_unit_FP = "FP_Strat"
+sample_size_FP = 375 #g #Sample Size in grams
 n_samples_FP = 1 #number of samples per lot final product
-N_Packages_Samples = 4
+N_Packages_Samples = 15
 RR_FP_Trad = "Lot"
 Limit_FP =0
 if ScenCondz.FPS_Agg ==True:
@@ -92,10 +91,11 @@ Limit_R_FP = 0
 RR_R_FP_Trad  = "Lot"
 
 #Retail Sampling
-test_unit_CS = "PalletNoFS"
+N_Strat_CS = 4
+test_unit_CS = "FP_Strat"
 n_samples_CS = 1
-sample_size_CS = 25
-No_GRabs_CS = 3
+sample_size_CS = 375
+No_Grabs_CS = 15
 Limit_CS = 0
 RR_CS  = "Lot"
 

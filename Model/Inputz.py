@@ -119,8 +119,8 @@ def F_Chloride_lvl (Time_Wash, Treatment):
         if C < 0:
             C = 0 
         Pre_runningT = i #Running Time.
-        if(i==10):
-            print(O)
+        #if(i==10):
+        #   print(O)
         List_C.append(C)
     Cdf = pd.DataFrame(
     {'Time': Times,
@@ -371,7 +371,7 @@ if SCInputz.Sanitation_YN == False:
 #%% Final Product
 
 #Lb of product per hour
-FP_Hour = 20_000
+FP_Hour = 7_200
 Pack_Weight_FP = 5 #Weight of each pack. 
 N_Lots_FP = 1 #Lost of final product
 #Packaging into Cases

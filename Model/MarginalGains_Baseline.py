@@ -72,8 +72,7 @@ def scenario_function(Cont_Scen_no,
                       HSTrad = False,
                       RSTrad = False,
                       FPSTrad = False,
-                      CSampling = False,
-                      Compliance_50 = False
+                      CSampling = False
                       ):
     ''' Docstring
     Select the scenarios from the arguements to run the scenario function. 
@@ -124,28 +123,11 @@ def scenario_function(Cont_Scen_no,
         ScenCondz.FPS_Trad = 1
     
     if CSampling == True:
-        ScenCondz.C_Sampling == 1
+        ScenCondz.C_Sampling = 1
     
     reload(SCInputz)
     
     
-    #Compliance Section
-    if Compliance_50 == True:
-        #Holding Randomization
-        if np.random.uniform()<0.5:
-           Holding = True
-        #Precooling Ranodmization:
-        if np.random.uniform()<0.5:
-            Pre_Cooling = True
-        #Washing Randomization
-        if np.random.uniform()<0.5:
-            Washing = True
-        #PRewash Randomization
-        if np.random.uniform()<0.5:
-            PreS_Wash = True
-        #Sanitation Randomization
-        if np.random.uniform()<0.5:
-            Sanitation = True
     
     #Management of System Control: 
     
@@ -225,6 +207,22 @@ def Remove_Outlier_Indices(df):
     IQR = Q3 - Q1
     trueList = ~((df < (Q1 - 1.5 * IQR)) |(df > (Q3 + 1.5 * IQR)))
     return trueList
+
+
+def Progression_DF_Melt(List_of_Outs):
+    Column_Names = "BaselineNI BaselineAI Holding Precooling Washing PreSpray_Wash Sanitation".split()
+    
+    Index_1 = 0
+    List_dfs = []
+    for  i in List_of_Outs:
+        #Progression Data. 
+        i[1]["Type"] = Column_Names[Index_1]
+        Melted_BNI_1 = i[1].melt(id_vars=['Type'])
+        Index_1 = Index_1+1
+        List_dfs.append(Melted_BNI_1)
+    
+    df = pd.concat(List_dfs)
+    return df
     
 
 def F_Outputs_Table(List_of_Outputs):
@@ -247,8 +245,7 @@ def F_Outputs_Table(List_of_Outputs):
         "Ratio_Product_accepted",
         "Pooled_CFU_g_mean",
         "Pooled_CFU_g_5CI",
-        "Pooled_CFU_g_5CI",   
-        
+        "Pooled_CFU_g_5CI",    
     ]
     
     Outputs_Df =pd.DataFrame(np.NaN, index= range(len(List_of_Outputs)), columns =Columns_Final_Outs)
@@ -311,21 +308,20 @@ def F_Outputs_Table(List_of_Outputs):
         
         
         rep=rep+1
-    
     return Outputs_Df
 #%% Effect of Individual Interventions
 '''
 This chunk of code runs 6 systems talked on the effect of individual interventions section. 
 '''
-
+#Baseline No Intervention
 Baseline_NI_1 =  scenario_function(Cont_Scen_no=1)
 Baseline_NI_2 =  scenario_function(Cont_Scen_no=2)
 Baseline_NI_3 =  scenario_function(Cont_Scen_no=3)
 
-Baseline_50_1 =  scenario_function(Cont_Scen_no=1, Compliance_50=True)
-Baseline_50_2 =  scenario_function(Cont_Scen_no=2)
-Baseline_50_3 =  scenario_function(Cont_Scen_no=3)
-
+#Baseline All Intervention
+Baseline_AI_1 =  scenario_function(Cont_Scen_no=1,Washing = True, Holding = True,Pre_Cooling = True, PreS_Wash=True, Sanitation = True)
+Baseline_AI_2 =  scenario_function(Cont_Scen_no=2,Washing = True, Holding = True,Pre_Cooling = True, PreS_Wash=True, Sanitation = True)
+Baseline_AI_3 =  scenario_function(Cont_Scen_no=3,Washing = True, Holding = True,Pre_Cooling = True, PreS_Wash=True, Sanitation = True)
 
 #Effect of Holding
 Baseline_NI_Holding_1 =  scenario_function(Cont_Scen_no=1,Holding=True)
@@ -351,18 +347,10 @@ Baseline_NI_Sp_Wash_1 =  scenario_function(Cont_Scen_no=1,PreS_Wash=True)
 Baseline_NI_Sp_Wash_2 =  scenario_function(Cont_Scen_no=2,PreS_Wash=True)
 Baseline_NI_Sp_Wash_3 =  scenario_function(Cont_Scen_no=3,PreS_Wash=True)
 
-
+#Baseline NI + Processing line Sanitation. 
 Baseline_NI_PLS_1 = scenario_function(Cont_Scen_no=1,Sanitation=True)
 Baseline_NI_PLS_2 = scenario_function(Cont_Scen_no=2,Sanitation=True)
 Baseline_NI_PLS_3 = scenario_function(Cont_Scen_no=3,Sanitation=True)
-
-Baseline_AI_1 =  scenario_function(Cont_Scen_no=1,Washing = True, Holding = True,Pre_Cooling = True, PreS_Wash=True, Sanitation = True)
-Baseline_AI_2 =  scenario_function(Cont_Scen_no=2,Washing = True, Holding = True,Pre_Cooling = True, PreS_Wash=True, Sanitation = True)
-Baseline_AI_3 =  scenario_function(Cont_Scen_no=3,Washing = True, Holding = True,Pre_Cooling = True, PreS_Wash=True, Sanitation = True)
- 
-#%%%
-#Section to try washing
-Baseline_NI_Wash_Opt_1 =  scenario_function(Cont_Scen_no=1,Washing=True,Washing_Optimized =True)
 
 
 #%%%
@@ -374,31 +362,31 @@ This Chunk conducts data analysis for the effect of individual interventions
 # Data Analysis for getting the diffences between  individual interventions
 
 #Scenario 1 Uniform Contamination
-List_of_Outs_Ints_1 = [Baseline_NI_1,
-                       Baseline_AI_1,
-                     Baseline_NI_Holding_1,
-                     Baseline_NI_Precooling_1,
-                     Baseline_NI_Wash_1,
-                     Baseline_NI_Sp_Wash_1,
-                     Baseline_NI_PLS_1
-                     ]
+List_of_Outs_Ints_1 =    [Baseline_NI_1,
+                         Baseline_AI_1,
+                         Baseline_NI_Holding_1,
+                         Baseline_NI_Precooling_1,
+                         Baseline_NI_Wash_1,
+                         Baseline_NI_Sp_Wash_1,
+                         Baseline_NI_PLS_1
+                         ]
 
 Outputdf_INT_1 = F_Outputs_Table(List_of_Outs_Ints_1)
 
 
-#Scenario 2 Uniform Contamination
+#Scenario 2 10% clustered Contamination
 List_of_Outs_Ints_2 = [Baseline_NI_2,
                        Baseline_AI_2,
-                     Baseline_NI_Holding_2,
-                     Baseline_NI_Precooling_2,
-                     Baseline_NI_Wash_2,
-                     Baseline_NI_Sp_Wash_2,
-                     Baseline_NI_PLS_2
+                       Baseline_NI_Holding_2,
+                       Baseline_NI_Precooling_2,
+                       Baseline_NI_Wash_2,
+                       Baseline_NI_Sp_Wash_2,
+                       Baseline_NI_PLS_2
                      ]
 
 Outputdf_INT_2 = F_Outputs_Table(List_of_Outs_Ints_2)
 
-#Scenario 3 Uniform Contamination
+#Scenario 1% cluster contamination.
 List_of_Outs_Ints_3 = [Baseline_NI_3,
                        Baseline_AI_3,
                      Baseline_NI_Holding_3,
@@ -410,21 +398,6 @@ List_of_Outs_Ints_3 = [Baseline_NI_3,
 
 Outputdf_INT_3 = F_Outputs_Table(List_of_Outs_Ints_3)
 
-
-def Progression_DF_Melt(List_of_Outs):
-    Column_Names = "BaselineNI BaselineAI Holding Precooling Washing PreSpray_Wash Sanitation".split()
-    
-    Index_1 = 0
-    List_dfs = []
-    for  i in List_of_Outs:
-        #Progression Data. 
-        i[1]["Type"] = Column_Names[Index_1]
-        Melted_BNI_1 = i[1].melt(id_vars=['Type'])
-        Index_1 = Index_1+1
-        List_dfs.append(Melted_BNI_1)
-    
-    df = pd.concat(List_dfs)
-    return df
 
 Melted_Prog_DF_NI_1 = Progression_DF_Melt(List_of_Outs = List_of_Outs_Ints_1)
 Melted_Prog_DF_NI_2 = Progression_DF_Melt(List_of_Outs = List_of_Outs_Ints_2)
@@ -553,7 +526,7 @@ def red_CFU (df1,dfbaseline):
 
 
 
-st.t.interval(alpha=0.95, df=1000, loc=1.27, scale=0.5) 
+#st.t.interval(alpha=0.95, df=1000, loc=1.27, scale=0.5) 
 
 #spray wash
 logredcomp(Baseline_NI_Sp_Wash_1, Baseline_NI_1)
@@ -576,7 +549,6 @@ logredcomp(Baseline_AI_3, Baseline_NI_3)
 logredcomp(Baseline_AI_2, Baseline_NI_2)
 
 
-
 H= sns.catplot(x ="MeanComparison", y = "ScenarioN", col="Cont_Spread",
                 data=INT_Combined, kind="bar",
                 height=4, aspect=1)
@@ -584,12 +556,11 @@ H.set_axis_labels("Relative Difference", "Sampling Plan Scenario")
 
 
 
-#%% Running the scenarios. 
+#%% Running the scenario Analysis 
 
-### BASELINE  NO INTERVENTION###
+### BASELINE  NO INTERVENTION ####
 
 #Baseline Scenario No Intervention. 
-
 Baseline_NI_1 =  scenario_function(Cont_Scen_no=1)
 Baseline_NI_2 =  scenario_function(Cont_Scen_no=2)
 Baseline_NI_3 =  scenario_function(Cont_Scen_no=3)
@@ -619,7 +590,6 @@ Baseline_NI_H_3=  scenario_function(Cont_Scen_no=3,HSTrad = True)
 Baseline_NI_R_1=  scenario_function(Cont_Scen_no=1,RSTrad =True)
 Baseline_NI_R_2=  scenario_function(Cont_Scen_no=2,RSTrad =True)
 Baseline_NI_R_3=  scenario_function(Cont_Scen_no=3,RSTrad =True)
-
 
 #Baseline no intervention Receiving Samplgin Traditional
 Baseline_NI_FP_1=  scenario_function(Cont_Scen_no=1,FPSTrad =True)
@@ -683,6 +653,8 @@ Baseline_AI_FP_3 =  scenario_function(Cont_Scen_no=3,Washing = True,Holding = Tr
 Baseline_AI_CS_1 =  scenario_function(Cont_Scen_no=1,Washing = True, Holding = True,Pre_Cooling = True, PreS_Wash=True, Sanitation = True, CSampling = True)
 Baseline_AI_CS_2 =  scenario_function(Cont_Scen_no=2,Washing = True, Holding = True,Pre_Cooling = True, PreS_Wash=True, Sanitation = True, CSampling = True)
 Baseline_AI_CS_3 =  scenario_function(Cont_Scen_no=3,Washing = True,  Holding = True,Pre_Cooling = True, PreS_Wash=True, Sanitation = True, CSampling = True)
+
+
 
 
 

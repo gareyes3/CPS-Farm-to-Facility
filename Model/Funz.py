@@ -619,7 +619,7 @@ def F_Rejection_Rule3 (df, Test_Unit, limit):
             Reject.append(i)
     df.PositiveSamples = [list() for x in range(len(df.index))] #this is in case everything gets rejected
     if set(Unique_Test_Unit)<= set(Reject):
-        df_Blank = df.iloc[[0]]
+        df_Blank = df.iloc[[0]].copy()
         df_Blank.loc[:, ['CFU']] = 0
         df_Blank.loc[:, ['Weight']] = SCInputz.Partition_Weight
         df_Blank.loc[:, ['Accept']] = "All Rej"

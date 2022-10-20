@@ -58,7 +58,7 @@ def F_MainLoop():
 
     
     for  i in range(SCInputz.N_Iterations):
-
+        #i = 1
         Iteration_In = i
         print(Iteration_In,"iteration")
         np.random.seed(i)
@@ -706,6 +706,7 @@ def F_MainLoop():
             #Sampling Step
             if ScenCondz.FP_Sampling == True:
                 if ScenCondz.FPS_Trad ==True:
+                    df["FP_Strat"]=np.concatenate([([i]*int(len(df["HourProd"])/SCInputz.N_Strat_FP)) for i in list(range(1,(SCInputz.N_Strat_FP+1)))], axis=0)
                     df =Funz.F_Sampling_2(df =df,Test_Unit =SCInputz.test_unit_FP, 
                                                NSamp_Unit = SCInputz.n_samples_FP, 
                                                Samp_Size =SCInputz.sample_size_FP, 
@@ -839,7 +840,6 @@ def F_MainLoop():
         #STEP 6 POST PROCESS STEPS ---------------------------------------------------------------------------------------------------------------------
         #Steps after Final Product
         if ScenCondz.Customer_Added_Steps ==True:
-            
             #Putting Packages into Cases
             if ScenCondz.Field_Pack == False:
                 if df["Weight"].sum() != 50:
@@ -884,15 +884,14 @@ def F_MainLoop():
             
             
             
-            #Sampling at CS upon reception 
-                        #Sampling Step
-            #print(df["Weight"].sum(), "weight")
             if ScenCondz.C_Sampling == True:
-                df =Funz.F_Sampling_2(df =df,Test_Unit =SCInputz.test_unit_CS, 
-                                           NSamp_Unit = SCInputz.n_samples_CS, 
-                                           Samp_Size =SCInputz.sample_size_CS, 
-                                           Partition_Weight =Inputz.Pack_Weight_FP, 
-                                           NoGrab = SCInputz.No_GRabs_CS)
+                df["FP_Strat"]=np.concatenate([([i]*int(len(df["HourProd"])/SCInputz.N_Strat_CS)) for i in list(range(1,(SCInputz.N_Strat_CS+1)))], axis=0)
+                df =Funz.F_Sampling_2(df =df,
+                                        Test_Unit =SCInputz.test_unit_CS, 
+                                        NSamp_Unit = SCInputz.n_samples_CS, 
+                                        Samp_Size =SCInputz.sample_size_CS, 
+                                        Partition_Weight =Inputz.Pack_Weight_FP, 
+                                        NoGrab = SCInputz.No_Grabs_CS)
             
             #Filtering out the Rejected lots, Final product
             
