@@ -655,8 +655,217 @@ Baseline_AI_CS_2 =  scenario_function(Cont_Scen_no=2,Washing = True, Holding = T
 Baseline_AI_CS_3 =  scenario_function(Cont_Scen_no=3,Washing = True,  Holding = True,Pre_Cooling = True, PreS_Wash=True, Sanitation = True, CSampling = True)
 
 
+###BASELINE NI - WASHING 
+#Baseline Scenario No Intervention. 
+Baseline_NI_W_1 =  scenario_function(Cont_Scen_no=1,Washing = True)
+Baseline_NI_W_2 =  scenario_function(Cont_Scen_no=2,Washing = True)
+Baseline_NI_W_3 =  scenario_function(Cont_Scen_no=3,Washing = True)
+
+### Pre-Harvest Sampling 4 days.
+#Baseline no intervention. 4 days preharvest sampling
+Baseline_NI_W_PHS4d_1 =  scenario_function(Cont_Scen_no=1,PHS4d = True,Washing = True)
+Baseline_NI_W_PHS4d_2 =  scenario_function(Cont_Scen_no=2,PHS4d = True,Washing = True)
+Baseline_NI_W_PHS4d_3 =  scenario_function(Cont_Scen_no=3,PHS4d = True,Washing = True)
+
+#Baseline no intervention. 4 hours preharvest sampling
+Baseline_NI_W_PHS4h_1 =  scenario_function(Cont_Scen_no=1,PHS4h = True,Washing = True)
+Baseline_NI_W_PHS4h_2 =  scenario_function(Cont_Scen_no=2,PHS4h = True,Washing = True)
+Baseline_NI_W_PHS4h_3 =  scenario_function(Cont_Scen_no=3,PHS4h = True,Washing = True)
+
+#Baseline no intervention. 4 hours preharvest sampling
+Baseline_NI_W_PHSInt_1 =  scenario_function(Cont_Scen_no=1,PHSInt = True,Washing = True)
+Baseline_NI_W_PHSInt_2 =  scenario_function(Cont_Scen_no=2,PHSInt = True,Washing = True)
+Baseline_NI_W_PHSInt_3 =  scenario_function(Cont_Scen_no=3,PHSInt = True,Washing = True)
+
+#Baseline no intervention Harvest Sampling Traditional
+Baseline_NI_W_H_1=  scenario_function(Cont_Scen_no=1,HSTrad = True,Washing = True)
+Baseline_NI_W_H_2=  scenario_function(Cont_Scen_no=2,HSTrad = True,Washing = True)
+Baseline_NI_W_H_3=  scenario_function(Cont_Scen_no=3,HSTrad = True,Washing = True)
+
+#Baseline no intervention Receiving Samplgin Traditional
+Baseline_NI_W_R_1=  scenario_function(Cont_Scen_no=1,RSTrad =True,Washing = True)
+Baseline_NI_W_R_2=  scenario_function(Cont_Scen_no=2,RSTrad =True,Washing = True)
+Baseline_NI_W_R_3=  scenario_function(Cont_Scen_no=3,RSTrad =True,Washing = True)
+
+#Baseline no intervention Receiving Samplgin Traditional
+Baseline_NI_W_FP_1=  scenario_function(Cont_Scen_no=1,FPSTrad =True,Washing = True)
+Baseline_NI_W_FP_2=  scenario_function(Cont_Scen_no=2,FPSTrad =True,Washing = True)
+Baseline_NI_W_FP_3=  scenario_function(Cont_Scen_no=3,FPSTrad =True,Washing = True)
+
+#Baseline no intervention Receiving Samplgin Traditional
+Baseline_NI_W_CS_1=  scenario_function(Cont_Scen_no=1,CSampling =True,Washing = True)
+Baseline_NI_W_CS_2=  scenario_function(Cont_Scen_no=2,CSampling =True,Washing = True)
+Baseline_NI_W_CS_3=  scenario_function(Cont_Scen_no=3,CSampling =True,Washing = True)
 
 
+###BASELINE NI -Holding 
+#Baseline Scenario No Intervention. 
+Baseline_NI_H_1 =  scenario_function(Cont_Scen_no=1,Holding =  True)
+Baseline_NI_H_2 =  scenario_function(Cont_Scen_no=2,Holding = True)
+Baseline_NI_H_3 =  scenario_function(Cont_Scen_no=3,Holding =  True)
+
+### Pre-Harvest Sampling 4 days.
+#Baseline no intervention. 4 days preharvest sampling
+Baseline_NI_H_PHS4d_1 =  scenario_function(Cont_Scen_no=1,PHS4d = True,Holding = True)
+Baseline_NI_H_PHS4d_2 =  scenario_function(Cont_Scen_no=2,PHS4d = True,Holding = True)
+Baseline_NI_H_PHS4d_3 =  scenario_function(Cont_Scen_no=3,PHS4d = True,Holding = True)
+
+#Baseline no intervention. 4 hours preharvest sampling
+Baseline_NI_H_PHS4h_1 =  scenario_function(Cont_Scen_no=1,PHS4h = True,Holding = True)
+Baseline_NI_H_PHS4h_2 =  scenario_function(Cont_Scen_no=2,PHS4h = True,Holding = True)
+Baseline_NI_H_PHS4h_3 =  scenario_function(Cont_Scen_no=3,PHS4h = True,Holding = True)
+
+#Baseline no intervention. 4 hours preharvest sampling
+Baseline_NI_H_PHSInt_1 =  scenario_function(Cont_Scen_no=1,PHSInt = True,Holding = True)
+Baseline_NI_H_PHSInt_2 =  scenario_function(Cont_Scen_no=2,PHSInt = True,Holding = True)
+Baseline_NI_H_PHSInt_3 =  scenario_function(Cont_Scen_no=3,PHSInt = True,Holding = True)
+
+#Baseline no intervention Harvest Sampling Traditional
+Baseline_NI_H_H_1=  scenario_function(Cont_Scen_no=1,HSTrad = True,Holding = True)
+Baseline_NI_H_H_2=  scenario_function(Cont_Scen_no=2,HSTrad = True,Holding = True)
+Baseline_NI_H_H_3=  scenario_function(Cont_Scen_no=3,HSTrad = True,Holding = True)
+
+#Baseline no intervention Receiving Samplgin Traditional
+Baseline_NI_H_R_1=  scenario_function(Cont_Scen_no=1,RSTrad =True,Holding = True)
+Baseline_NI_H_R_2=  scenario_function(Cont_Scen_no=2,RSTrad =True,Holding = True)
+Baseline_NI_H_R_3=  scenario_function(Cont_Scen_no=3,RSTrad =True,Holding = True)
+
+#Baseline no intervention Receiving Samplgin Traditional
+Baseline_NI_H_FP_1=  scenario_function(Cont_Scen_no=1,FPSTrad =True,Holding = True)
+Baseline_NI_H_FP_2=  scenario_function(Cont_Scen_no=2,FPSTrad =True,Holding = True)
+Baseline_NI_H_FP_3=  scenario_function(Cont_Scen_no=3,FPSTrad =True,Holding = True)
+
+#Baseline no intervention Receiving Samplgin Traditional
+Baseline_NI_H_CS_1=  scenario_function(Cont_Scen_no=1,CSampling =True,Holding = True)
+Baseline_NI_H_CS_2=  scenario_function(Cont_Scen_no=2,CSampling =True,Holding = True)
+Baseline_NI_H_CS_3=  scenario_function(Cont_Scen_no=3,CSampling =True,Holding = True)
+
+###BASELINE NI -PreWash 
+#Baseline Scenario No Intervention. 
+Baseline_NI_PW_1 =  scenario_function(Cont_Scen_no=1, PreS_Wash=True)
+Baseline_NI_PW_2 =  scenario_function(Cont_Scen_no=2, PreS_Wash=True)
+Baseline_NI_PW_3 =  scenario_function(Cont_Scen_no=3, PreS_Wash=True)
+
+### Pre-Harvest Sampling 4 days.
+#Baseline no intervention. 4 days preharvest sampling
+Baseline_NI_PW_PHS4d_1 =  scenario_function(Cont_Scen_no=1,PHS4d = True, PreS_Wash=True)
+Baseline_NI_PW_PHS4d_2 =  scenario_function(Cont_Scen_no=2,PHS4d = True, PreS_Wash=True)
+Baseline_NI_PW_PHS4d_3 =  scenario_function(Cont_Scen_no=3,PHS4d = True, PreS_Wash=True)
+
+#Baseline no intervention. 4 hours preharvest sampling
+Baseline_NI_PW_PHS4h_1 =  scenario_function(Cont_Scen_no=1,PHS4h = True, PreS_Wash=True)
+Baseline_NI_PW_PHS4h_2 =  scenario_function(Cont_Scen_no=2,PHS4h = True, PreS_Wash=True)
+Baseline_NI_PW_PHS4h_3 =  scenario_function(Cont_Scen_no=3,PHS4h = True, PreS_Wash=True)
+
+#Baseline no intervention. 4 hours preharvest sampling
+Baseline_NI_PW_PHSInt_1 =  scenario_function(Cont_Scen_no=1,PHSInt = True, PreS_Wash=True)
+Baseline_NI_PW_PHSInt_2 =  scenario_function(Cont_Scen_no=2,PHSInt = True, PreS_Wash=True)
+Baseline_NI_PW_PHSInt_3 =  scenario_function(Cont_Scen_no=3,PHSInt = True, PreS_Wash=True)
+
+#Baseline no intervention Harvest Sampling Traditional
+Baseline_NI_PW_H_1=  scenario_function(Cont_Scen_no=1,HSTrad = True, PreS_Wash=True)
+Baseline_NI_PW_H_2=  scenario_function(Cont_Scen_no=2,HSTrad = True, PreS_Wash=True)
+Baseline_NI_PW_H_3=  scenario_function(Cont_Scen_no=3,HSTrad = True, PreS_Wash=True)
+
+#Baseline no intervention Receiving Samplgin Traditional
+Baseline_NI_PW_R_1=  scenario_function(Cont_Scen_no=1,RSTrad =True, PreS_Wash=True)
+Baseline_NI_PW_R_2=  scenario_function(Cont_Scen_no=2,RSTrad =True, PreS_Wash=True)
+Baseline_NI_PW_R_3=  scenario_function(Cont_Scen_no=3,RSTrad =True, PreS_Wash=True)
+
+#Baseline no intervention Receiving Samplgin Traditional
+Baseline_NI_PW_FP_1=  scenario_function(Cont_Scen_no=1,FPSTrad =True, PreS_Wash=True)
+Baseline_NI_PW_FP_2=  scenario_function(Cont_Scen_no=2,FPSTrad =True, PreS_Wash=True)
+Baseline_NI_PW_FP_3=  scenario_function(Cont_Scen_no=3,FPSTrad =True, PreS_Wash=True)
+
+#Baseline no intervention Receiving Samplgin Traditional
+Baseline_NI_PW_CS_1=  scenario_function(Cont_Scen_no=1,CSampling =True, PreS_Wash=True)
+Baseline_NI_PW_CS_2=  scenario_function(Cont_Scen_no=2,CSampling =True, PreS_Wash=True)
+Baseline_NI_PW_CS_3=  scenario_function(Cont_Scen_no=3,CSampling =True, PreS_Wash=True)
+
+###BASELINE NI -SANITATION 
+#Baseline Scenario No Intervention. 
+Baseline_NI_S_1 =  scenario_function(Cont_Scen_no=1, Sanitation = True)
+Baseline_NI_S_2 =  scenario_function(Cont_Scen_no=2, Sanitation = True)
+Baseline_NI_S_3 =  scenario_function(Cont_Scen_no=3, Sanitation = True)
+
+### Pre-Harvest Sampling 4 days.
+#Baseline no intervention. 4 days preharvest sampling
+Baseline_NI_S_PHS4d_1 =  scenario_function(Cont_Scen_no=1,PHS4d = True, Sanitation = True)
+Baseline_NI_S_PHS4d_2 =  scenario_function(Cont_Scen_no=2,PHS4d = True, Sanitation = True)
+Baseline_NI_S_PHS4d_3 =  scenario_function(Cont_Scen_no=3,PHS4d = True, Sanitation = True)
+
+#Baseline no intervention. 4 hours preharvest sampling
+Baseline_NI_S_PHS4h_1 =  scenario_function(Cont_Scen_no=1,PHS4h = True, Sanitation = True)
+Baseline_NI_S_PHS4h_2 =  scenario_function(Cont_Scen_no=2,PHS4h = True, Sanitation = True)
+Baseline_NI_S_PHS4h_3 =  scenario_function(Cont_Scen_no=3,PHS4h = True, Sanitation = True)
+
+#Baseline no intervention. 4 hours preharvest sampling
+Baseline_NI_S_PHSInt_1 =  scenario_function(Cont_Scen_no=1,PHSInt = True, Sanitation = True)
+Baseline_NI_S_PHSInt_2 =  scenario_function(Cont_Scen_no=2,PHSInt = True, Sanitation = True)
+Baseline_NI_S_PHSInt_3 =  scenario_function(Cont_Scen_no=3,PHSInt = True, Sanitation = True)
+
+#Baseline no intervention Harvest Sampling Traditional
+Baseline_NI_S_H_1=  scenario_function(Cont_Scen_no=1,HSTrad = True, Sanitation = True)
+Baseline_NI_S_H_2=  scenario_function(Cont_Scen_no=2,HSTrad = True, Sanitation = True)
+Baseline_NI_S_H_3=  scenario_function(Cont_Scen_no=3,HSTrad = True, Sanitation = True)
+
+#Baseline no intervention Receiving Samplgin Traditional
+Baseline_NI_S_R_1=  scenario_function(Cont_Scen_no=1,RSTrad =True, Sanitation = True)
+Baseline_NI_S_R_2=  scenario_function(Cont_Scen_no=2,RSTrad =True, Sanitation = True)
+Baseline_NI_S_R_3=  scenario_function(Cont_Scen_no=3,RSTrad =True, Sanitation = True)
+
+#Baseline no intervention Receiving Samplgin Traditional
+Baseline_NI_S_FP_1=  scenario_function(Cont_Scen_no=1,FPSTrad =True, Sanitation = True)
+Baseline_NI_S_FP_2=  scenario_function(Cont_Scen_no=2,FPSTrad =True, Sanitation = True)
+Baseline_NI_S_FP_3=  scenario_function(Cont_Scen_no=3,FPSTrad =True, Sanitation = True)
+
+#Baseline no intervention Receiving Samplgin Traditional
+Baseline_NI_S_CS_1=  scenario_function(Cont_Scen_no=1,CSampling =True, Sanitation = True)
+Baseline_NI_S_CS_2=  scenario_function(Cont_Scen_no=2,CSampling =True, Sanitation = True)
+Baseline_NI_S_CS_3=  scenario_function(Cont_Scen_no=3,CSampling =True, Sanitation = True)
+
+
+###BASELINE NI -Precool
+#Baseline Scenario No Intervention. 
+Baseline_NI_PC_1 =  scenario_function(Cont_Scen_no=1, Pre_Cooling = True)
+Baseline_NI_PC_2 =  scenario_function(Cont_Scen_no=2, Pre_Cooling = True)
+Baseline_NI_PC_3 =  scenario_function(Cont_Scen_no=3, Pre_Cooling = True)
+
+### Pre-Harvest Sampling 4 days.
+#Baseline no intervention. 4 days preharvest sampling
+Baseline_NI_PC_PHS4d_1 =  scenario_function(Cont_Scen_no=1,PHS4d = True, Pre_Cooling = True)
+Baseline_NI_PC_PHS4d_2 =  scenario_function(Cont_Scen_no=2,PHS4d = True, Pre_Cooling = True)
+Baseline_NI_PC_PHS4d_3 =  scenario_function(Cont_Scen_no=3,PHS4d = True, Pre_Cooling = True)
+
+#Baseline no intervention. 4 hours preharvest sampling
+Baseline_NI_PC_PHS4h_1 =  scenario_function(Cont_Scen_no=1,PHS4h = True, Pre_Cooling = True)
+Baseline_NI_PC_PHS4h_2 =  scenario_function(Cont_Scen_no=2,PHS4h = True, Pre_Cooling = True)
+Baseline_NI_PC_PHS4h_3 =  scenario_function(Cont_Scen_no=3,PHS4h = True, Pre_Cooling = True)
+
+#Baseline no intervention. 4 hours preharvest sampling
+Baseline_NI_PC_PHSInt_1 =  scenario_function(Cont_Scen_no=1,PHSInt = True, Pre_Cooling = True)
+Baseline_NI_PC_PHSInt_2 =  scenario_function(Cont_Scen_no=2,PHSInt = True, Pre_Cooling = True)
+Baseline_NI_PC_PHSInt_3 =  scenario_function(Cont_Scen_no=3,PHSInt = True, Pre_Cooling = True)
+
+#Baseline no intervention Harvest Sampling Traditional
+Baseline_NI_PC_H_1=  scenario_function(Cont_Scen_no=1,HSTrad = True, Pre_Cooling = True)
+Baseline_NI_PC_H_2=  scenario_function(Cont_Scen_no=2,HSTrad = True, Pre_Cooling = True)
+Baseline_NI_PC_H_3=  scenario_function(Cont_Scen_no=3,HSTrad = True, Pre_Cooling = True)
+
+#Baseline no intervention Receiving Samplgin Traditional
+Baseline_NI_PC_R_1=  scenario_function(Cont_Scen_no=1,RSTrad =True, Pre_Cooling = True)
+Baseline_NI_PC_R_2=  scenario_function(Cont_Scen_no=2,RSTrad =True, Pre_Cooling = True)
+Baseline_NI_PC_R_3=  scenario_function(Cont_Scen_no=3,RSTrad =True, Pre_Cooling = True)
+
+#Baseline no intervention Receiving Samplgin Traditional
+Baseline_NI_PC_FP_1=  scenario_function(Cont_Scen_no=1,FPSTrad =True, Pre_Cooling = True)
+Baseline_NI_PC_FP_2=  scenario_function(Cont_Scen_no=2,FPSTrad =True, Pre_Cooling = True)
+Baseline_NI_PC_FP_3=  scenario_function(Cont_Scen_no=3,FPSTrad =True, Pre_Cooling = True)
+
+#Baseline no intervention Receiving Samplgin Traditional
+Baseline_NI_PC_CS_1=  scenario_function(Cont_Scen_no=1,CSampling =True, Pre_Cooling = True)
+Baseline_NI_PC_CS_2=  scenario_function(Cont_Scen_no=2,CSampling =True, Pre_Cooling = True)
+Baseline_NI_PC_CS_3=  scenario_function(Cont_Scen_no=3,CSampling =True, Pre_Cooling = True)
 
 #%% Data analysis
 
