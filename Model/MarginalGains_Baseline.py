@@ -870,28 +870,7 @@ Baseline_NI_PC_CS_3=  scenario_function(Cont_Scen_no=3,CSampling =True, Pre_Cool
 #%% Data analysis
 
 #BASELINE NO INTERVETIONS -------------------------------------------------------
-'''
-#Creating list of contamination progression
-List_of_Progs_NI = [Baseline_NI[1],
-                     Baseline_NI_PHS4d[1],
-                     Baseline_NI_PHS4h[1],
-                     Baseline_NI_PHSInt[1],
-                     Baseline_NI_H[1],
-                     Baseline_NI_R[1],
-                     Baseline_NI_FP[1]
-                     ]
 
-List_of_MainOuts = [Baseline_NI[0],
-                     Baseline_NI_PHS4d[0],
-                     Baseline_NI_PHS4h[0],
-                     Baseline_NI_PHSInt[0],
-                     Baseline_NI_H[0],
-                     Baseline_NI_R[0],
-                     Baseline_NI_FP[0]
-                     ]
-
-Baseline_NI_PHS4d[0].columns
-'''
 List_of_Outs_NI_1 = [Baseline_NI_1,
                      Baseline_NI_PHS4d_1,
                      Baseline_NI_PHS4h_1,

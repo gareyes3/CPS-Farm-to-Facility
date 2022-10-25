@@ -26,7 +26,6 @@ rng = Generator(PCG64())
 #5. Custom Plan #Pending
 
 
-
 #Contamination Scenario #1
 if ScenCondz.Contamination_Scenario == 1: 
     Hazard_Lvl = 100_000
