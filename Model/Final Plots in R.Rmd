@@ -13,21 +13,147 @@ library(ggplot2)
 library(scales)
 library(forcats)
 
-setwd("C:/Users/Gustavo Reyes/Box/CPS Project- Farm to Facility/Papers/CSV Data")
+setwd("C:/Users/gareyes3/Box/CPS Project- Farm to Facility/Papers/CSV Data/Review 2")
 #setwd("C:/Users/reyes/Box Sync/CPS Project- Farm to Facility/Papers/CSV Data")
 #setwd("C:/Users/gareyes3/Box/CPS Project- Farm to Facility/Papers/CSV Data")
 ```
 
+Contamination progression around the system.
+
+This chunks creates the plot that shows progression through the system as interventions get applied.
+Used to get the efficacy of each individual intervention. 
+
+
+##Powers
+```{r}
+Powers_df<-read_csv("Powers.csv")
+
+Powers_df<- Powers_df %>%
+  filter(Type != "None")
+
+Powers_df$Type<-factor(Powers_df$Type, levels = c("PHS4D" ,"PHS4H", "PHSInt", "HS", "RS", "FPS", "CS"))
+Powers_df$variable<-factor(Powers_df$variable, levels = c("No Intervention","Holding Only","PreCooling Only","Sanitation Only", "Prewash Only","Washing Only" , "All Intervention"))
+Powers_df$ContS<-factor(Powers_df$ContS, levels = c("Random Uniform", "10% Cluster", "1% Cluster"))
+
+Powers_df %>% 
+  ggplot(aes(x = Type, y = value, group = variable, fill = variable))+
+  #geom_col(position = position_dodge())+
+  geom_line( position = position_dodge(width = 0) ,size = 1, alpha = 0.5, aes(color = variable))+
+  geom_point(size = 3, position = position_dodge(width = 0),shape = 21) +
+  facet_grid(variable~ContS)+
+  theme_bw()+
+  labs(y = "Sampling Plan Power", x = "Sampling Stage")
+
+ggsave("Powers.tiff", width = 35, height = 22, units = "cm", dpi = 600)
+
+Powers_df %>% 
+  ggplot(aes(x = Type, y = value, group = ContS, fill = ContS))+
+  #geom_col(position = position_dodge())+
+  geom_line( position = position_dodge(width = 0) ,size = 1, alpha = 0.5, aes(color = ContS))+
+  geom_point(size = 3, position = position_dodge(width = 0),shape = 21) +
+  facet_wrap(~variable)+
+  theme_bw()+
+  labs(y = "Sampling Plan Power", x = "Sampling Stage")
+ggsave("Powers2.tiff", width = 35, height = 22, units = "cm", dpi = 600)
+
+
+Powers_df %>% 
+  ggplot(aes(x = Type, y = value, group = variable, fill = variable))+
+  #geom_col(position = position_dodge())+
+  geom_line( position = position_dodge(width = 0) ,size = 1, alpha = 0.5, aes(color = variable))+
+  geom_point(size = 3, position = position_dodge(width = 0),shape = 21) +
+  facet_wrap(~ContS)+
+  theme_bw()+
+  labs(y = "Sampling Plan Power", x = "Sampling Stage")
+
+ggsave("Powers3.tiff", width = 35, height = 22, units = "cm", dpi = 600)
+
+```
+
+
+## Contmainationation progression
+```{r}
+NI_1_ProgInt<-read_csv("Melted_Prog_DF_NI_1-R2T.csv")
+NI_2_ProgInt<-read_csv("Melted_Prog_DF_NI_2-R2T.csv")
+NI_3_ProgInt<-read_csv("Melted_Prog_DF_NI_3-R2T.csv")
+
+order_progression<-unique(NI_1_ProgInt$variable) #getting exact order of events
+
+#Function for Calculating the 95% confidence interval for the means.
+margin_calc<-function(x){
+  margin <- qt(0.975,df=1000-1)*sd(x)/sqrt(1000)
+}
+
+#random
+NI_Summ<-NI_1_ProgInt %>% 
+  group_by(Type,variable ) %>% 
+  summarize(mean= mean(value),h95 =mean + margin_calc(value),l95 =mean - margin_calc(value)) %>% 
+  mutate(ContScen = "Random Contamination") %>% 
+  drop_na()
+#10%
+NI_Summ_3<-NI_3_ProgInt %>% 
+  group_by(Type,variable ) %>% 
+  summarize(mean= mean(value),h95 =mean + margin_calc(value),l95 =mean - margin_calc(value)) %>% 
+  mutate(ContScen = "10% Clustered Contamination") %>% 
+  drop_na()
+#1%
+NI_Summ_2<-NI_2_ProgInt %>% 
+  group_by(Type,variable ) %>% 
+  summarize(mean= mean(value),h95 =mean + margin_calc(value),l95 =mean - margin_calc(value)) %>% 
+    mutate(ContScen = "1% Clustered Contamination") %>% 
+  drop_na()
+
+#Getting Summary Stats. for intervention effect. 
+#log changes.
+1.58e+3
+
+NI_Summ %>% 
+  filter(variable == "After CS Samp") %>% 
+  mutate(logchange= log10(mean/1580),
+         logchange95l = log10(h95/1580),
+         logchange95h = log10(l95/1580)
+         )
+
+Binded_all<-bind_rows(NI_Summ,NI_Summ_3,NI_Summ_2)
+
+#Updating Intervention Names: 
+Binded_all$Type<-str_replace("BaselineAI", string = Binded_all$Type, replacement = "Baseline All-Intervention")
+Binded_all$Type<-str_replace("BaselineNI", string = Binded_all$Type, replacement = "Baseline No-Intervention")
+Binded_all$Type<-str_replace("Holding", string = Binded_all$Type, replacement = "Preharvest Holding")
+Binded_all$Type<-str_replace("PreSpray_Wash", string = Binded_all$Type, replacement = "Prewash")
+Binded_all$Type<-str_replace("Washing", string = Binded_all$Type, replacement = "Chlorinated Wash")
+
+#fixing the word preharvest
+Binded_all$variable<-str_replace("Pre-Harvest", string = Binded_all$variable, replacement = "Preharvest")
+order_progression2<-str_replace("Pre-Harvest", string = order_progression, replacement = "Preharvest")
+
+Binded_all$variable<-factor(Binded_all$variable, levels=order_progression2)
+Binded_all$ContScen<-factor(Binded_all$ContScen, levels=c("Random Contamination","10% Clustered Contamination","1% Clustered Contamination"))
+
+
+
+
+ggplot(data= Binded_all, aes(x= variable,y = mean, group= Type, color = Type, linetype=Type, fill = Type))+
+  geom_line(size = 0.75)+
+  geom_ribbon(aes(ymin = l95, ymax = h95), alpha = 0.2)+
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))+
+  theme(text = element_text(size=24))+
+   scale_y_continuous(trans='log10',
+                      labels = trans_format("log10", math_format(10^.x)))+
+  labs(y= "Total Adulterant Cells in System", x="Process Stage")+
+  #ggtitle("1) Random Contamination")+
+  facet_wrap(~ ContScen, ncol = 3)+
+  labs(color = "Interventions", fill = "Interventions", linetype = "Interventions")
+
+ggsave("Contamination_Progression.tiff", width = 45, height = 25, units = "cm", dpi = 600)
+
+```
 
 
 ## Factor Sensitivity plot
 
 ```{r}
 FSdf<-read_csv("FSdf-Final.csv")
-
-#log10(4388/13740302)
-
-#FSdf$FS<-c(0,-1.2769679063, -1.7998346791, -0.8368652945, -0.0747038970, -1.2406815098, 0.0373676179, -0.0048823063, -0.1545419933, -0.5291657397, -0.0500426243, -0.1400479579, -0.1535739862, -0.0009942127,-3.492672, -3.516924,-3.497117, -3.597166, -3.495334, -3.500707, -3.499108, -3.49573)
 ```
 
 ```{r}
@@ -110,89 +236,11 @@ pfs = ggplot(data= FSdf, aes(x = fct_reorder(Name, abs(FS)), y = FS, fill = Syst
 
 ```
 
-
-## Contmainationation progression
-```{r}
-NI_1_ProgInt<-read_csv("Melted_Prog_DF_NI_1-Final.csv")
-NI_2_ProgInt<-read_csv("Melted_Prog_DF_NI_2-Final.csv")
-NI_3_ProgInt<-read_csv("Melted_Prog_DF_NI_3-Final.csv")
-
-order_progression<-unique(NI_1_ProgInt$variable) #getting exact order of events
-
-margin_calc<-function(x){
-  margin <- qt(0.975,df=1000-1)*sd(x)/sqrt(1000)
-}
-
-#random
-NI_Summ<-NI_1_ProgInt %>% 
-  group_by(Type,variable ) %>% 
-  summarize(mean= mean(value),h95 =mean + margin_calc(value),l95 =mean - margin_calc(value)) %>% 
-  mutate(ContScen = "Random Contamination") %>% 
-  drop_na()
-#10%
-NI_Summ_3<-NI_3_ProgInt %>% 
-  group_by(Type,variable ) %>% 
-  summarize(mean= mean(value),h95 =mean + margin_calc(value),l95 =mean - margin_calc(value)) %>% 
-  mutate(ContScen = "10% Clustered Contamination") %>% 
-  drop_na()
-#1%
-NI_Summ_2<-NI_2_ProgInt %>% 
-  group_by(Type,variable ) %>% 
-  summarize(mean= mean(value),h95 =mean + margin_calc(value),l95 =mean - margin_calc(value)) %>% 
-    mutate(ContScen = "1% Clustered Contamination") %>% 
-  drop_na()
-
-#GettingSummaryStats. for intervention effect. 
-
-NI_Summ %>% 
-  filter(variable == "After CS Samp") %>% 
-  mutate(logchange= log10(mean/1372),
-         logchange95l = log10(h95/1372),
-         logchange95h = log10(l95/1372)
-         )
-
-
-log10(0.4705123/1583.4578) #this to calculate the CI from the paper
-log10(65.7962957/1583.4578)
-log10(0.4705123/1583.4578) #this to calculate the CI from the paper
-log10(199.4115526/1583.4578)
-
-
-
-Binded_all<-bind_rows(NI_Summ,NI_Summ_3,NI_Summ_2)
-
-order_progression2<-str_replace("Pre-Harvest", string = order_progression, replacement = "Preharvest")
-
-Binded_all$variable<-factor(Binded_all$variable, levels=order_progression2)
-Binded_all$ContScen<-factor(Binded_all$ContScen, levels=c("Random Contamination","10% Clustered Contamination","1% Clustered Contamination"))
-
-Binded_all$variable<-str_replace("Pre-Harvest", string = Binded_all$variable, replacement = "Preharvest")
-
-
-ggplot(data= Binded_all, aes(x= variable,y = mean, group= Type, color = Type, linetype=Type, fill = Type))+
-  geom_line(size = 0.75)+
-  geom_ribbon(aes(ymin = l95, ymax = h95), alpha = 0.2)+
-  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))+
-  theme(text = element_text(size=24))+
-   scale_y_continuous(trans='log10',
-                      labels = trans_format("log10", math_format(10^.x)))+
-  labs(y= "Total Adulterant Cells in System", x="Process Stage")+
-  #ggtitle("1) Random Contamination")+
-  facet_wrap(~ ContScen, ncol = 3)
-
-ggsave("contprog-Final.png", width = 45, height = 25, units = "cm", dpi = 600)
-  
-
-
-
-#Making Individual One. 
-
-```
-
-
 ## Contamination at sampling Point
 
 ```{r}
+#AI and NOI: This one used fir comparing AI and No
+
 Con_S<-read_csv("ContSamp-Final.csv")
 Con_S_AI<-read_csv("ContSamp_AI-Final.csv")
 
@@ -234,19 +282,180 @@ ggplot(data = Binded_Con, aes(x = variable, y =value, fill = `Cont Scenario`))+
   facet_wrap(~Process)+
   scale_fill_discrete(name = "Contamination Scenario")
 
-ggsave("Cont_Sampling-Final.png", width = 40, height = 35, units = "cm", dpi = 600)
+ggsave("Cont_Sampling-Final.tiff", width = 40, height = 30, units = "cm", dpi = 600)
 
-options("device")
+#ALL Binded: this used to compared all other interventions
+Cont_Samp_Point_Binded<-read_csv("ContSampPoint.csv")
 
-log10( 4447 /13749302 )
+Order_ConS<-unique(Con_S$variable)
+Cont_Samp_Point_Binded$variable<-factor(Cont_Samp_Point_Binded$variable, levels=Order_ConS)
+Cont_Samp_Point_Binded$`Cont Scenario`<-factor(Cont_Samp_Point_Binded$`Cont Scenario`, levels = c("Random Uniform", "10% Cluster", "1% Cluster"))
+Cont_Samp_Point_Binded$Process<-factor(Cont_Samp_Point_Binded$Process, levels = c("No Intervention","Holding Only","PreCooling Only","Sanitation Only", "PreWash Only","Washing Only" , "All Intervention"))
 
-(1-(4447 /13749302))*100
+
+ggplot(data = Cont_Samp_Point_Binded, aes(x = variable, y =value, fill = `Cont Scenario`))+
+  geom_boxplot()+
+   scale_y_continuous(trans='log10',
+                      labels = trans_format("log10", math_format(10^.x)))+
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))+
+  theme(text = element_text(size=24), legend.text=element_text(size=18),legend.title=element_text(size=22))+
+  labs(x= "Sampling Step", y = "Total Adulterant Cells in System")+
+  facet_wrap(~Process)+
+  scale_fill_discrete(name = "Contamination Scenario")
+
+ggsave("Cont_Sampling Point.tiff", width = 40, height = 30, units = "cm", dpi = 600)
+
+
+ggplot(data = Cont_Samp_Point_Binded, aes(x = Process, y =value, fill = `Cont Scenario`))+
+  geom_boxplot()+
+   scale_y_continuous(trans='log10',
+                      labels = trans_format("log10", math_format(10^.x)))+
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))+
+  theme(text = element_text(size=24), legend.text=element_text(size=18),legend.title=element_text(size=22))+
+  labs(x= "Sampling Step", y = "Total Adulterant Cells in System")+
+  facet_wrap(~variable)+
+  scale_fill_discrete(name = "Contamination Scenario")
+
+ggsave("Cont_Sampling Point.tiff", width = 40, height = 30, units = "cm", dpi = 600)
 
 ```
 
 
-## Poster Plot Scenario Comparison
+##Expossure and Prevalence comparison Chart
 
+```{r}
+
+Exposure_Chart<-read_csv("Exposure_Chart_df-Final.csv")
+Exposure_Chart<-Exposure_Chart[-1]
+
+unique(Exposure_Chart$Cont_Spread)
+levels_1<-c("Baseline", "PHS4D", "PHS4H", "PHSInt", "HTrad", "RSTrad", "FPSTrad", "CS")
+levels_2<-c("Baseline", "CS", "PHS4D", "HTrad", "RSTrad","PHS4H", "FPSTrad", "PHSInt")
+
+Exposure_Chart$Cont_Spread<-factor(Exposure_Chart$Cont_Spread, levels = c("Random", "10% Cluster", "1% Cluster"))
+
+
+Exposure_Chart<-Exposure_Chart %>% 
+  mutate(log10cont = log10(Final_CFU_Acc_Portion_mean),)
+
+#Exposure.
+ggplot(data = Exposure_Chart,aes(x = factor(Sampling_Plan, levels =levels_1 ) ,y = MeanComparison, group = Baseline_Scenario,color = Baseline_Scenario))+
+  theme_bw()+
+  geom_point(size = 4)+
+  theme(text = element_text(size=26), axis.text = element_text(size = 24))+
+  theme(legend.text=element_text(size=16),legend.title=element_text(size=20))+
+  #geom_col(data = Exposure_Chart, aes(x =factor(Sampling_Plan, levels =levels_2), y = log10cont))+
+  facet_wrap(~Cont_Spread)+
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))+
+  labs(y= "Relative TAC Exposure", x = "Sampling Plan", color= "Baseline Scenario")+
+  scale_y_continuous(labels = percent)+
+  geom_line(aes(group = Sampling_Plan),
+            color="black",
+            alpha = 0.7 ,
+            arrow = arrow(length=unit(0.3,"cm"), ends="last", type = "closed"))+
+  ggtitle("Relative TAC Exposure")+
+  geom_hline(aes(yintercept = 0.3040073, linetype = "Maximum effect NI system"), size = 2)+
+  geom_hline(aes(yintercept = 0.7794872, linetype = "Maximum effect AI system"), size = 2)+
+  scale_linetype_manual(name ="", values = c('dotted','dashed')) 
+
+
+ggsave("Relative Exposure-Final.tiff", width = 40, height = 28, units = "cm", dpi = 600)
+
+scale_color_manual(values = c("Baseline" = "black", "PHS4D" = "red","PHS4H" = "black","PHSInt" = "black","HTrad" = "black","RSTrad" = "black","FPSTrad" = "black","CS" = "black"))
+ 
+  
+#Relative Prevalence
+  
+ggplot(data = Exposure_Chart,aes(x = factor(Sampling_Plan, levels =levels_1 ) ,y =Prevalence_Comparison, group = Baseline_Scenario,color = Baseline_Scenario))+
+  theme_bw()+
+  geom_point(size = 4)+
+  theme(text = element_text(size=26), axis.text = element_text(size = 24))+
+  theme(legend.text=element_text(size=16),legend.title=element_text(size=20))+
+  #geom_col(data = Exposure_Chart, aes(x =factor(Sampling_Plan, levels =levels_2), y = log10cont))+
+  facet_wrap(~Cont_Spread)+
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))+
+  labs(y= "Relative Prevalence of Contaminated Packages", x = "Sampling Plan", color= "Baseline Scenario")+
+  scale_y_continuous(labels = percent)+
+  geom_line(aes(group = Sampling_Plan),
+            color="black",
+            alpha = 0.7 ,
+            arrow = arrow(length=unit(0.3,"cm"), ends="last", type = "closed"))+
+  ggtitle("Relative Prevalence")+
+  geom_hline(aes(yintercept = 0.3667362, linetype = "Maximum effect NI system"), size = 2)+
+  geom_hline(aes(yintercept = 0.7794872, linetype = "Maximum effect AI system"), size = 2)+
+  scale_linetype_manual(name ="", values = c('dotted','dashed')) 
+
+ggsave("Relative Prevalence.tiff", width = 40, height = 28, units = "cm", dpi = 600)
+  
+  
+#Cont 
+  ggplot(data = Exposure_Chart,aes(y = factor(Sampling_Plan, levels =levels_2 ) ,x = log10cont, group = Baseline_Scenario,fill = Baseline_Scenario))+
+  theme_bw()+
+  geom_col(position = "dodge")+
+  #geom_point(size = 2.5)+
+  #geom_col(data = Exposure_Chart, aes(x =factor(Sampling_Plan, levels =levels_2), y = log10cont))+
+  facet_wrap(~Cont_Spread)+
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))+
+  labs(y= "Log10 Total Cells Exposure", x = "Sampling Plan", color= "Baseline Scenario")+
+  #scale_y_continuous(labels = percent)+
+  #geom_line(aes(group = Sampling_Plan),
+            #color="black",
+            #alpha = 0.7 ,
+            #arrow = arrow(length=unit(0.15,"cm"), ends="first", type = "closed"))+
+  ggtitle("Total Cells Exposure")
+  
+
+
+```
+
+
+#Exposure Comparison with more in between scenarios
+
+```{r}
+Exposure_Chart<-read_csv("Exposure_Chart_df-Final2.csv")
+Exposure_Chart<-Exposure_Chart[-1]
+
+unique(Exposure_Chart$Cont_Spread)
+levels_1<-c("Baseline", "PHS4D", "PHS4H", "PHSInt", "HTrad", "RSTrad", "FPSTrad", "CS")
+levels_2<-c("Baseline", "CS", "PHS4D", "HTrad", "RSTrad","PHS4H", "FPSTrad", "PHSInt")
+
+Exposure_Chart$Cont_Spread<-factor(Exposure_Chart$Cont_Spread, levels = c("Random", "10% Cluster", "1% Cluster"))
+
+
+Exposure_Chart<-Exposure_Chart %>% 
+  mutate(log10cont = log10(Final_CFU_Acc_Portion_mean),)
+
+#Exposure.
+ggplot(data = Exposure_Chart,aes(x = factor(Sampling_Plan, levels =levels_1 ) ,y = MeanComparison, group = Baseline_Scenario,color = Baseline_Scenario))+
+  theme_bw()+
+  geom_point(size = 4)+
+  theme(text = element_text(size=26), axis.text = element_text(size = 24))+
+  theme(legend.text=element_text(size=16),legend.title=element_text(size=20))+
+  #geom_col(data = Exposure_Chart, aes(x =factor(Sampling_Plan, levels =levels_2), y = log10cont))+
+  facet_wrap(~Cont_Spread)+
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))+
+  labs(y= "Relative TAC Exposure", x = "Sampling Plan", color= "Baseline Scenario")+
+  scale_y_continuous(labels = percent)+
+  geom_line(aes(group = Sampling_Plan),
+            color="black",
+            alpha = 0.7 ,
+            arrow = arrow(length=unit(0.3,"cm"), ends="last", type = "closed"))+
+  ggtitle("Relative TAC Exposure")+
+  geom_hline(aes(yintercept = 0.3040073, linetype = "Maximum effect NI system"), size = 2)+
+  geom_hline(aes(yintercept = 0.7794872, linetype = "Maximum effect AI system"), size = 2)+
+  scale_linetype_manual(name ="", values = c('dotted','dashed')) 
+
+
+ggsave("Relative Exposure-Final.tiff", width = 40, height = 28, units = "cm", dpi = 600)
+
+```
+
+
+
+
+## Poster Plot Scenario Comparison CPS Symp 2022 
+
+this got replaced by the Factor Sensitivity plot later on. 
 ```{r}
 order_x2 = c('BaselineNI',
  'PHS4D_NI',
@@ -318,89 +527,7 @@ ggplot(data= Final_Exps, aes(x =fct_reorder(`Sampling Plan`, `Relative Differenc
   #ggsave("EXposure-Final.png", width = 40, height = 28, units = "cm", dpi = 600)
 ```
 
-##Expossure comparison Chart
 
-```{r}
-
-Exposure_Chart<-read_csv("Exposure_Chart_df.csv")
-Exposure_Chart<-Exposure_Chart[-1]
-
-unique(Exposure_Chart$Cont_Spread)
-levels_1<-c("Baseline", "PHS4D", "PHS4H", "PHSInt", "HTrad", "RSTrad", "FPSTrad", "CS")
-levels_2<-c("Baseline", "CS", "PHS4D", "HTrad", "RSTrad","PHS4H", "FPSTrad", "PHSInt")
-
-Exposure_Chart$Cont_Spread<-factor(Exposure_Chart$Cont_Spread, levels = c("Random", "10% Cluster", "1% Cluster"))
-
-
-Exposure_Chart<-Exposure_Chart %>% 
-  mutate(log10cont = log10(Final_CFU_Acc_Portion_mean),)
-
-#Exposure.
-ggplot(data = Exposure_Chart,aes(x = factor(Sampling_Plan, levels =levels_1 ) ,y = MeanComparison, group = Baseline_Scenario,color = Baseline_Scenario))+
-  theme_bw()+
-  geom_point(size = 4)+
-  theme(text = element_text(size=26), axis.text = element_text(size = 24))+
-  theme(legend.text=element_text(size=16),legend.title=element_text(size=20))+
-  #geom_col(data = Exposure_Chart, aes(x =factor(Sampling_Plan, levels =levels_2), y = log10cont))+
-  facet_wrap(~Cont_Spread)+
-  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))+
-  labs(y= "Relative TAC Exposure", x = "Sampling Plan", color= "Baseline Scenario")+
-  scale_y_continuous(labels = percent)+
-  geom_line(aes(group = Sampling_Plan),
-            color="black",
-            alpha = 0.7 ,
-            arrow = arrow(length=unit(0.3,"cm"), ends="last", type = "closed"))+
-  ggtitle("Relative TAC Exposure")+
-  geom_hline(aes(yintercept = 0.3040073, linetype = "Maximum effect NI system"), size = 2)+
-  geom_hline(aes(yintercept = 0.7794872, linetype = "Maximum effect AI system"), size = 2)+
-  scale_linetype_manual(name ="", values = c('dotted','dashed')) +
-ggsave("Relative Exposure-Final.png", width = 40, height = 28, units = "cm", dpi = 600)
-
-  scale_color_manual(values = c("Baseline" = "black", "PHS4D" = "red","PHS4H" = "black","PHSInt" = "black","HTrad" = "black","RSTrad" = "black","FPSTrad" = "black","CS" = "black"))
- 
-  
-#PRevalence
-  
-ggplot(data = Exposure_Chart,aes(x = factor(Sampling_Plan, levels =levels_1 ) ,y =Prevalence_Comparison, group = Baseline_Scenario,color = Baseline_Scenario))+
-  theme_bw()+
-  geom_point(size = 4)+
-  theme(text = element_text(size=26), axis.text = element_text(size = 24))+
-  theme(legend.text=element_text(size=16),legend.title=element_text(size=20))+
-  #geom_col(data = Exposure_Chart, aes(x =factor(Sampling_Plan, levels =levels_2), y = log10cont))+
-  facet_wrap(~Cont_Spread)+
-  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))+
-  labs(y= "Relative Prevalence of Contaminated Packages", x = "Sampling Plan", color= "Baseline Scenario")+
-  scale_y_continuous(labels = percent)+
-  geom_line(aes(group = Sampling_Plan),
-            color="black",
-            alpha = 0.7 ,
-            arrow = arrow(length=unit(0.3,"cm"), ends="last", type = "closed"))+
-  ggtitle("Relative Prevalence")+
-  geom_hline(aes(yintercept = 0.3667362, linetype = "Maximum effect NI system"), size = 2)+
-  geom_hline(aes(yintercept = 0.7794872, linetype = "Maximum effect AI system"), size = 2)+
-  scale_linetype_manual(name ="", values = c('dotted','dashed')) +
-ggsave("Relative Prevalence-Final.png", width = 40, height = 28, units = "cm", dpi = 600)
-  
-  
-#Cont 
-  ggplot(data = Exposure_Chart,aes(y = factor(Sampling_Plan, levels =levels_2 ) ,x = log10cont, group = Baseline_Scenario,fill = Baseline_Scenario))+
-  theme_bw()+
-  geom_col(position = "dodge")+
-  #geom_point(size = 2.5)+
-  #geom_col(data = Exposure_Chart, aes(x =factor(Sampling_Plan, levels =levels_2), y = log10cont))+
-  facet_wrap(~Cont_Spread)+
-  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))+
-  labs(y= "Log10 Total Cells Exposure", x = "Sampling Plan", color= "Baseline Scenario")+
-  #scale_y_continuous(labels = percent)+
-  #geom_line(aes(group = Sampling_Plan),
-            #color="black",
-            #alpha = 0.7 ,
-            #arrow = arrow(length=unit(0.15,"cm"), ends="first", type = "closed"))+
-  ggtitle("Total Cells Exposure")
-  
-
-
-```
 
 
 

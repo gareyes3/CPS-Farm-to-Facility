@@ -16,7 +16,7 @@ Random_Contam = False
 Sensitivity_Analysis = False
 
 
-N_Iterations= 1000
+N_Iterations= 10000
 Field_Weight= 100000 #total lb in field
 slot_weight = 25_000 #weight of the sublot in field.
 Partition_Weight = 50 #Partition weight for contamination Events, Partition to have better definition of field. 
