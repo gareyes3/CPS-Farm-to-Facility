@@ -1044,7 +1044,7 @@ Outputs_Df_NI_PC_3=F_Outputs_Table(List_of_Outs_NI_PC_3)
 #%% Sampling Plan Power
     #To get power
 def sampling_power(df,Step_Acc):
-    return len(df[0][df[0][Step_Acc] ==0])/1000
+    return len(df[0][df[0][Step_Acc] ==0])/10000
     #to get number of detected
 def sampling_power_2(df,Step_Acc):
     return len(df[0][df[0][Step_Acc] ==0])
