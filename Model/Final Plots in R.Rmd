@@ -64,9 +64,8 @@ Powers_df %>%
   geom_point(size = 3, position = position_dodge(width = 0),shape = 21) +
   facet_wrap(~ContS)+
   theme_bw()+
-  labs(y = "Sampling Plan Power", x = "Sampling Stage")
-
-ggsave("Powers3.tiff", width = 35, height = 22, units = "cm", dpi = 600)
+  labs(y = "Sampling Plan Power", x = "Sampling Stage", fill = "Process System", color =  "Process System")
+ggsave("Powers3.tiff", width = 30, height = 16, units = "cm", dpi = 600)
 
 ```
 
@@ -105,13 +104,13 @@ NI_Summ_2<-NI_2_ProgInt %>%
 
 #Getting Summary Stats. for intervention effect. 
 #log changes.
-1.58e+3
+1.59e+3
 
 NI_Summ %>% 
   filter(variable == "After CS Samp") %>% 
-  mutate(logchange= log10(mean/1580),
-         logchange95l = log10(h95/1580),
-         logchange95h = log10(l95/1580)
+  mutate(logchange= log10(mean/1590),
+         logchange95l = log10(h95/1590),
+         logchange95h = log10(l95/1590)
          )
 
 Binded_all<-bind_rows(NI_Summ,NI_Summ_3,NI_Summ_2)
@@ -287,7 +286,7 @@ ggsave("Cont_Sampling-Final.tiff", width = 40, height = 30, units = "cm", dpi = 
 #ALL Binded: this used to compared all other interventions
 Cont_Samp_Point_Binded<-read_csv("ContSampPoint.csv")
 
-Order_ConS<-unique(Con_S$variable)
+Order_ConS<-unique(Cont_Samp_Point_Binded$variable)
 Cont_Samp_Point_Binded$variable<-factor(Cont_Samp_Point_Binded$variable, levels=Order_ConS)
 Cont_Samp_Point_Binded$`Cont Scenario`<-factor(Cont_Samp_Point_Binded$`Cont Scenario`, levels = c("Random Uniform", "10% Cluster", "1% Cluster"))
 Cont_Samp_Point_Binded$Process<-factor(Cont_Samp_Point_Binded$Process, levels = c("No Intervention","Holding Only","PreCooling Only","Sanitation Only", "PreWash Only","Washing Only" , "All Intervention"))
@@ -317,6 +316,10 @@ ggplot(data = Cont_Samp_Point_Binded, aes(x = Process, y =value, fill = `Cont Sc
   scale_fill_discrete(name = "Contamination Scenario")
 
 ggsave("Cont_Sampling Point.tiff", width = 40, height = 30, units = "cm", dpi = 600)
+
+Cont_Samp_Point_Binded %>% 
+  group_by(variable,Process,`Cont Scenario`) %>% 
+  summarise(mean = mean(value), q2.5 = quantile(value, 0.025), q975 = quantile(value, 0.975))
 
 ```
 
