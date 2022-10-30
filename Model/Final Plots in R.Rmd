@@ -13,9 +13,10 @@ library(ggplot2)
 library(scales)
 library(forcats)
 
-setwd("C:/Users/gareyes3/Box/CPS Project- Farm to Facility/Papers/CSV Data/Review 2")
+#setwd("C:/Users/gareyes3/Box/CPS Project- Farm to Facility/Papers/CSV Data/Review 2")
 #setwd("C:/Users/reyes/Box Sync/CPS Project- Farm to Facility/Papers/CSV Data")
 #setwd("C:/Users/gareyes3/Box/CPS Project- Farm to Facility/Papers/CSV Data")
+setwd("C:/Users/Gustavo Reyes/Box/CPS Project- Farm to Facility/Papers/CSV Data/Review 2")
 ```
 
 Contamination progression around the system.
@@ -318,8 +319,9 @@ ggplot(data = Cont_Samp_Point_Binded, aes(x = Process, y =value, fill = `Cont Sc
 ggsave("Cont_Sampling Point.tiff", width = 40, height = 30, units = "cm", dpi = 600)
 
 Cont_Samp_Point_Binded %>% 
-  group_by(variable,Process,`Cont Scenario`) %>% 
-  summarise(mean = mean(value), q2.5 = quantile(value, 0.025), q975 = quantile(value, 0.975))
+  group_by(variable, Process) %>% 
+  summarise(mean = mean(value), q2.5 = quantile(value, 0.05), q975 = quantile(value, 0.95)) %>% 
+  filter(variable == "Before FPS")
 
 ```
 
