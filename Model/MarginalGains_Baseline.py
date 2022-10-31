@@ -1579,24 +1579,6 @@ Outputs_Df_NI_W_3["Baseline_Scenario"] = "Wash Only"
 Outputs_Df_NI_W_3["Cont_Spread"] = "10% Cluster"
 N3_W=Outputs_Df_NI_W_3[["Final_CFU_Acc_Portion_mean","Prevalence_Acc_Mean","Prevalence_Comparison","MeanComparison","Cont_Spread","Sampling_Plan","Baseline_Scenario"]]
 
-#NI _ Prewash
-Outputs_Df_NI_PW_1["Final_CFU_Acc_Portion_mean"]
-Outputs_Df_NI_PW_1["Sampling_Plan"] = "Baseline PHS4D PHS4H PHSInt HTrad RSTrad FPSTrad CS".split()
-Outputs_Df_NI_PW_1["Baseline_Scenario"] = "Prewash Only"
-Outputs_Df_NI_PW_1["Cont_Spread"] = "Random"
-N1_W=Outputs_Df_NI_PW_1[["Final_CFU_Acc_Portion_mean","Prevalence_Acc_Mean","Prevalence_Comparison","MeanComparison","Cont_Spread","Sampling_Plan","Baseline_Scenario"]]
-
-Outputs_Df_NI_PW_2["Final_CFU_Acc_Portion_mean"]
-Outputs_Df_NI_PW_2["Sampling_Plan"] = "Baseline PHS4D PHS4H PHSInt HTrad RSTrad FPSTrad CS".split()
-Outputs_Df_NI_PW_2["Baseline_Scenario"] = "Prewash Only"
-Outputs_Df_NI_PW_2["Cont_Spread"] = "1% Cluster"
-N2_W=Outputs_Df_NI_PW_2[["Final_CFU_Acc_Portion_mean","Prevalence_Acc_Mean","Prevalence_Comparison","MeanComparison","Cont_Spread","Sampling_Plan","Baseline_Scenario"]]
-
-Outputs_Df_NI_PW_3["Final_CFU_Acc_Portion_mean"]
-Outputs_Df_NI_PW_3["Sampling_Plan"] = "Baseline PHS4D PHS4H PHSInt HTrad RSTrad FPSTrad CS".split()
-Outputs_Df_NI_PW_3["Baseline_Scenario"] = "Prewash Only"
-Outputs_Df_NI_PW_3["Cont_Spread"] = "10% Cluster"
-N3_W=Outputs_Df_NI_PW_3[["Final_CFU_Acc_Portion_mean","Prevalence_Acc_Mean","Prevalence_Comparison","MeanComparison","Cont_Spread","Sampling_Plan","Baseline_Scenario"]]
 
 #NI _ Prewash
 Outputs_Df_NI_PW_1["Final_CFU_Acc_Portion_mean"]
@@ -1678,7 +1660,7 @@ N3_PC=Outputs_Df_NI_PC_3[["Final_CFU_Acc_Portion_mean","Prevalence_Acc_Mean","Pr
 
 Exposure_Chart_df= pd.concat([A1,A2,A3,N1,N2,N3,N1_W,N2_W,N3_W,N1_PW,N2_PW,N3_PW,N1_H,N2_H,N3_H,N1_S,N2_S,N3_S,N1_PC,N2_PC,N3_PC ])
 
-Exposure_Chart_df.to_csv("C:\\Users\\gareyes3\\Box\\CPS Project- Farm to Facility\\Papers\\CSV Data\\Review 2\\Exposure_Chart_df-Final2.csv")
+Exposure_Chart_df.to_csv("C:\\Users\\Gustavo Reyes\\Box\\CPS Project- Farm to Facility\\Papers\\CSV Data\\Review 2\\Exposure_Chart_df-Final2.csv")
 
 #%%END
 #%%
