@@ -33,7 +33,7 @@ from matplotlib import pyplot as plt
 from matplotlib.ticker import ScalarFormatter
 import seaborn as sns
 import sys
-import Trial_MainLoop_PH
+#import Trial_MainLoop_PH
 
 
 reload(MainModel3z)
@@ -164,12 +164,7 @@ def scenario_function(Cont_Scen_no,
 #%%
 
 Baseline = scenario_function(Cont_Scen_no=1)
-Baseline_washing = scenario_function(Cont_Scen_no=1,Washing = True)
-Baseline_washing_opt = scenario_function(Cont_Scen_no=1,Washing = True,Always_Washing_Optimized= True)
-Baseline_holding = scenario_function(Cont_Scen_no=1,Holding= True)
-Baseline_Pre_Cooling = scenario_function(Cont_Scen_no=1,Pre_Cooling= True)
-Baseline_PreS_Wash = scenario_function(Cont_Scen_no=1, PreS_Wash = True) #
-Baseline_Sanitation = scenario_function(Cont_Scen_no=1, Sanitation = True) #
+#Baseline_washing_opt = scenario_function(Cont_Scen_no=1,Washing = True,Always_Washing_Optimized= True)
 Baseline_PHS4d = scenario_function(Cont_Scen_no=1, PHS4d = True) #
 Baseline_PHS4h = scenario_function(Cont_Scen_no=1, PHS4h = True) #
 Baseline_PHS4Int = scenario_function(Cont_Scen_no=1, PHSInt = True)#
@@ -177,6 +172,53 @@ Baseline_HS = scenario_function(Cont_Scen_no=1, HSTrad = True)#
 Baseline_RS = scenario_function(Cont_Scen_no=1, RSTrad = True)
 Baseline_FPSTrad = scenario_function(Cont_Scen_no=1, FPSTrad = True)
 Baseline_CS = scenario_function(Cont_Scen_no=1, CSampling = True)
+
+Baseline_washing = scenario_function(Cont_Scen_no=1,Washing = True)
+Baseline_washing_PHS4D = scenario_function(Cont_Scen_no=1,Washing = True,PHS4d = True)
+Baseline_washing_PHS4h = scenario_function(Cont_Scen_no=1,Washing = True,PHS4h = True)
+Baseline_washing_PHSInt = scenario_function(Cont_Scen_no=1,Washing = True,PHSInt = True)
+Baseline_washing_HS = scenario_function(Cont_Scen_no=1,Washing = True,HSTrad  = True)
+Baseline_washing_RS = scenario_function(Cont_Scen_no=1,Washing = True,RSTrad = True)
+Baseline_washing_FPS = scenario_function(Cont_Scen_no=1,Washing = True,FPSTrad = True)
+Baseline_washing_CS = scenario_function(Cont_Scen_no=1,Washing = True,CSampling = True)
+
+Baseline_Holding = scenario_function(Cont_Scen_no=1,Holding= True)
+Baseline_Holding_PHS4D = scenario_function(Cont_Scen_no=1,Holding = True,PHS4d = True)
+Baseline_Holding_PHS4h = scenario_function(Cont_Scen_no=1,Holding = True,PHS4h = True)
+Baseline_Holding_PHSInt = scenario_function(Cont_Scen_no=1,Holding = True,PHSInt = True)
+Baseline_Holding_HS = scenario_function(Cont_Scen_no=1,Holding = True,HSTrad  = True)
+Baseline_Holding_RS = scenario_function(Cont_Scen_no=1,Holding = True,RSTrad = True)
+Baseline_Holding_FPS = scenario_function(Cont_Scen_no=1,Holding = True,FPSTrad = True)
+Baseline_Holding_CS = scenario_function(Cont_Scen_no=1,Holding = True,CSampling = True)
+
+Baseline_PreS_Wash = scenario_function(Cont_Scen_no=1, PreS_Wash = True) #
+Baseline_PreS_Wash_PHS4D = scenario_function(Cont_Scen_no=1,PreS_Wash = True,PHS4d = True)
+Baseline_PreS_Wash_PHS4h = scenario_function(Cont_Scen_no=1,PreS_Wash = True,PHS4h = True)
+Baseline_PreS_Wash_PHSInt = scenario_function(Cont_Scen_no=1,PreS_Wash = True,PHSInt = True)
+Baseline_PreS_Wash_HS = scenario_function(Cont_Scen_no=1,PreS_Wash = True,HSTrad  = True)
+Baseline_PreS_Wash_RS = scenario_function(Cont_Scen_no=1,PreS_Wash = True,RSTrad = True)
+Baseline_PreS_Wash_FPS = scenario_function(Cont_Scen_no=1,PreS_Wash = True,FPSTrad = True)
+Baseline_PreS_Wash_CS = scenario_function(Cont_Scen_no=1,PreS_Wash = True,CSampling = True)
+
+Baseline_Sanitation = scenario_function(Cont_Scen_no=1, Sanitation = True) #
+Baseline_Sanitation_PHS4D = scenario_function(Cont_Scen_no=1,Sanitation = True,PHS4d = True)
+Baseline_Sanitation_PHS4h = scenario_function(Cont_Scen_no=1,Sanitation = True,PHS4h = True)
+Baseline_Sanitation_PHSInt = scenario_function(Cont_Scen_no=1,Sanitation = True,PHSInt = True)
+Baseline_Sanitation_HS = scenario_function(Cont_Scen_no=1,Sanitation = True,HSTrad  = True)
+Baseline_Sanitation_RS = scenario_function(Cont_Scen_no=1,Sanitation = True,RSTrad = True)
+Baseline_Sanitation_FPS = scenario_function(Cont_Scen_no=1,Sanitation = True,FPSTrad = True)
+Baseline_Sanitation_CS = scenario_function(Cont_Scen_no=1,Sanitation = True,CSampling = True)
+
+Baseline_Pre_Cooling = scenario_function(Cont_Scen_no=1,Pre_Cooling= True)
+Baseline_Pre_Cooling_PHS4D = scenario_function(Cont_Scen_no=1,Pre_Cooling = True,PHS4d = True)
+Baseline_Pre_Cooling_PHS4h = scenario_function(Cont_Scen_no=1,Pre_Cooling = True,PHS4h = True)
+Baseline_Pre_Cooling_PHSInt = scenario_function(Cont_Scen_no=1,Pre_Cooling = True,PHSInt = True)
+Baseline_Pre_Cooling_HS = scenario_function(Cont_Scen_no=1,Pre_Cooling = True,HSTrad  = True)
+Baseline_Pre_Cooling_RS = scenario_function(Cont_Scen_no=1,Pre_Cooling = True,RSTrad = True)
+Baseline_Pre_Cooling_FPS = scenario_function(Cont_Scen_no=1,Pre_Cooling = True,FPSTrad = True)
+Baseline_Pre_Cooling_CS = scenario_function(Cont_Scen_no=1,Pre_Cooling = True,CSampling = True)
+
+
 Baseline_AI = scenario_function(Cont_Scen_no=1,Washing = True, Holding = True,Pre_Cooling = True, PreS_Wash=True, Sanitation = True)
 Baseline_AI_PHS4d = scenario_function(Cont_Scen_no=1,Washing = True,  Holding = True,Pre_Cooling = True, PreS_Wash=True, Sanitation = True,PHS4d = True)
 Baseline_AI_PHS4h = scenario_function(Cont_Scen_no=1,Washing = True, Holding = True,Pre_Cooling = True, PreS_Wash=True, Sanitation = True,PHS4h = True)
@@ -195,11 +237,43 @@ List_of_Names = ["Baseline-NI","Baseline-NI-Washing","Baseline-NI-Washing 10 ppm
 
 
 
+List_of_Names = ["Baseline NI", "Baseline NI PHS4D", "Baseline NI PHS4H", "Baseline NI PHS Int", "Baseline NI HS", "Baseline NI RS", "Baseline NI FPS", "Baseline NI CS",
+                 "Washing Only", "Washing Only PHS4D", "Washing Only PHS4H", "Washing Only PHS Int", "Washing Only HS", "Washing Only RS", "Washing Only FPS", "Washing Only CS",
+                 "Holding Only", "Holding Only PHS4D", "Holding Only PHS4H", "Holding Only PHS Int", "Holding Only HS", "Holding Only RS", "Holding Only FPS", "Holding Only CS",
+                 "PreWash Only", "PreWash Only PHS4D", "PreWash Only PHS4H", "PreWash Only PHS Int", "PreWash Only HS", "PreWash Only RS", "PreWash Only FPS", "PreWash Only CS",
+                 "Precooling Only", "Precooling Only PHS4D", "Precooling Only PHS4H", "Precooling Only PHS Int", "Precooling Only HS", "Precooling Only RS", "Precooling Only FPS", "Precooling Only CS",
+                 "Sanitation Only", "Sanitation Only PHS4D", "Sanitation Only PHS4H", "Sanitation Only PHS Int", "Sanitation Only HS", "Sanitation Only RS", "Sanitation Only FPS", "Sanitation Only CS",                 
+                 "Baseline  AI", "Baseline  AI PHS4D", "Baseline  AI PHS4H", "Baseline  AI PHS Int", "Baseline  AI HS", "Baseline  AI RS", "Baseline  AI FPS", "Baseline  AI CS",
+    ]
+
+List_of_systems = ["Baseline NI","Baseline NI","Baseline NI","Baseline NI","Baseline NI","Baseline NI","Baseline NI","Baseline NI",
+                   "Washing Only","Washing Only","Washing Only","Washing Only","Washing Only","Washing Only","Washing Only","Washing Only",
+                   "Holding Only","Holding Only","Holding Only","Holding Only","Holding Only","Holding Only","Holding Only","Holding Only",
+                   "PreWash Only", "PreWash Only", "PreWash Only", "PreWash Only", "PreWash Only", "PreWash Only", "PreWash Only", "PreWash Only", 
+                   "Precooling Only","Precooling Only","Precooling Only","Precooling Only","Precooling Only","Precooling Only","Precooling Only","Precooling Only",
+                   "Sanitation Only","Sanitation Only","Sanitation Only","Sanitation Only","Sanitation Only","Sanitation Only","Sanitation Only","Sanitation Only",
+                   "Baseline  AI", "Baseline  AI", "Baseline  AI", "Baseline  AI", "Baseline  AI", "Baseline  AI", "Baseline  AI", "Baseline  AI"
+                   
+                   ]
+
+List_of_FS = [Baseline,Baseline_PHS4d,Baseline_PHS4h,Baseline_PHS4Int,Baseline_HS,Baseline_RS,Baseline_FPSTrad,Baseline_CS,
+              Baseline_washing,Baseline_washing_PHS4D,Baseline_washing_PHS4h,Baseline_washing_PHSInt,Baseline_washing_HS,Baseline_washing_RS,Baseline_washing_FPS,Baseline_washing_CS,
+              Baseline_Holding,Baseline_Holding_PHS4D,Baseline_Holding_PHS4h,Baseline_Holding_PHSInt,Baseline_Holding_HS,Baseline_Holding_RS,Baseline_Holding_FPS,Baseline_Holding_CS,
+              Baseline_PreS_Wash,Baseline_PreS_Wash_PHS4D,Baseline_PreS_Wash_PHS4h,Baseline_PreS_Wash_PHSInt,Baseline_PreS_Wash_HS,Baseline_PreS_Wash_RS,Baseline_PreS_Wash_FPS,Baseline_PreS_Wash_CS,
+              Baseline_Sanitation,Baseline_Sanitation_PHS4D,Baseline_Sanitation_PHS4h,Baseline_Sanitation_PHSInt,Baseline_Sanitation_HS,Baseline_Sanitation_RS,Baseline_Sanitation_FPS,Baseline_Sanitation_CS,
+              Baseline_Pre_Cooling,Baseline_Pre_Cooling_PHS4D,Baseline_Pre_Cooling_PHS4h,Baseline_Pre_Cooling_PHSInt,Baseline_Pre_Cooling_HS,Baseline_Pre_Cooling_RS,Baseline_Pre_Cooling_FPS,Baseline_Pre_Cooling_CS,
+              Baseline_AI,Baseline_AI_PHS4d, Baseline_AI_PHS4h,Baseline_AI_PHSInt,Baseline_AI_HSTrad,Baseline_AI_RS,Baseline_AI_FPSTrad,Baseline_AI_CS
+              
+    ]
+
+
+
+
 List_of_FS = [
     Baseline,
     Baseline_washing,
-    Baseline_washing_opt,
-    Baseline_holding,
+    #Baseline_washing_opt,
+    Baseline_Holding,
     Baseline_Pre_Cooling,
     Baseline_PreS_Wash,
     Baseline_Sanitation,
@@ -221,7 +295,8 @@ List_of_FS = [
     ]
 
 
-
+Baseline[1]["After CS Samp"].sum()
+List[0][1]["After CS Samp"].sum()
 
 def get_FS(List):
     vector_of_FS = []
@@ -236,11 +311,12 @@ FS = get_FS(List_of_FS)
 
 FSdf= pd.DataFrame({
     "FS": FS,
-    "Name": List_of_Names
+    "Name": List_of_Names,
+    "System":List_of_systems
     })
 
 
-FSdf.to_csv(path_or_buf = "C:\\Users\\Gustavo Reyes\\Box\\CPS Project- Farm to Facility\\Papers\\CSV Data\\FSdf-Final.csv") 
+FSdf.to_csv(path_or_buf = "C:\\Users\\gareyes3\\Box\\CPS Project- Farm to Facility\\Papers\\CSV Data\\Review 2\\FSdf-Final.csv") 
 #FSdf.to_csv(path_or_buf = "C:\\Users\\gareyes3\\Box Sync\\CPS Project- Farm to Facility\\Papers\\CSV Data\\FSdf-Final.csv") 
     
 

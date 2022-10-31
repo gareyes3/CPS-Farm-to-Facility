@@ -13,10 +13,10 @@ library(ggplot2)
 library(scales)
 library(forcats)
 
-#setwd("C:/Users/gareyes3/Box/CPS Project- Farm to Facility/Papers/CSV Data/Review 2")
+setwd("C:/Users/gareyes3/Box/CPS Project- Farm to Facility/Papers/CSV Data/Review 2")
 #setwd("C:/Users/reyes/Box Sync/CPS Project- Farm to Facility/Papers/CSV Data")
 #setwd("C:/Users/gareyes3/Box/CPS Project- Farm to Facility/Papers/CSV Data")
-setwd("C:/Users/Gustavo Reyes/Box/CPS Project- Farm to Facility/Papers/CSV Data/Review 2")
+#setwd("C:/Users/Gustavo Reyes/Box/CPS Project- Farm to Facility/Papers/CSV Data/Review 2")
 ```
 
 Contamination progression around the system.
@@ -218,7 +218,7 @@ pfs = ggplot(data= FSdf, aes(x = fct_reorder(Name, abs(FS)), y = FS, fill = Syst
   pfs+
   theme(text = element_text(size=24))+
   #geom_hline(yintercept = -3.492672,linetype="dotted", size = 2)+
-   # geom_hline(yintercept = 0,linetype="dashed",size = 2)+
+  # geom_hline(yintercept = 0,linetype="dashed",size = 2)+
   ylab("Factor Sensitivity Index")+
   xlab("Scenario or Intervention")+
   scale_x_discrete(labels = labels_x)+
@@ -232,7 +232,30 @@ pfs = ggplot(data= FSdf, aes(x = fct_reorder(Name, abs(FS)), y = FS, fill = Syst
                         name = "")
 
   ggsave("FS-Final.png", width = 40, height = 30, units = "cm", dpi = 600)
+  
+hline_data <- data.frame(y = c(-3.40,0,-0.785689788,0.123961982,-1.250976121,-0.012333977,
+-1.27982526), System = factor(c("Baseline  AI", "Baseline NI", "Holding Only", "Precooling Only", "PreWash Only", "Sanitation Only", "Washing Only")), 
+                         stringsAsFactors = FALSE)
 
+hline_data2 <- data.frame(y = c(0),Baseline_System = factor(c("Baseline")), 
+                         stringsAsFactors = FALSE)
+
+FSdf <- FSdf %>% mutate(ints3 = rep(c(-3.40,0,-0.785689788,0.123961982,-1.250976121,-0.012333977,
+-1.27982526), each =8))
+
+
+ggplot(data= FSdf, aes(x = fct_reorder(Name, abs(FS)), y = FS, fill = System))+
+  geom_col()+
+  coord_flip()+
+  facet_wrap(~System,scales = "free_y")  +
+  ylab("Factor Sensitivity Index")+
+  xlab("Scenario or Intervention")+
+  geom_hline(data = hline_data, aes(yintercept = y, linetype = System),size =1.5)+
+  #geom_hline(data = hline_data2, aes(yintercept = y, linetype = Baseline_System),size =2, color = "red")+
+  geom_hline(aes(yintercept = 0),size =1.5, color = "red", alpha = 0.5)
+  
+
+pfs
 
 ```
 
@@ -434,7 +457,7 @@ Exposure_Chart<-Exposure_Chart %>%
 ggplot(data = Exposure_Chart,aes(x = factor(Sampling_Plan, levels =levels_1 ) ,y = MeanComparison, group = Baseline_Scenario,fill = Baseline_Scenario))+
   theme_bw()+
   geom_line(aes(color =Baseline_Scenario ))+
-  geom_point(size = 4, position = position_dodge(width = 0),shape = 21, alpha = 0.8)+
+  geom_point(size = 5, position = position_dodge(width = 0),shape = 21, alpha = 0.8)+
   theme(text = element_text(size=26), axis.text = element_text(size = 24))+
   theme(legend.text=element_text(size=16),legend.title=element_text(size=20))+
   #geom_col(data = Exposure_Chart, aes(x =factor(Sampling_Plan, levels =levels_2), y = log10cont))+
@@ -444,8 +467,8 @@ ggplot(data = Exposure_Chart,aes(x = factor(Sampling_Plan, levels =levels_1 ) ,y
   scale_y_continuous(labels = percent)+
   #geom_line(aes(group = Sampling_Plan),color="black",alpha = 0.7 ,arrow = arrow(length=unit(0.3,"cm"), ends="last", type #= "closed"))+
   #ggtitle("Relative TAC Exposure")+
-  #geom_hline(aes(yintercept = 0.3040073, linetype = "Maximum effect NI system"), size = 2)+
-  #geom_hline(aes(yintercept = 0.7794872, linetype = "Maximum effect AI system"), size = 2)+
+  geom_hline(aes(yintercept = 0.2340680, linetype = "Maximum effect NI system"), size = 2, alpha = 0.5)+
+  geom_hline(aes(yintercept = 0.6890373, linetype = "Maximum effect AI system"), size = 2,alpha = 0.5)+
   scale_linetype_manual(name ="", values = c('dotted','dashed')) 
 
 
