@@ -751,7 +751,7 @@ def F_CrossContProLine (gb2, Tr_P_S, Tr_S_P,Sanitation_Freq_lb = 0, StepEff = 0 
                 if every_x_many > 0:
                     if i in Cleaning_steps:
                         if ContS>0:
-                            ContS = ContS*(10**StepEff) 
+                            ContS = rng.binomial(ContS,10**StepEff) 
             ContP = j.CFU[i] #Contamination product
             TotTr_P_S= rng.binomial(ContP,Tr_P_S) #Transfer from Product to Surfaces
             TotTr_S_P = rng.binomial(ContS,Tr_S_P) #Trasnfer from Surfaves to product
@@ -761,6 +761,7 @@ def F_CrossContProLine (gb2, Tr_P_S, Tr_S_P,Sanitation_Freq_lb = 0, StepEff = 0 
         ContS_L.append(ContS)
     Outputs = [gb2,ContS_L]
     return Outputs
+
 
 
 def F_CrossContProLine2 (gb2, Tr_P_S, Tr_S_P, Sanitation_Freq_lb = 0, StepEff = 0 , compliance = 0 ):

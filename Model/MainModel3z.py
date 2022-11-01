@@ -594,6 +594,7 @@ def F_MainLoop():
                                              compliance = Inputz.St_Compliance)
             gb2 = StOuts[0]
             StCont = StOuts[1]
+            #print(sum(StCont))
             
             #6 Centrifuge-----------------------------------------------------
             

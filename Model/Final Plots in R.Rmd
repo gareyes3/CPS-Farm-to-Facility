@@ -136,14 +136,15 @@ Binded_all$ContScen<-factor(Binded_all$ContScen, levels=c("Random Contamination"
 ggplot(data= Binded_all, aes(x= variable,y = mean, group= Type, color = Type, linetype=Type, fill = Type))+
   geom_line(size = 0.75)+
   geom_ribbon(aes(ymin = l95, ymax = h95), alpha = 0.2)+
-  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))+
-  theme(text = element_text(size=24))+
    scale_y_continuous(trans='log10',
                       labels = trans_format("log10", math_format(10^.x)))+
   labs(y= "Total Adulterant Cells in System", x="Process Stage")+
   #ggtitle("1) Random Contamination")+
   facet_wrap(~ ContScen, ncol = 3)+
-  labs(color = "Interventions", fill = "Interventions", linetype = "Interventions")
+  labs(color = "Interventions", fill = "Interventions", linetype = "Interventions")+
+  theme_bw()+
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))+
+  theme(text = element_text(size=24))
 
 ggsave("Contamination_Progression.tiff", width = 45, height = 25, units = "cm", dpi = 600)
 
@@ -233,15 +234,18 @@ pfs = ggplot(data= FSdf, aes(x = fct_reorder(Name, abs(FS)), y = FS, fill = Syst
 
   ggsave("FS-Final.png", width = 40, height = 30, units = "cm", dpi = 600)
   
-hline_data <- data.frame(y = c(-3.40,0,-0.785689788,0.123961982,-1.250976121,-0.012333977,
--1.27982526), System = factor(c("Baseline  AI", "Baseline NI", "Holding Only", "Precooling Only", "PreWash Only", "Sanitation Only", "Washing Only")), 
+hline_data <- data.frame(y = c(-3.41,0,-0.805564771,0.015250639
+,-1.250976121,-0.012333977,
+-1.320045958), System = factor(c("Baseline  AI", "Baseline NI", "Holding Only", "Precooling Only", "PreWash Only", "Sanitation Only", "Washing Only")), 
                          stringsAsFactors = FALSE)
 
 hline_data2 <- data.frame(y = c(0),Baseline_System = factor(c("Baseline")), 
                          stringsAsFactors = FALSE)
 
-FSdf <- FSdf %>% mutate(ints3 = rep(c(-3.40,0,-0.785689788,0.123961982,-1.250976121,-0.012333977,
--1.27982526), each =8))
+FSdf <- FSdf %>% mutate(ints3 = rep(c(-3.41,0,-0.805564771,0.015250639
+,-1.250976121,-0.012333977,
+-1.320045958
+), each =8))
 
 
 ggplot(data= FSdf, aes(x = fct_reorder(Name, abs(FS)), y = FS, fill = System))+
@@ -252,8 +256,12 @@ ggplot(data= FSdf, aes(x = fct_reorder(Name, abs(FS)), y = FS, fill = System))+
   xlab("Scenario or Intervention")+
   geom_hline(data = hline_data, aes(yintercept = y, linetype = System),size =1.5)+
   #geom_hline(data = hline_data2, aes(yintercept = y, linetype = Baseline_System),size =2, color = "red")+
-  geom_hline(aes(yintercept = 0),size =1.5, color = "red", alpha = 0.5)
+  geom_hline(aes(yintercept = 0),size =1.5, color = "red", alpha = 0.5)+
+  theme_bw()+
+  theme(text = element_text(size=16), axis.text = element_text(size = 16))+
+  theme(legend.text=element_text(size=20),legend.title=element_text(size=20))
   
+  ggsave("FS-R2.png", width = 45, height = 30, units = "cm", dpi = 600)
 
 pfs
 
@@ -320,11 +328,12 @@ ggplot(data = Cont_Samp_Point_Binded, aes(x = variable, y =value, fill = `Cont S
   geom_boxplot()+
    scale_y_continuous(trans='log10',
                       labels = trans_format("log10", math_format(10^.x)))+
-  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))+
-  theme(text = element_text(size=24), legend.text=element_text(size=18),legend.title=element_text(size=22))+
   labs(x= "Sampling Step", y = "Total Adulterant Cells in System")+
   facet_wrap(~Process)+
-  scale_fill_discrete(name = "Contamination Scenario")
+  scale_fill_discrete(name = "Contamination Scenario")+
+  theme_bw()+
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))+
+  theme(text = element_text(size=24), legend.text=element_text(size=18),legend.title=element_text(size=22))
 
 ggsave("Cont_Sampling Point.tiff", width = 40, height = 30, units = "cm", dpi = 600)
 
