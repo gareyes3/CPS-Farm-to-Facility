@@ -234,9 +234,9 @@ pfs = ggplot(data= FSdf, aes(x = fct_reorder(Name, abs(FS)), y = FS, fill = Syst
 
   ggsave("FS-Final.png", width = 40, height = 30, units = "cm", dpi = 600)
   
-hline_data <- data.frame(y = c(-3.41,0,-0.805564771,0.015250639
-,-1.250976121,-0.012333977,
--1.320045958), System = factor(c("Baseline  AI", "Baseline NI", "Holding Only", "Precooling Only", "PreWash Only", "Sanitation Only", "Washing Only")), 
+hline_data <- data.frame(y = c(-3.416,0,-2.5970,-3.412
+,-2.1759,-3.373,
+-1.3206), System = factor(c("Baseline  AI", "Baseline NI", "No Holding", "No Precooling", "No PreWash", "No Sanitation", "No Washing")), 
                          stringsAsFactors = FALSE)
 
 hline_data2 <- data.frame(y = c(0),Baseline_System = factor(c("Baseline")), 

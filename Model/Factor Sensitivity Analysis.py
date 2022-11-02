@@ -238,20 +238,20 @@ List_of_Names = ["Baseline-NI","Baseline-NI-Washing","Baseline-NI-Washing 10 ppm
 
 
 List_of_Names = ["Baseline NI", "Baseline NI PHS4D", "Baseline NI PHS4H", "Baseline NI PHS Int", "Baseline NI HS", "Baseline NI RS", "Baseline NI FPS", "Baseline NI CS",
-                 "Washing Only", "Washing Only PHS4D", "Washing Only PHS4H", "Washing Only PHS Int", "Washing Only HS", "Washing Only RS", "Washing Only FPS", "Washing Only CS",
-                 "Holding Only", "Holding Only PHS4D", "Holding Only PHS4H", "Holding Only PHS Int", "Holding Only HS", "Holding Only RS", "Holding Only FPS", "Holding Only CS",
-                 "PreWash Only", "PreWash Only PHS4D", "PreWash Only PHS4H", "PreWash Only PHS Int", "PreWash Only HS", "PreWash Only RS", "PreWash Only FPS", "PreWash Only CS",
-                 "Precooling Only", "Precooling Only PHS4D", "Precooling Only PHS4H", "Precooling Only PHS Int", "Precooling Only HS", "Precooling Only RS", "Precooling Only FPS", "Precooling Only CS",
-                 "Sanitation Only", "Sanitation Only PHS4D", "Sanitation Only PHS4H", "Sanitation Only PHS Int", "Sanitation Only HS", "Sanitation Only RS", "Sanitation Only FPS", "Sanitation Only CS",                 
+                 "No Washing", "No Washing PHS4D", "No Washing PHS4H", "No Washing PHS Int", "No Washing HS", "No Washing RS", "No Washing FPS", "No Washing CS",
+                 "No Holding", "No Holding PHS4D", "No Holding PHS4H", "No Holding PHS Int", "No Holding HS", "No Holding RS", "No Holding FPS", "No Holding CS",
+                 "No PreWash", "No PreWash PHS4D", "No PreWash PHS4H", "No PreWash PHS Int", "No PreWash HS", "No PreWash RS", "No PreWash FPS", "No PreWash CS",
+                 "No Precooling", "No Precooling PHS4D", "No Precooling PHS4H", "No Precooling PHS Int", "No Precooling HS", "No Precooling RS", "No Precooling FPS", "No Precooling CS",
+                 "No Sanitation", "No Sanitation PHS4D", "No Sanitation PHS4H", "No Sanitation PHS Int", "No Sanitation HS", "No Sanitation RS", "No Sanitation FPS", "No Sanitation CS",                 
                  "Baseline  AI", "Baseline  AI PHS4D", "Baseline  AI PHS4H", "Baseline  AI PHS Int", "Baseline  AI HS", "Baseline  AI RS", "Baseline  AI FPS", "Baseline  AI CS",
     ]
 
 List_of_systems = ["Baseline NI","Baseline NI","Baseline NI","Baseline NI","Baseline NI","Baseline NI","Baseline NI","Baseline NI",
-                   "Washing Only","Washing Only","Washing Only","Washing Only","Washing Only","Washing Only","Washing Only","Washing Only",
-                   "Holding Only","Holding Only","Holding Only","Holding Only","Holding Only","Holding Only","Holding Only","Holding Only",
-                   "PreWash Only", "PreWash Only", "PreWash Only", "PreWash Only", "PreWash Only", "PreWash Only", "PreWash Only", "PreWash Only", 
-                   "Precooling Only","Precooling Only","Precooling Only","Precooling Only","Precooling Only","Precooling Only","Precooling Only","Precooling Only",
-                   "Sanitation Only","Sanitation Only","Sanitation Only","Sanitation Only","Sanitation Only","Sanitation Only","Sanitation Only","Sanitation Only",
+                   "No Washing","No Washing","No Washing","No Washing","No Washing","No Washing","No Washing","No Washing",
+                   "No Holding","No Holding","No Holding","No Holding","No Holding","No Holding","No Holding","No Holding",
+                   "No PreWash", "No PreWash", "No PreWash", "No PreWash", "No PreWash", "No PreWash", "No PreWash", "No PreWash", 
+                   "No Precooling","No Precooling","No Precooling","No Precooling","No Precooling","No Precooling","No Precooling","No Precooling",
+                   "No Sanitation","No Sanitation","No Sanitation","No Sanitation","No Sanitation","No Sanitation","No Sanitation","No Sanitation",
                    "Baseline  AI", "Baseline  AI", "Baseline  AI", "Baseline  AI", "Baseline  AI", "Baseline  AI", "Baseline  AI", "Baseline  AI"
                    
                    ]
