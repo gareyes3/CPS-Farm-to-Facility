@@ -1352,25 +1352,25 @@ Steps_For_Power = "None PHS4D PHS4H PHSInt HS RS FPS CS".split()
 powers_df_1 = pd.DataFrame({
     "No Intervention": Powers_NI, #100%
     "All Intervention": Powers_AI, #100%
-    "Washing Only": Powers_NI_W, #100%
-    "Prewash Only": Powers_NI_PW, #100%
-    "Holding Only": Powers_NI_H, #100%
-    "Sanitation Only": Powers_NI_S, #100%
-    "PreCooling Only": Powers_NI_PC, #100%
+    "No Washing": Powers_NI_W, #100%
+    "No Prewash": Powers_NI_PW, #100%
+    "No Holding": Powers_NI_H, #100%
+    "No Sanitation": Powers_NI_S, #100%
+    "No Precooling": Powers_NI_PC, #100%
     "Type": Steps_For_Power 
     })
 
 powers_df_1=powers_df_1.melt(id_vars=['Type'])
-powers_df_1["ContS"] = "Random Uniform" 
+powers_df_1["ContS"] = "Random Uniform Unclustered" 
 
 powers_df_2 = pd.DataFrame({
    "No Intervention": Powers_NI_3, #10%
     "All Intervention": Powers_AI_3, #10%
-    "Washing Only": Powers_NI_W_3, #100%
-    "Prewash Only": Powers_NI_PW_3, #100%
-    "Holding Only": Powers_NI_H_3, #100%
-    "Sanitation Only": Powers_NI_S_3, #100%
-    "PreCooling Only": Powers_NI_PC_3, #100%
+    "No Washing": Powers_NI_W_3, #100%
+    "No Prewash": Powers_NI_PW_3, #100%
+    "No Holding": Powers_NI_H_3, #100%
+    "No Sanitation": Powers_NI_S_3, #100%
+    "No Precooling": Powers_NI_PC_3, #100%
     "Type": Steps_For_Power 
     })
 
@@ -1381,11 +1381,11 @@ powers_df_2["ContS"] = "10% Cluster"
 powers_df_3 = pd.DataFrame({   
     "No Intervention": Powers_NI_2, #1%
     "All Intervention": Powers_AI_2, #1%
-    "Washing Only": Powers_NI_W_2, #100%
-    "Prewash Only": Powers_NI_PW_2, #100%
-    "Holding Only": Powers_NI_H_2, #100%
-    "Sanitation Only": Powers_NI_S_2, #100%
-    "PreCooling Only": Powers_NI_PC_2, #100%
+    "No Washing": Powers_NI_W_2, #100%
+    "No Prewash": Powers_NI_PW_2, #100%
+    "No Holding": Powers_NI_H_2, #100%
+    "No Sanitation": Powers_NI_S_2, #100%
+    "No Precooling": Powers_NI_PC_2, #100%
     "Type": Steps_For_Power 
     })
 
@@ -1423,7 +1423,7 @@ Sampling_Loc_NI_1 =Sampling_Loc_DF(List_of_Outs_NI_1)
 Sampling_Loc_NI_2 =Sampling_Loc_DF(List_of_Outs_NI_2)
 Sampling_Loc_NI_3 =Sampling_Loc_DF(List_of_Outs_NI_3)
 
-Sampling_Loc_NI_1["Cont Scenario"] = "Random Uniform"
+Sampling_Loc_NI_1["Cont Scenario"] = "Random Uniform Unclustered"
 Sampling_Loc_NI_2["Cont Scenario"] = "1% Cluster"
 Sampling_Loc_NI_3["Cont Scenario"] = "10% Cluster"
 
@@ -1439,7 +1439,7 @@ Sampling_Loc_AI_1 =Sampling_Loc_DF(List_of_Outs_AI_1)
 Sampling_Loc_AI_2 =Sampling_Loc_DF(List_of_Outs_AI_2)
 Sampling_Loc_AI_3 =Sampling_Loc_DF(List_of_Outs_AI_3)
 
-Sampling_Loc_AI_1["Cont Scenario"] = "Random Uniform"
+Sampling_Loc_AI_1["Cont Scenario"] = "Random Uniform Unclustered"
 Sampling_Loc_AI_2["Cont Scenario"] = "1% Cluster"
 Sampling_Loc_AI_3["Cont Scenario"] = "10% Cluster"
 
@@ -1455,24 +1455,24 @@ Sampling_Loc_NI_W_1 =Sampling_Loc_DF(List_of_Outs_NI_W_1)
 Sampling_Loc_NI_W_2 =Sampling_Loc_DF(List_of_Outs_NI_W_2)
 Sampling_Loc_NI_W_3 =Sampling_Loc_DF(List_of_Outs_NI_W_3)
 
-Sampling_Loc_NI_W_1["Cont Scenario"] = "Random Uniform"
+Sampling_Loc_NI_W_1["Cont Scenario"] = "Random Uniform Unclustered"
 Sampling_Loc_NI_W_2["Cont Scenario"] = "1% Cluster"
 Sampling_Loc_NI_W_3["Cont Scenario"] = "10% Cluster"
 
 Sampling_Loc_Melt_W = pd.concat([Sampling_Loc_NI_W_1,Sampling_Loc_NI_W_2,Sampling_Loc_NI_W_3])
-Sampling_Loc_Melt_W["Process"] = "Washing Only"
+Sampling_Loc_Melt_W["Process"] = "No Washing"
 
 #Prewas Only---- 
 Sampling_Loc_NI_PW_1 =Sampling_Loc_DF(List_of_Outs_NI_PW_1)
 Sampling_Loc_NI_PW_2 =Sampling_Loc_DF(List_of_Outs_NI_PW_2)
 Sampling_Loc_NI_PW_3 =Sampling_Loc_DF(List_of_Outs_NI_PW_3)
 
-Sampling_Loc_NI_PW_1["Cont Scenario"] = "Random Uniform"
+Sampling_Loc_NI_PW_1["Cont Scenario"] = "Random Uniform Unclustered"
 Sampling_Loc_NI_PW_2["Cont Scenario"] = "1% Cluster"
 Sampling_Loc_NI_PW_3["Cont Scenario"] = "10% Cluster"
 
 Sampling_Loc_Melt_PW = pd.concat([Sampling_Loc_NI_PW_1,Sampling_Loc_NI_PW_2,Sampling_Loc_NI_PW_3])
-Sampling_Loc_Melt_PW["Process"] = "PreWash Only"
+Sampling_Loc_Melt_PW["Process"] = "No Prewash"
 
 
 #Holding Only Only---- 
@@ -1480,12 +1480,12 @@ Sampling_Loc_NI_H_1 =Sampling_Loc_DF(List_of_Outs_NI_H_1)
 Sampling_Loc_NI_H_2 =Sampling_Loc_DF(List_of_Outs_NI_H_2)
 Sampling_Loc_NI_H_3 =Sampling_Loc_DF(List_of_Outs_NI_H_3)
 
-Sampling_Loc_NI_H_1["Cont Scenario"] = "Random Uniform"
+Sampling_Loc_NI_H_1["Cont Scenario"] = "Random Uniform Unclustered"
 Sampling_Loc_NI_H_2["Cont Scenario"] = "1% Cluster"
 Sampling_Loc_NI_H_3["Cont Scenario"] = "10% Cluster"
 
 Sampling_Loc_Melt_H = pd.concat([Sampling_Loc_NI_H_1,Sampling_Loc_NI_H_2,Sampling_Loc_NI_H_3])
-Sampling_Loc_Melt_H["Process"] = "Holding Only"
+Sampling_Loc_Melt_H["Process"] = "No Holding"
 
 
 #Sanitation Only Only---- 
@@ -1493,12 +1493,12 @@ Sampling_Loc_NI_S_1 =Sampling_Loc_DF(List_of_Outs_NI_S_1)
 Sampling_Loc_NI_S_2 =Sampling_Loc_DF(List_of_Outs_NI_S_2)
 Sampling_Loc_NI_S_3 =Sampling_Loc_DF(List_of_Outs_NI_S_3)
 
-Sampling_Loc_NI_S_1["Cont Scenario"] = "Random Uniform"
+Sampling_Loc_NI_S_1["Cont Scenario"] = "Random Uniform Unclustered"
 Sampling_Loc_NI_S_2["Cont Scenario"] = "1% Cluster"
 Sampling_Loc_NI_S_3["Cont Scenario"] = "10% Cluster"
 
 Sampling_Loc_Melt_S = pd.concat([Sampling_Loc_NI_S_1,Sampling_Loc_NI_S_2,Sampling_Loc_NI_S_3])
-Sampling_Loc_Melt_S["Process"] = "Sanitation Only"
+Sampling_Loc_Melt_S["Process"] = "No Sanitation"
 
 
 #Precool Only Only---- 
@@ -1506,12 +1506,12 @@ Sampling_Loc_NI_PC_1 =Sampling_Loc_DF(List_of_Outs_NI_PC_1)
 Sampling_Loc_NI_PC_2 =Sampling_Loc_DF(List_of_Outs_NI_PC_2)
 Sampling_Loc_NI_PC_3 =Sampling_Loc_DF(List_of_Outs_NI_PC_3)
 
-Sampling_Loc_NI_PC_1["Cont Scenario"] = "Random Uniform"
+Sampling_Loc_NI_PC_1["Cont Scenario"] = "Random Uniform Unclustered"
 Sampling_Loc_NI_PC_2["Cont Scenario"] = "1% Cluster"
 Sampling_Loc_NI_PC_3["Cont Scenario"] = "10% Cluster"
 
 Sampling_Loc_Melt_PC = pd.concat([Sampling_Loc_NI_PC_1,Sampling_Loc_NI_PC_2,Sampling_Loc_NI_PC_3])
-Sampling_Loc_Melt_PC["Process"] = "PreCooling Only"
+Sampling_Loc_Melt_PC["Process"] = "No Precooling"
 
 Contam_Samp_Point =pd.concat([Sampling_Loc_Melt,Sampling_Loc_Melt_AI,Sampling_Loc_Melt_W,
            Sampling_Loc_Melt_PW,Sampling_Loc_Melt_H,Sampling_Loc_Melt_S,Sampling_Loc_Melt_PC])
@@ -1526,7 +1526,7 @@ Outputs_Df_AI_1["Final_CFU_Acc_Portion_mean"]
 Outputs_Df_AI_1["MeanComparison"]
 Outputs_Df_AI_1["Sampling_Plan"] = "Baseline PHS4D PHS4H PHSInt HTrad RSTrad FPSTrad CS".split()
 Outputs_Df_AI_1["Baseline_Scenario"] = "All Intervention"
-Outputs_Df_AI_1["Cont_Spread"] = "Random"
+Outputs_Df_AI_1["Cont_Spread"] = "Random Uniform Unclustered"
 A1=Outputs_Df_AI_1[["Final_CFU_Acc_Portion_mean","Prevalence_Acc_Mean","Prevalence_Comparison","MeanComparison","Cont_Spread","Sampling_Plan","Baseline_Scenario"]]
 
 Outputs_Df_AI_2["Final_CFU_Acc_Portion_mean"]
@@ -1545,7 +1545,7 @@ A3=Outputs_Df_AI_3[["Final_CFU_Acc_Portion_mean","Prevalence_Acc_Mean","Prevalen
 Outputs_Df_NI_1["Final_CFU_Acc_Portion_mean"]
 Outputs_Df_NI_1["Sampling_Plan"] = "Baseline PHS4D PHS4H PHSInt HTrad RSTrad FPSTrad CS".split()
 Outputs_Df_NI_1["Baseline_Scenario"] = "No Intervention"
-Outputs_Df_NI_1["Cont_Spread"] = "Random"
+Outputs_Df_NI_1["Cont_Spread"] = "Random Uniform Unclustered"
 N1=Outputs_Df_NI_1[["Final_CFU_Acc_Portion_mean","Prevalence_Acc_Mean","Prevalence_Comparison","MeanComparison","Cont_Spread","Sampling_Plan","Baseline_Scenario"]]
 
 Outputs_Df_NI_2["Final_CFU_Acc_Portion_mean"]
@@ -1563,19 +1563,19 @@ N3=Outputs_Df_NI_3[["Final_CFU_Acc_Portion_mean","Prevalence_Acc_Mean","Prevalen
 #NI _ Wash
 Outputs_Df_NI_W_1["Final_CFU_Acc_Portion_mean"]
 Outputs_Df_NI_W_1["Sampling_Plan"] = "Baseline PHS4D PHS4H PHSInt HTrad RSTrad FPSTrad CS".split()
-Outputs_Df_NI_W_1["Baseline_Scenario"] = "Wash Only"
-Outputs_Df_NI_W_1["Cont_Spread"] = "Random"
+Outputs_Df_NI_W_1["Baseline_Scenario"] = "No Washing"
+Outputs_Df_NI_W_1["Cont_Spread"] = "Random Uniform Unclustered"
 N1_W=Outputs_Df_NI_W_1[["Final_CFU_Acc_Portion_mean","Prevalence_Acc_Mean","Prevalence_Comparison","MeanComparison","Cont_Spread","Sampling_Plan","Baseline_Scenario"]]
 
 Outputs_Df_NI_W_2["Final_CFU_Acc_Portion_mean"]
 Outputs_Df_NI_W_2["Sampling_Plan"] = "Baseline PHS4D PHS4H PHSInt HTrad RSTrad FPSTrad CS".split()
-Outputs_Df_NI_W_2["Baseline_Scenario"] = "Wash Only"
+Outputs_Df_NI_W_2["Baseline_Scenario"] = "No Washing"
 Outputs_Df_NI_W_2["Cont_Spread"] = "1% Cluster"
 N2_W=Outputs_Df_NI_W_2[["Final_CFU_Acc_Portion_mean","Prevalence_Acc_Mean","Prevalence_Comparison","MeanComparison","Cont_Spread","Sampling_Plan","Baseline_Scenario"]]
 
 Outputs_Df_NI_W_3["Final_CFU_Acc_Portion_mean"]
 Outputs_Df_NI_W_3["Sampling_Plan"] = "Baseline PHS4D PHS4H PHSInt HTrad RSTrad FPSTrad CS".split()
-Outputs_Df_NI_W_3["Baseline_Scenario"] = "Wash Only"
+Outputs_Df_NI_W_3["Baseline_Scenario"] = "No Washing"
 Outputs_Df_NI_W_3["Cont_Spread"] = "10% Cluster"
 N3_W=Outputs_Df_NI_W_3[["Final_CFU_Acc_Portion_mean","Prevalence_Acc_Mean","Prevalence_Comparison","MeanComparison","Cont_Spread","Sampling_Plan","Baseline_Scenario"]]
 
@@ -1583,76 +1583,76 @@ N3_W=Outputs_Df_NI_W_3[["Final_CFU_Acc_Portion_mean","Prevalence_Acc_Mean","Prev
 #NI _ Prewash
 Outputs_Df_NI_PW_1["Final_CFU_Acc_Portion_mean"]
 Outputs_Df_NI_PW_1["Sampling_Plan"] = "Baseline PHS4D PHS4H PHSInt HTrad RSTrad FPSTrad CS".split()
-Outputs_Df_NI_PW_1["Baseline_Scenario"] = "Prewash Only"
-Outputs_Df_NI_PW_1["Cont_Spread"] = "Random"
+Outputs_Df_NI_PW_1["Baseline_Scenario"] = "No Prewash"
+Outputs_Df_NI_PW_1["Cont_Spread"] = "Random Uniform Unclustered"
 N1_PW=Outputs_Df_NI_PW_1[["Final_CFU_Acc_Portion_mean","Prevalence_Acc_Mean","Prevalence_Comparison","MeanComparison","Cont_Spread","Sampling_Plan","Baseline_Scenario"]]
 
 Outputs_Df_NI_PW_2["Final_CFU_Acc_Portion_mean"]
 Outputs_Df_NI_PW_2["Sampling_Plan"] = "Baseline PHS4D PHS4H PHSInt HTrad RSTrad FPSTrad CS".split()
-Outputs_Df_NI_PW_2["Baseline_Scenario"] = "Prewash Only"
+Outputs_Df_NI_PW_2["Baseline_Scenario"] = "No Prewash"
 Outputs_Df_NI_PW_2["Cont_Spread"] = "1% Cluster"
 N2_PW=Outputs_Df_NI_PW_2[["Final_CFU_Acc_Portion_mean","Prevalence_Acc_Mean","Prevalence_Comparison","MeanComparison","Cont_Spread","Sampling_Plan","Baseline_Scenario"]]
 
 Outputs_Df_NI_PW_3["Final_CFU_Acc_Portion_mean"]
 Outputs_Df_NI_PW_3["Sampling_Plan"] = "Baseline PHS4D PHS4H PHSInt HTrad RSTrad FPSTrad CS".split()
-Outputs_Df_NI_PW_3["Baseline_Scenario"] = "Prewash Only"
+Outputs_Df_NI_PW_3["Baseline_Scenario"] = "No Prewash"
 Outputs_Df_NI_PW_3["Cont_Spread"] = "10% Cluster"
 N3_PW=Outputs_Df_NI_PW_3[["Final_CFU_Acc_Portion_mean","Prevalence_Acc_Mean","Prevalence_Comparison","MeanComparison","Cont_Spread","Sampling_Plan","Baseline_Scenario"]]
 
 #NI _ Holding
 Outputs_Df_NI_H_1["Final_CFU_Acc_Portion_mean"]
 Outputs_Df_NI_H_1["Sampling_Plan"] = "Baseline PHS4D PHS4H PHSInt HTrad RSTrad FPSTrad CS".split()
-Outputs_Df_NI_H_1["Baseline_Scenario"] = "Holding Only"
-Outputs_Df_NI_H_1["Cont_Spread"] = "Random"
+Outputs_Df_NI_H_1["Baseline_Scenario"] = "No Holding"
+Outputs_Df_NI_H_1["Cont_Spread"] = "Random Uniform Unclustered"
 N1_H=Outputs_Df_NI_H_1[["Final_CFU_Acc_Portion_mean","Prevalence_Acc_Mean","Prevalence_Comparison","MeanComparison","Cont_Spread","Sampling_Plan","Baseline_Scenario"]]
 
 Outputs_Df_NI_H_2["Final_CFU_Acc_Portion_mean"]
 Outputs_Df_NI_H_2["Sampling_Plan"] = "Baseline PHS4D PHS4H PHSInt HTrad RSTrad FPSTrad CS".split()
-Outputs_Df_NI_H_2["Baseline_Scenario"] = "Holding Only"
+Outputs_Df_NI_H_2["Baseline_Scenario"] = "No Holding"
 Outputs_Df_NI_H_2["Cont_Spread"] = "1% Cluster"
 N2_H=Outputs_Df_NI_H_2[["Final_CFU_Acc_Portion_mean","Prevalence_Acc_Mean","Prevalence_Comparison","MeanComparison","Cont_Spread","Sampling_Plan","Baseline_Scenario"]]
 
 Outputs_Df_NI_H_3["Final_CFU_Acc_Portion_mean"]
 Outputs_Df_NI_H_3["Sampling_Plan"] = "Baseline PHS4D PHS4H PHSInt HTrad RSTrad FPSTrad CS".split()
-Outputs_Df_NI_H_3["Baseline_Scenario"] = "Holding Only"
+Outputs_Df_NI_H_3["Baseline_Scenario"] = "No Holding"
 Outputs_Df_NI_H_3["Cont_Spread"] = "10% Cluster"
 N3_H=Outputs_Df_NI_H_3[["Final_CFU_Acc_Portion_mean","Prevalence_Acc_Mean","Prevalence_Comparison","MeanComparison","Cont_Spread","Sampling_Plan","Baseline_Scenario"]]
 
 #NI _ Sanitation
 Outputs_Df_NI_S_1["Final_CFU_Acc_Portion_mean"]
 Outputs_Df_NI_S_1["Sampling_Plan"] = "Baseline PHS4D PHS4H PHSInt HTrad RSTrad FPSTrad CS".split()
-Outputs_Df_NI_S_1["Baseline_Scenario"] = "Sanitation Only"
-Outputs_Df_NI_S_1["Cont_Spread"] = "Random"
+Outputs_Df_NI_S_1["Baseline_Scenario"] = "No Sanitation"
+Outputs_Df_NI_S_1["Cont_Spread"] = "Random Uniform Unclustered"
 N1_S=Outputs_Df_NI_S_1[["Final_CFU_Acc_Portion_mean","Prevalence_Acc_Mean","Prevalence_Comparison","MeanComparison","Cont_Spread","Sampling_Plan","Baseline_Scenario"]]
 
 Outputs_Df_NI_S_2["Final_CFU_Acc_Portion_mean"]
 Outputs_Df_NI_S_2["Sampling_Plan"] = "Baseline PHS4D PHS4H PHSInt HTrad RSTrad FPSTrad CS".split()
-Outputs_Df_NI_S_2["Baseline_Scenario"] = "Sanitation Only"
+Outputs_Df_NI_S_2["Baseline_Scenario"] = "No Sanitation"
 Outputs_Df_NI_S_2["Cont_Spread"] = "1% Cluster"
 N2_S=Outputs_Df_NI_S_2[["Final_CFU_Acc_Portion_mean","Prevalence_Acc_Mean","Prevalence_Comparison","MeanComparison","Cont_Spread","Sampling_Plan","Baseline_Scenario"]]
 
 Outputs_Df_NI_S_3["Final_CFU_Acc_Portion_mean"]
 Outputs_Df_NI_S_3["Sampling_Plan"] = "Baseline PHS4D PHS4H PHSInt HTrad RSTrad FPSTrad CS".split()
-Outputs_Df_NI_S_3["Baseline_Scenario"] = "Sanitation Only"
+Outputs_Df_NI_S_3["Baseline_Scenario"] = "No Sanitation"
 Outputs_Df_NI_S_3["Cont_Spread"] = "10% Cluster"
 N3_S=Outputs_Df_NI_S_3[["Final_CFU_Acc_Portion_mean","Prevalence_Acc_Mean","Prevalence_Comparison","MeanComparison","Cont_Spread","Sampling_Plan","Baseline_Scenario"]]
 
 #NI _ Precooling
 Outputs_Df_NI_PC_1["Final_CFU_Acc_Portion_mean"]
 Outputs_Df_NI_PC_1["Sampling_Plan"] = "Baseline PHS4D PHS4H PHSInt HTrad RSTrad FPSTrad CS".split()
-Outputs_Df_NI_PC_1["Baseline_Scenario"] = "PreCooling Only"
-Outputs_Df_NI_PC_1["Cont_Spread"] = "Random"
+Outputs_Df_NI_PC_1["Baseline_Scenario"] = "No Precooling"
+Outputs_Df_NI_PC_1["Cont_Spread"] = "Random Uniform Unclustered"
 N1_PC=Outputs_Df_NI_PC_1[["Final_CFU_Acc_Portion_mean","Prevalence_Acc_Mean","Prevalence_Comparison","MeanComparison","Cont_Spread","Sampling_Plan","Baseline_Scenario"]]
 
 Outputs_Df_NI_PC_2["Final_CFU_Acc_Portion_mean"]
 Outputs_Df_NI_PC_2["Sampling_Plan"] = "Baseline PHS4D PHS4H PHSInt HTrad RSTrad FPSTrad CS".split()
-Outputs_Df_NI_PC_2["Baseline_Scenario"] = "PreCooling Only"
+Outputs_Df_NI_PC_2["Baseline_Scenario"] = "No Precooling"
 Outputs_Df_NI_PC_2["Cont_Spread"] = "1% Cluster"
 N2_PC=Outputs_Df_NI_PC_2[["Final_CFU_Acc_Portion_mean","Prevalence_Acc_Mean","Prevalence_Comparison","MeanComparison","Cont_Spread","Sampling_Plan","Baseline_Scenario"]]
 
 Outputs_Df_NI_PC_3["Final_CFU_Acc_Portion_mean"]
 Outputs_Df_NI_PC_3["Sampling_Plan"] = "Baseline PHS4D PHS4H PHSInt HTrad RSTrad FPSTrad CS".split()
-Outputs_Df_NI_PC_3["Baseline_Scenario"] = "PreCooling Only"
+Outputs_Df_NI_PC_3["Baseline_Scenario"] = "No Precooling"
 Outputs_Df_NI_PC_3["Cont_Spread"] = "10% Cluster"
 N3_PC=Outputs_Df_NI_PC_3[["Final_CFU_Acc_Portion_mean","Prevalence_Acc_Mean","Prevalence_Comparison","MeanComparison","Cont_Spread","Sampling_Plan","Baseline_Scenario"]]
 
@@ -1660,7 +1660,7 @@ N3_PC=Outputs_Df_NI_PC_3[["Final_CFU_Acc_Portion_mean","Prevalence_Acc_Mean","Pr
 
 Exposure_Chart_df= pd.concat([A1,A2,A3,N1,N2,N3,N1_W,N2_W,N3_W,N1_PW,N2_PW,N3_PW,N1_H,N2_H,N3_H,N1_S,N2_S,N3_S,N1_PC,N2_PC,N3_PC ])
 
-Exposure_Chart_df.to_csv("C:\\Users\\Gustavo Reyes\\Box\\CPS Project- Farm to Facility\\Papers\\CSV Data\\Review 2\\Exposure_Chart_df-Final2.csv")
+Exposure_Chart_df.to_csv("C:\\Users\\gareyes3\\Box\\CPS Project- Farm to Facility\\Papers\\CSV Data\\Review 2\\Exposure_Chart_df-Final2.csv")
 
 #%%END
 #%%

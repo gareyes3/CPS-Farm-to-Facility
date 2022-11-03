@@ -33,8 +33,8 @@ Powers_df<- Powers_df %>%
   filter(Type != "None")
 
 Powers_df$Type<-factor(Powers_df$Type, levels = c("PHS4D" ,"PHS4H", "PHSInt", "HS", "RS", "FPS", "CS"))
-Powers_df$variable<-factor(Powers_df$variable, levels = c("No Intervention","Holding Only","PreCooling Only","Sanitation Only", "Prewash Only","Washing Only" , "All Intervention"))
-Powers_df$ContS<-factor(Powers_df$ContS, levels = c("Random Uniform", "10% Cluster", "1% Cluster"))
+Powers_df$variable<-factor(Powers_df$variable, levels = c("No Intervention","All Intervention","No Holding","No Precooling", "No Prewash","No Washing","No Sanitation" ))
+Powers_df$ContS<-factor(Powers_df$ContS, levels = c("Random Uniform Unclustered", "10% Cluster", "1% Cluster"))
 
 Powers_df %>% 
   ggplot(aes(x = Type, y = value, group = variable, fill = variable))+
@@ -67,6 +67,8 @@ Powers_df %>%
   theme_bw()+
   labs(y = "Sampling Plan Power", x = "Sampling Stage", fill = "Process System", color =  "Process System")
 ggsave("Powers3.tiff", width = 30, height = 16, units = "cm", dpi = 600)
+ggsave("Powers3.jpeg", width = 30, height = 16, units = "cm", dpi = 600)
+
 
 ```
 
@@ -121,16 +123,17 @@ Binded_all$Type<-str_replace("BaselineAI", string = Binded_all$Type, replacement
 Binded_all$Type<-str_replace("BaselineNI", string = Binded_all$Type, replacement = "Baseline No-Intervention")
 Binded_all$Type<-str_replace("Holding", string = Binded_all$Type, replacement = "Preharvest Holding")
 Binded_all$Type<-str_replace("PreSpray_Wash", string = Binded_all$Type, replacement = "Prewash")
-Binded_all$Type<-str_replace("Washing", string = Binded_all$Type, replacement = "Chlorinated Wash")
+Binded_all$Type<-str_replace("Washing", string = Binded_all$Type, replacement = "Washing")
 
 #fixing the word preharvest
 Binded_all$variable<-str_replace("Pre-Harvest", string = Binded_all$variable, replacement = "Preharvest")
 order_progression2<-str_replace("Pre-Harvest", string = order_progression, replacement = "Preharvest")
 
 Binded_all$variable<-factor(Binded_all$variable, levels=order_progression2)
-Binded_all$ContScen<-factor(Binded_all$ContScen, levels=c("Random Contamination","10% Clustered Contamination","1% Clustered Contamination"))
+Binded_all$ContScen<-str_replace("Random Contamination", string = Binded_all$ContScen, replacement = "Random unclustered")
+Binded_all$ContScen<-factor(Binded_all$ContScen, levels=c("Random unclustered","10% Clustered Contamination","1% Clustered Contamination"))
 
-
+Binded_all$Type<-factor(Binded_all$Type, levels=c("Baseline No-Intervention", "Baseline All-Intervention","Preharvest Holding", "Precooling", "Prewash", "Washing", "Sanitation" ))
 
 
 ggplot(data= Binded_all, aes(x= variable,y = mean, group= Type, color = Type, linetype=Type, fill = Type))+
@@ -147,6 +150,8 @@ ggplot(data= Binded_all, aes(x= variable,y = mean, group= Type, color = Type, li
   theme(text = element_text(size=24))
 
 ggsave("Contamination_Progression.tiff", width = 45, height = 25, units = "cm", dpi = 600)
+ggsave("Contamination_Progression.jpeg", width = 45, height = 25, units = "cm", dpi = 600)
+
 
 ```
 
@@ -234,15 +239,22 @@ pfs = ggplot(data= FSdf, aes(x = fct_reorder(Name, abs(FS)), y = FS, fill = Syst
 
   ggsave("FS-Final.png", width = 40, height = 30, units = "cm", dpi = 600)
   
-hline_data <- data.frame(y = c(-3.416,0,-2.5970,-3.412
-,-2.1759,-3.373,
--1.3206), System = factor(c("Baseline  AI", "Baseline NI", "No Holding", "No Precooling", "No PreWash", "No Sanitation", "No Washing")), 
-                         stringsAsFactors = FALSE)
+  
+##NEW###
+
+FSdf$System <-str_replace("Baseline NI", string = FSdf$System, replacement = "Baseline No-Intervention")
+FSdf$System <-str_replace("Baseline  AI", string = FSdf$System, replacement = "Baseline All-Intervention")
+FSdf$System <-str_replace("No PreWash", string = FSdf$System, replacement = "No Prewash")
+FSdf$System<-factor(FSdf$System, levels=c("Baseline No-Intervention", "Baseline All-Intervention","No Holding", "No Precooling", "No Prewash", "No Washing", "No Sanitation" ))
+
+
+hline_data <- data.frame(y = c(0,-3.416,-2.5970,-3.412,-2.1759,-1.3206,-3.373), 
+System = factor(c("Baseline No-Intervention", "Baseline All-Intervention","No Holding", "No Precooling", "No Prewash", "No Washing", "No Sanitation" ), levels =c("Baseline No-Intervention", "Baseline All-Intervention","No Holding", "No Precooling", "No Prewash", "No Washing", "No Sanitation" ) ), stringsAsFactors = FALSE)
 
 hline_data2 <- data.frame(y = c(0),Baseline_System = factor(c("Baseline")), 
                          stringsAsFactors = FALSE)
 
-FSdf <- FSdf %>% mutate(ints3 = rep(c(-3.41,0,-0.805564771,0.015250639
+FSdf <- FSdf %>% mutate(ints3 = rep(c(0,-3.41,-0.805564771,0.015250639
 ,-1.250976121,-0.012333977,
 -1.320045958
 ), each =8))
@@ -254,14 +266,15 @@ ggplot(data= FSdf, aes(x = fct_reorder(Name, abs(FS)), y = FS, fill = System))+
   facet_wrap(~System,scales = "free_y")  +
   ylab("Factor Sensitivity Index")+
   xlab("Scenario or Intervention")+
-  geom_hline(data = hline_data, aes(yintercept = y, linetype = System),size =1.5)+
+  geom_hline(data = hline_data, aes(yintercept = y, linetype = System),size =1)+
   #geom_hline(data = hline_data2, aes(yintercept = y, linetype = Baseline_System),size =2, color = "red")+
-  geom_hline(aes(yintercept = 0),size =1.5, color = "red", alpha = 0.5)+
-  theme_bw()+
-  theme(text = element_text(size=16), axis.text = element_text(size = 16))+
-  theme(legend.text=element_text(size=20),legend.title=element_text(size=20))
+  geom_hline(aes(yintercept = 0),size =1, color = "red", alpha = 0.5)+
+  theme_bw()
+  #theme(text = element_text(size=16), axis.text = element_text(size = 16))+
+  #theme(legend.text=element_text(size=20),legend.title=element_text(size=20))
   
-  ggsave("FS-R2.png", width = 45, height = 30, units = "cm", dpi = 600)
+  ggsave("FS-R2.jpeg", width = 30, height = 16, units = "cm", dpi = 600)
+   ggsave("FS-R2.tiff", width = 30, height = 16, units = "cm", dpi = 600)
 
 pfs
 
@@ -320,8 +333,8 @@ Cont_Samp_Point_Binded<-read_csv("ContSampPoint.csv")
 
 Order_ConS<-unique(Cont_Samp_Point_Binded$variable)
 Cont_Samp_Point_Binded$variable<-factor(Cont_Samp_Point_Binded$variable, levels=Order_ConS)
-Cont_Samp_Point_Binded$`Cont Scenario`<-factor(Cont_Samp_Point_Binded$`Cont Scenario`, levels = c("Random Uniform", "10% Cluster", "1% Cluster"))
-Cont_Samp_Point_Binded$Process<-factor(Cont_Samp_Point_Binded$Process, levels = c("No Intervention","Holding Only","PreCooling Only","Sanitation Only", "PreWash Only","Washing Only" , "All Intervention"))
+Cont_Samp_Point_Binded$`Cont Scenario`<-factor(Cont_Samp_Point_Binded$`Cont Scenario`, levels = c("Random Uniform Unclustered", "10% Cluster", "1% Cluster"))
+Cont_Samp_Point_Binded$Process<-factor(Cont_Samp_Point_Binded$Process, levels = c("No Intervention","No Holding","No Precooling","No Sanitation", "No Prewash","No Washing" , "All Intervention"))
 
 
 ggplot(data = Cont_Samp_Point_Binded, aes(x = variable, y =value, fill = `Cont Scenario`))+
@@ -336,7 +349,7 @@ ggplot(data = Cont_Samp_Point_Binded, aes(x = variable, y =value, fill = `Cont S
   theme(text = element_text(size=24), legend.text=element_text(size=18),legend.title=element_text(size=22))
 
 ggsave("Cont_Sampling Point.tiff", width = 40, height = 30, units = "cm", dpi = 600)
-
+ggsave("Cont_Sampling Point.jpeg", width = 40, height = 30, units = "cm", dpi = 600)
 
 ggplot(data = Cont_Samp_Point_Binded, aes(x = Process, y =value, fill = `Cont Scenario`))+
   geom_boxplot()+
@@ -456,32 +469,39 @@ unique(Exposure_Chart$Cont_Spread)
 levels_1<-c("Baseline", "PHS4D", "PHS4H", "PHSInt", "HTrad", "RSTrad", "FPSTrad", "CS")
 levels_2<-c("Baseline", "CS", "PHS4D", "HTrad", "RSTrad","PHS4H", "FPSTrad", "PHSInt")
 
-Exposure_Chart$Cont_Spread<-factor(Exposure_Chart$Cont_Spread, levels = c("Random", "10% Cluster", "1% Cluster"))
+Exposure_Chart$Cont_Spread<-factor(Exposure_Chart$Cont_Spread, levels = c("Random Uniform Unclustered", "10% Cluster", "1% Cluster"))
 
 
 Exposure_Chart<-Exposure_Chart %>% 
-  mutate(log10cont = log10(Final_CFU_Acc_Portion_mean),)
+  mutate(log10cont = log10(Final_CFU_Acc_Portion_mean))
+
+Exposure_Chart$Baseline_Scenario<-str_replace("All Intervention", string = Exposure_Chart$Baseline_Scenario, replacement = "Baseline All-Intervention")
+Exposure_Chart$Baseline_Scenario<-str_replace("No Intervention", string = Exposure_Chart$Baseline_Scenario, replacement = "Baseline No-Intervention")
+
+
+Exposure_Chart$Baseline_Scenario<-factor(Exposure_Chart$Baseline_Scenario, levels=c("Baseline No-Intervention", "Baseline All-Intervention","No Holding", "No Precooling", "No Prewash", "No Washing", "No Sanitation" ))
 
 #Exposure.
 ggplot(data = Exposure_Chart,aes(x = factor(Sampling_Plan, levels =levels_1 ) ,y = MeanComparison, group = Baseline_Scenario,fill = Baseline_Scenario))+
   theme_bw()+
-  geom_line(aes(color =Baseline_Scenario ))+
-  geom_point(size = 5, position = position_dodge(width = 0),shape = 21, alpha = 0.8)+
-  theme(text = element_text(size=26), axis.text = element_text(size = 24))+
-  theme(legend.text=element_text(size=16),legend.title=element_text(size=20))+
+  geom_line(aes(color =Baseline_Scenario), size  =1, alpha = 0.5)+
+  geom_point(size = 3, position = position_dodge(width = 0),shape = 21, alpha = 1)+
+  #theme(text = element_text(size=26), axis.text = element_text(size = 24))+
+  #theme(legend.text=element_text(size=16),legend.title=element_text(size=20))+
   #geom_col(data = Exposure_Chart, aes(x =factor(Sampling_Plan, levels =levels_2), y = log10cont))+
   facet_wrap(~Cont_Spread)+
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))+
-  labs(y= "Relative Difference: TAC that leak through the system", x = "Sampling Plan", color= "Baseline Scenario", fill = "Baseline Scenario")+
+  labs(y= "Relative Difference: Endpoint TAC", x = "Sampling Plan", color= "Process System", fill = "Process System")+
   scale_y_continuous(labels = percent)+
   #geom_line(aes(group = Sampling_Plan),color="black",alpha = 0.7 ,arrow = arrow(length=unit(0.3,"cm"), ends="last", type #= "closed"))+
   #ggtitle("Relative TAC Exposure")+
-  geom_hline(aes(yintercept = 0.2340680, linetype = "Maximum effect NI system"), size = 2, alpha = 0.5)+
-  geom_hline(aes(yintercept = 0.6890373, linetype = "Maximum effect AI system"), size = 2,alpha = 0.5)+
+  geom_hline(aes(yintercept = 0.2258976, linetype = "Maximum effect NI system"), size = 1, alpha = 0.5)+
+  geom_hline(aes(yintercept = 0.6890373, linetype = "Maximum effect AI system"), size = 1,alpha = 0.5)+
   scale_linetype_manual(name ="", values = c('dotted','dashed')) 
 
 
-ggsave("Relative Exposure-Final.tiff", width = 40, height = 28, units = "cm", dpi = 600)
+ggsave("Relative Exposure-Final.tiff", width = 30, height = 16, units = "cm", dpi = 600)
+ggsave("Relative Exposure-Final.jpeg", width = 30, height = 16, units = "cm", dpi = 600)
 
 ```
 
