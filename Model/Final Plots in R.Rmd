@@ -111,9 +111,9 @@ NI_Summ_2<-NI_2_ProgInt %>%
 
 NI_Summ %>% 
   filter(variable == "After CS Samp") %>% 
-  mutate(logchange= log10(mean/1590),
-         logchange95l = log10(h95/1590),
-         logchange95h = log10(l95/1590)
+  mutate(logchange= log10(mean/1.59e+3),
+         logchange95l = log10(h95/1.59e+3),
+         logchange95h = log10(l95/1.59e+3)
          )
 
 Binded_all<-bind_rows(NI_Summ,NI_Summ_3,NI_Summ_2)
@@ -331,6 +331,9 @@ ggsave("Cont_Sampling-Final.tiff", width = 40, height = 30, units = "cm", dpi = 
 #ALL Binded: this used to compared all other interventions
 Cont_Samp_Point_Binded<-read_csv("ContSampPoint.csv")
 
+
+
+
 Order_ConS<-unique(Cont_Samp_Point_Binded$variable)
 Cont_Samp_Point_Binded$variable<-factor(Cont_Samp_Point_Binded$variable, levels=Order_ConS)
 Cont_Samp_Point_Binded$`Cont Scenario`<-factor(Cont_Samp_Point_Binded$`Cont Scenario`, levels = c("Random Uniform Unclustered", "10% Cluster", "1% Cluster"))
@@ -363,10 +366,15 @@ ggplot(data = Cont_Samp_Point_Binded, aes(x = Process, y =value, fill = `Cont Sc
 
 ggsave("Cont_Sampling Point.tiff", width = 40, height = 30, units = "cm", dpi = 600)
 
-Cont_Samp_Point_Binded %>% 
-  group_by(variable, Process) %>% 
-  summarise(mean = mean(value), q2.5 = quantile(value, 0.05), q975 = quantile(value, 0.95)) %>% 
-  filter(variable == "Before FPS")
+Conts_SP<- Cont_Samp_Point_Binded %>% 
+  group_by(variable, Process,`Cont Scenario`) %>% 
+  summarise(mean = mean(value), q5 = quantile(value, 0.05), q95 = quantile(value, 0.95))
+
+X<-split(Conts_SP, Conts_SP$`Cont Scenario`)
+
+write.csv(X[1],file ="Cont1.csv" )
+write.csv(X[2],file ="Cont2.csv" )
+write.csv(X[3],file ="Cont3.csv" )
 
 ```
 
@@ -502,6 +510,13 @@ ggplot(data = Exposure_Chart,aes(x = factor(Sampling_Plan, levels =levels_1 ) ,y
 
 ggsave("Relative Exposure-Final.tiff", width = 30, height = 16, units = "cm", dpi = 600)
 ggsave("Relative Exposure-Final.jpeg", width = 30, height = 16, units = "cm", dpi = 600)
+
+
+ggplot(data = Exposure_Chart,aes(x = factor(Sampling_Plan, levels =levels_1 ) ,y = MeanComparison, group = Cont_Spread,fill = Cont_Spread))+
+  geom_col(position = position_dodge2())+
+  theme_bw()+
+  facet_wrap(~Baseline_Scenario)
+  
 
 ```
 
