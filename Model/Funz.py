@@ -26,7 +26,7 @@ def pert(a, b, c, *, size=1, lamb=4):
     r = c - a
     alpha = 1 + lamb * (b - a) / r
     beta = 1 + lamb * (c - b) / r
-    return a + rng.beta(alpha, beta, size=size) * r
+    return a + np.random.beta(alpha, beta, size=size) * r
 
 def betagen(a,b,mini,maxi):    
     return float(beta.rvs(a , b)* (maxi - mini) + mini)
@@ -91,7 +91,7 @@ def Feces_Addition(Month): #Wrose case scenrio, High level of contamination.
     
 def Feces_Splash(df,Soil_Slots):
     tr=transfer_1(np.random.uniform(0,1))/(1.29*10**8)
-    Cont_Trans = Soil_Slots.apply(lambda x: rng.binomial(x,tr))
+    Cont_Trans = Soil_Slots.apply(lambda x: np.random.binomial(x,tr))
     df["CFU"] = df["CFU"]+Cont_Trans
     return df
 
@@ -158,19 +158,19 @@ def Cont_Ini_PHS(df):
             Soil_Slots = df["CFU"]
             #Contaminating 10 random partitions
             Index_Cont=Soil_Slots.sample(n=10).index
-            Updates_values=Soil_Slots[Index_Cont].values+ rng.multinomial(Feces_Addition(Inputz.Month_choice),[1/10]*10,1)
+            Updates_values=Soil_Slots[Index_Cont].values+ np.random.multinomial(Feces_Addition(Inputz.Month_choice),[1/10]*10,1)
             Soil_Slots[Index_Cont]=Updates_values[0]
-            Soil_Slots = Soil_Slots.apply(lambda x: rng.binomial(x,10**-0.1744)) #applying daily die-off.            
+            Soil_Slots = Soil_Slots.apply(lambda x: np.random.binomial(x,10**-0.1744)) #applying daily die-off.            
             if TotalTime in Inputz.Final_Irrigation_Days:
                 df = Feces_Splash(df,Soil_Slots)
         #Scenario 4
         if Inputz.Scenario_no == 4:
             Soil_Slots = df["CFU"]
             #Contaminating 10 random partitions
-            Updates_values=Soil_Slots.values+ rng.multinomial(Feces_Runoff(Inputz.Month_choice),[1/2000]*2000,1)
+            Updates_values=Soil_Slots.values+ np.random.multinomial(Feces_Runoff(Inputz.Month_choice),[1/2000]*2000,1)
             Soil_Slots=Updates_values[0]
             Soil_Slots=pd.Series(Soil_Slots)
-            Soil_Slots = Soil_Slots.apply(lambda x: rng.binomial(x,10**-0.1744)) #applying daily die-off.            
+            Soil_Slots = Soil_Slots.apply(lambda x: np.random.binomial(x,10**-0.1744)) #applying daily die-off.            
             if TotalTime in Inputz.Final_Irrigation_Days:
                 df = Feces_Splash(df,Soil_Slots)        
             
@@ -186,7 +186,7 @@ def Cont_Ini_PHS(df):
         
     if Inputz.Time_I_PHS_PartD >0: #Only if the partial day is greater than 0
         #Part 2: Partial Day, deciding if contamination occurs in the first or second part of the day
-        if rng.uniform(0,1)<Inputz.Time_I_PHS_PartD: 
+        if np.random.uniform(0,1)<Inputz.Time_I_PHS_PartD: 
             Happens_YN_1part=1 
         else: 
             Happens_YN_1part=0
@@ -217,19 +217,19 @@ def Cont_Ini_PHS(df):
                 Soil_Slots = df["CFU"]
                 #Contaminating 10 random partitions
                 Index_Cont=Soil_Slots.sample(n=10).index
-                Updates_values=Soil_Slots[Index_Cont].values+ rng.multinomial(Feces_Addition(Inputz.Month_choice),[1/10]*10,1)
+                Updates_values=Soil_Slots[Index_Cont].values+ np.random.multinomial(Feces_Addition(Inputz.Month_choice),[1/10]*10,1)
                 Soil_Slots[Index_Cont]=Updates_values[0]
-                Soil_Slots = Soil_Slots.apply(lambda x: rng.binomial(x,10**(-0.1744*Inputz.Time_I_PHS_PartD))) #applying daily die-off.            
+                Soil_Slots = Soil_Slots.apply(lambda x: np.random.binomial(x,10**(-0.1744*Inputz.Time_I_PHS_PartD))) #applying daily die-off.            
                 if math.ceil(TotalTime) in Inputz.Final_Irrigation_Days:
                     df = Feces_Splash(df,Soil_Slots)
             
             if Inputz.Scenario_no == 4:
                 Soil_Slots = df["CFU"]
                 #Contaminating 10 random partitions
-                Updates_values=Soil_Slots.values+ rng.multinomial(Feces_Runoff(Inputz.Month_choice),[1/2000]*2000,1)
+                Updates_values=Soil_Slots.values+ np.random.multinomial(Feces_Runoff(Inputz.Month_choice),[1/2000]*2000,1)
                 Soil_Slots=Updates_values[0]
                 Soil_Slots=pd.Series(Soil_Slots)
-                Soil_Slots = Soil_Slots.apply(lambda x: rng.binomial(x,10**(-0.1744*Inputz.Time_I_PHS_PartD))) #applying daily die-off.            
+                Soil_Slots = Soil_Slots.apply(lambda x: np.random.binomial(x,10**(-0.1744*Inputz.Time_I_PHS_PartD))) #applying daily die-off.            
                 if math.ceil(TotalTime) in Inputz.Final_Irrigation_Days:
                     df = Feces_Splash(df,Soil_Slots)  
                         
@@ -279,19 +279,19 @@ def Cont_PHS_End(df, Happens_YN_1part, TotalTime, Total_CFU_v ):
                 Soil_Slots = df["CFU"]
                 #Contaminating 10 random partitions
                 Index_Cont=Soil_Slots.sample(n=10).index
-                Updates_values=Soil_Slots[Index_Cont].values+ rng.multinomial(Feces_Addition(Inputz.Month_choice),[1/10]*10,1)
+                Updates_values=Soil_Slots[Index_Cont].values+ np.random.multinomial(Feces_Addition(Inputz.Month_choice),[1/10]*10,1)
                 Soil_Slots[Index_Cont]=Updates_values[0]
-                Soil_Slots = Soil_Slots.apply(lambda x: rng.binomial(x,10**(-0.1744*Inputz.Time_PHS_H_PartD))) #applying daily die-off.            
+                Soil_Slots = Soil_Slots.apply(lambda x: np.random.binomial(x,10**(-0.1744*Inputz.Time_PHS_H_PartD))) #applying daily die-off.            
                 if math.ceil(TotalTime) in Inputz.Final_Irrigation_Days:
                     df = Feces_Splash(df,Soil_Slots)
                 
             if Inputz.Scenario_no == 4:
                 Soil_Slots = df["CFU"]
                 #Contaminating 10 random partitions
-                Updates_values=Soil_Slots.values+ rng.multinomial(Feces_Runoff(Inputz.Month_choice),[1/2000]*2000,1)
+                Updates_values=Soil_Slots.values+ np.random.multinomial(Feces_Runoff(Inputz.Month_choice),[1/2000]*2000,1)
                 Soil_Slots=Updates_values[0]
                 Soil_Slots=pd.Series(Soil_Slots)
-                Soil_Slots = Soil_Slots.apply(lambda x: rng.binomial(x,10**(-0.1744*Inputz.Time_PHS_H_PartD))) #applying daily die-off.            
+                Soil_Slots = Soil_Slots.apply(lambda x: np.random.binomial(x,10**(-0.1744*Inputz.Time_PHS_H_PartD))) #applying daily die-off.            
                 if math.ceil(TotalTime) in Inputz.Final_Irrigation_Days:
                     df = Feces_Splash(df,Soil_Slots) 
             
@@ -333,19 +333,19 @@ def Cont_PHS_End(df, Happens_YN_1part, TotalTime, Total_CFU_v ):
                 Soil_Slots = df["CFU"]
                 #Contaminating 10 random partitions
                 Index_Cont=Soil_Slots.sample(n=10).index
-                Updates_values=Soil_Slots[Index_Cont].values+ rng.multinomial(Feces_Addition(Inputz.Month_choice),[1/10]*10,1)
+                Updates_values=Soil_Slots[Index_Cont].values+ np.random.multinomial(Feces_Addition(Inputz.Month_choice),[1/10]*10,1)
                 Soil_Slots[Index_Cont]=Updates_values[0]
-                Soil_Slots = Soil_Slots.apply(lambda x: rng.binomial(x,10**-0.1744)) #applying daily die-off.            
+                Soil_Slots = Soil_Slots.apply(lambda x: np.random.binomial(x,10**-0.1744)) #applying daily die-off.            
                 if TotalTime in Inputz.Final_Irrigation_Days:
                     df = Feces_Splash(df,Soil_Slots)
             #Scenario 4
             if Inputz.Scenario_no == 4:
                 Soil_Slots = df["CFU"]
                 #Contaminating 10 random partitions
-                Updates_values=Soil_Slots.values+ rng.multinomial(Feces_Runoff(Inputz.Month_choice),[1/2000]*2000,1)
+                Updates_values=Soil_Slots.values+ np.random.multinomial(Feces_Runoff(Inputz.Month_choice),[1/2000]*2000,1)
                 Soil_Slots=Updates_values[0]
                 Soil_Slots=pd.Series(Soil_Slots)
-                Soil_Slots = Soil_Slots.apply(lambda x: rng.binomial(x,10**-0.1744)) #applying daily die-off.            
+                Soil_Slots = Soil_Slots.apply(lambda x: np.random.binomial(x,10**-0.1744)) #applying daily die-off.            
                 if TotalTime in Inputz.Final_Irrigation_Days:
                     df = Feces_Splash(df,Soil_Slots)        
                 
@@ -422,7 +422,7 @@ def F_Simple_Reduction(df, Reduction):
     for i in vector: 
         CFU_1 = i
         new_cont = np.random.binomial(CFU_1,10**-Reduction)
-        #new_cont=rng.poisson(10**-Reduction, CFU_1).sum()
+        #new_cont=np.random.poisson(10**-Reduction, CFU_1).sum()
         new_vector.append(new_cont)
     df["CFU"] = new_vector
     return df
@@ -434,7 +434,7 @@ def F_Simple_Reduction_PLines(gb2, Reduction):
         for i in vector: 
             CFU_1 = i
             new_cont = np.random.binomial(CFU_1,10**-Reduction)
-            #new_cont=rng.poisson(10**-Reduction, CFU_1).sum()
+            #new_cont=np.random.poisson(10**-Reduction, CFU_1).sum()
             new_vector.append(new_cont)
         j["CFU"] = new_vector
     return gb2
@@ -455,7 +455,7 @@ def F_Growth(DF,Temperature, TimeD ):
         CFUs_g = i/Parition_Weight_g #CFU/g
         Total_CFU = i
         if CFUs_g < (10**7): #7 log max density
-            DieoffRate = rng.triangular(0.0035, 0.013,0.040)/2.303 #log CFU /g h
+            DieoffRate = np.random.triangular(0.0035, 0.013,0.040)/2.303 #log CFU /g h
             TotalGrowthRate = (b*(Temperature - Tmin))**(2)/(2.303) #log CFU /g h
             if Temperature >5:
                 Growth  = 1
@@ -470,11 +470,11 @@ def F_Growth(DF,Temperature, TimeD ):
                 GrowthCeil = math.ceil(TotalGrowth)
                 Difference = TotalGrowth-GrowthCeil
                 MaxCont = Total_CFU*10**GrowthCeil
-                Updated_CFUs = rng.binomial(MaxCont,10**Difference)
+                Updated_CFUs = np.random.binomial(MaxCont,10**Difference)
             else:
-                Updated_CFUs= rng.binomial(Total_CFU,10**TotalGrowth)
+                Updated_CFUs= np.random.binomial(Total_CFU,10**TotalGrowth)
             '''
-            Updated_CFUs=rng.poisson(10**TotalGrowth, Total_CFU).sum()
+            Updated_CFUs=np.random.poisson(10**TotalGrowth, Total_CFU).sum()
         else:
             Updated_CFUs = Total_CFU
         New_CFUs.append(Updated_CFUs)
@@ -511,7 +511,7 @@ def Growth_Function_Lag(DF, Temperature,Time,Lag_Consumed_Prev):
 
 #Calculation of E.coli in Water
 def F_Ecoli_Water():   
-    Cw = rng.uniform(1,235)
+    Cw = np.random.uniform(1,235)
     Rw = 10**Func_NormalTrunc(Min= -100000, Max = 0, Mean=-1.9, SD = 0.6)
     W = Func_NormalTrunc(Min = 0, Max = 100000, Mean = 0.108, SD = 0.019)
     Ci = ((Cw/100)*Rw*W)*(454*SCInputz.Field_Weight)
@@ -751,10 +751,10 @@ def F_CrossContProLine (gb2, Tr_P_S, Tr_S_P,Sanitation_Freq_lb = 0, StepEff = 0 
                 if every_x_many > 0:
                     if i in Cleaning_steps:
                         if ContS>0:
-                            ContS = rng.binomial(ContS,10**StepEff) 
+                            ContS = np.random.binomial(ContS,10**StepEff) 
             ContP = j.CFU[i] #Contamination product
-            TotTr_P_S= rng.binomial(ContP,Tr_P_S) #Transfer from Product to Surfaces
-            TotTr_S_P = rng.binomial(ContS,Tr_S_P) #Trasnfer from Surfaves to product
+            TotTr_P_S= np.random.binomial(ContP,Tr_P_S) #Transfer from Product to Surfaces
+            TotTr_S_P = np.random.binomial(ContS,Tr_S_P) #Trasnfer from Surfaves to product
             ContPNew = ContP-TotTr_P_S+TotTr_S_P #New Contmination on Product
             ContS=ContS+TotTr_P_S-TotTr_S_P #Remiining Contamination in Surface for upcoming batches
             j.at[i,("CFU")]=ContPNew #Updating the Contamination in the Data Frame
@@ -781,8 +781,8 @@ def F_CrossContProLine2 (gb2, Tr_P_S, Tr_S_P, Sanitation_Freq_lb = 0, StepEff = 
                         ContS = ContS*10**StepEff
                         print ("cleaned")
             ContP = vectorCFU[i] #Contamination product
-            TotTr_P_S= rng.binomial(ContP,Tr_P_S) #Transfer from Product to Surfaces
-            TotTr_S_P = rng.binomial(ContS,Tr_S_P) #Trasnfer from Surfaves to product
+            TotTr_P_S= np.random.binomial(ContP,Tr_P_S) #Transfer from Product to Surfaces
+            TotTr_S_P = np.random.binomial(ContS,Tr_S_P) #Trasnfer from Surfaves to product
             ContPNew = ContP-TotTr_P_S+TotTr_S_P #New Contmination on Product
             ContS=ContS+TotTr_P_S-TotTr_S_P #Remiining Contamination in Surface for upcoming batches
             newvector.append(ContPNew)
@@ -800,7 +800,7 @@ def F_Partitioning(DF,NPartitions):
         for row in DF.itertuples():
             i = row[0]
             Cont = DF.at[i,'CFU']
-            PartCont=rng.multinomial(Cont,[1/NPartitions]*NPartitions,size=1)
+            PartCont=np.random.multinomial(Cont,[1/NPartitions]*NPartitions,size=1)
             PartCont = PartCont[0]
             AllParts_Cont.append(PartCont)
         b_flat = [j for i in AllParts_Cont for j in i]
@@ -817,7 +817,7 @@ def F_Partitioning(DF,NPartitions):
         AllParts_Cont = []
         for row in DF.itertuples():
             i = row[0]
-            PartCont=rng.multinomial(Cont,[1/NPartitions]*NPartitions,size=1)
+            PartCont=np.random.multinomial(Cont,[1/NPartitions]*NPartitions,size=1)
             PartCont = PartCont[0]
             AllParts_Cont.append(PartCont)
         b_flat = [j for i in AllParts_Cont for j in i]
@@ -837,7 +837,7 @@ def F_Field_Packing(DF, Case_Weight, PartWeight):
     for row in DF.itertuples():
         i = row[0]
         Cont = DF.at[i,'CFU']
-        PartCont=rng.multinomial(Cont,[1/NPartitions]*NPartitions,size=1)
+        PartCont=np.random.multinomial(Cont,[1/NPartitions]*NPartitions,size=1)
         PartCont = PartCont[0]
         AllParts_Cont.append(PartCont)
     b_flat = [j for i in AllParts_Cont for j in i]
@@ -898,7 +898,7 @@ def F_Partitioning2(DF, Partition_Weight):
         i = row[0]
         Cont = DF.at[i,'CFU']
         Parts = int(DF.at[i,'Parts'])
-        PartCont=rng.multinomial(Cont,[1/Parts]*Parts, size =1)
+        PartCont=np.random.multinomial(Cont,[1/Parts]*Parts, size =1)
         PartCont = PartCont[0]
         AllParts_Cont.append(PartCont)
     b_flat = [j for i in AllParts_Cont for j in i]
@@ -912,7 +912,7 @@ def F_Partitioning_W(DF,NPartitions):
     for row in DF.itertuples():
         i = row[0]
         Cont = DF.at[i,'CFU']
-        PartCont=rng.multinomial(Cont,[1/NPartitions]*NPartitions,size=1)
+        PartCont=np.random.multinomial(Cont,[1/NPartitions]*NPartitions,size=1)
         PartCont = PartCont[0]
         AllParts_Cont.append(PartCont)
     b_flat = [j for i in AllParts_Cont for j in i]
@@ -1020,8 +1020,8 @@ def Washing_Batch(df, New_water_every_xpacks):
          every_so = []
     else:
         every_so = Rangeofiterations[::New_water_every_xpacks]
-    Log_Red_WashW = rng.uniform(1.87,2.23)
-    TrRatetoNI = (1*10**rng.normal(0.0,0.3))/100 #check this fit
+    Log_Red_WashW = np.random.uniform(1.87,2.23)
+    TrRatetoNI = (1*10**np.random.normal(0.0,0.3))/100 #check this fit
     Cont_Water =0
     for i in range(len(Contamination_Vector)):
         if i in every_so:

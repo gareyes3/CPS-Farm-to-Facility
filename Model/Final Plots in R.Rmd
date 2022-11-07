@@ -473,6 +473,8 @@ ggsave("Relative Prevalence.tiff", width = 40, height = 28, units = "cm", dpi = 
 Exposure_Chart<-read_csv("Exposure_Chart_df-Final2.csv")
 Exposure_Chart<-Exposure_Chart[-1]
 
+Exposure_Chart$MeanComparison = 1-Exposure_Chart$MeanComparison
+
 unique(Exposure_Chart$Cont_Spread)
 levels_1<-c("Baseline", "PHS4D", "PHS4H", "PHSInt", "HTrad", "RSTrad", "FPSTrad", "CS")
 levels_2<-c("Baseline", "CS", "PHS4D", "HTrad", "RSTrad","PHS4H", "FPSTrad", "PHSInt")
@@ -503,9 +505,9 @@ ggplot(data = Exposure_Chart,aes(x = factor(Sampling_Plan, levels =levels_1 ) ,y
   scale_y_continuous(labels = percent)+
   #geom_line(aes(group = Sampling_Plan),color="black",alpha = 0.7 ,arrow = arrow(length=unit(0.3,"cm"), ends="last", type #= "closed"))+
   #ggtitle("Relative TAC Exposure")+
-  geom_hline(aes(yintercept = 0.2258976, linetype = "Maximum effect NI system"), size = 1, alpha = 0.5)+
-  geom_hline(aes(yintercept = 0.6890373, linetype = "Maximum effect AI system"), size = 1,alpha = 0.5)+
-  scale_linetype_manual(name ="", values = c('dotted','dashed')) 
+  #geom_hline(aes(yintercept = 0.2258976, linetype = "Maximum effect NI system"), size = 1, alpha = 0.5)+
+  #geom_hline(aes(yintercept = 0.6890373, linetype = "Maximum effect AI system"), size = 1,alpha = 0.5)+
+  #scale_linetype_manual(name ="", values = c('dotted','dashed')) 
 
 
 ggsave("Relative Exposure-Final.tiff", width = 30, height = 16, units = "cm", dpi = 600)
