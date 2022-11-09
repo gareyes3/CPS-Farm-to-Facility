@@ -229,11 +229,6 @@ Baseline_AI_FPSTrad = scenario_function(Cont_Scen_no=1,Washing = True, Holding =
 Baseline_AI_CS = scenario_function(Cont_Scen_no=1,Washing = True, Holding = True,Pre_Cooling = True, PreS_Wash=True, Sanitation = True,CSampling = True)
 
 
-List_of_Names = ["Baseline-NI","Baseline-NI-Washing","Baseline-NI-Washing 10 ppm","Baseline-NI Holding","Baseline-NI Pre-cooling",
-                 "Baseline-NI PreWash","Baseline-NI Sanitation", "Baseline-NI PHS4d","Baseline-NI PHS4h","Baseline-NI Int","Baseline-NI HS",
-                 "Baseline-NI RS", "Baseline-NI FPS", "Baseline-NI CS", "Baseline-AI","Baseline-AI PHS4d","Baseline-AI PHS4h", "Baseline-AI PHSInt",
-                 "Baseline-AI HS", "Baseline-AI RS", "Baseline-AI FPS", "Baseline-AI CS"
-                 ]
 
 
 
@@ -295,8 +290,6 @@ List_of_FS = [
     ]
 
 
-Baseline[1]["After CS Samp"].sum()
-List[0][1]["After CS Samp"].sum()
 
 def get_FS(List):
     vector_of_FS = []
@@ -320,8 +313,3 @@ FSdf.to_csv(path_or_buf = "C:\\Users\\gareyes3\\Box\\CPS Project- Farm to Facili
 #FSdf.to_csv(path_or_buf = "C:\\Users\\gareyes3\\Box Sync\\CPS Project- Farm to Facility\\Papers\\CSV Data\\FSdf-Final.csv") 
     
 
-Baseline[1]["After CS Samp"].sum()
-Baseline_washing[1]["After CS Samp"].sum()
-Baseline_washing_opt[1]["After CS Samp"].sum()
-
-np.log10(2254.0/144587.0)

@@ -7,7 +7,7 @@ Created on Tue Jan 25 11:13:00 2022
 
 #Marginal Gain analysis sampling, creation of the funtion. 
 
-#%%
+#%% Loading libraries
 import sys, os
 sys.path
 sys.path.append('C:\\Users\Gustavo Reyes\Documents\GitHubFiles\CPS-Farm-to-Facility\Model')
@@ -43,7 +43,7 @@ reload(Inputz)
 reload(SCInputz)
 reload(ScenCondz)
 
-#%% MAIN FUCTION THE RUNS THE MODEL WITH THE INTERVENTIONS LISTES
+#%% MAIN FUCTION THE RUNS THE MODEL WITH THE INTERVENTIONS LISTS
 #Options
      #Washing
      #Holding

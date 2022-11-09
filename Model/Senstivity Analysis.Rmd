@@ -6,12 +6,16 @@ output: html_document
 ---
 
 ```{r}
+setwd("C:/Users/gareyes3/Box/CPS Project- Farm to Facility/Papers/CSV Data/Review 2")
+
 library(sensitivity)
 library(tidyverse)
 ```
 
 ```{r}
-Data<-read_csv("SensitivityDF2.csv")
+setwd("C:/Users/gareyes3/Box/CPS Project- Farm to Facility/Papers/CSV Data/Review 2")
+
+Data<-read_csv("SensitivityDF.csv")
 Data_x<-Data[-c(1,49,50)]
 
 ```
@@ -160,6 +164,11 @@ rownames(Sens_DF)<-Column_Names
 Sens_DF_T25<-Sens_DF %>% 
   arrange(desc(abs(original))) %>% 
   head(n=25)
+setwd("C:/Users/gareyes3/Box/CPS Project- Farm to Facility/Papers/CSV Data/Review 2")
+
+write.csv(x = Sens_DF_T25,file = "PRCC Outs.csv")
+
+setwd()
 
 ```
 
@@ -176,9 +185,10 @@ ggplot(data = Sens_DF, aes(x=fct_reorder(rownames(Sens_DF), abs(original)),y=ori
   coord_flip()+
   theme(plot.title = element_text(hjust = 0.5))+
   theme(text = element_text(size=26), axis.text = element_text(size = 24))+
-  theme(legend.text=element_text(size=16),legend.title=element_text(size=20))+
+  theme(legend.text=element_text(size=16),legend.title=element_text(size=20))
 
+setwd("C:/Users/gareyes3/Box/CPS Project- Farm to Facility/Papers/CSV Data/Review 2")
 
-ggsave(filename= "SensitivityPlot_6_1.png", path = "C:/Users/reyes/Box Sync/CPS Project- Farm to Facility/Papers/CSV Data", height = 15, width =20, dpi = 600)
+ggsave(filename= "SensitivityPlot.jpeg", height = 15, width =20, dpi = 600)
 ```
 

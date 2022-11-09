@@ -1,12 +1,12 @@
 
 
-#%%
+#%% Chunk 1 paths # add you own path, if using the model in a different PC
 import sys
 sys.path
 sys.path.append('C:\\Users\Gustavo Reyes\Documents\GitHubFiles\CPS-Farm-to-Facility\Model')
 sys.path.append('C:\\Users\gareyes3\Documents\GitHub\CPS-Farm-to-Facility\Model')
 
-#%% 
+#%% Chunk 2 Libraries
 #Libraries, Modules
 import pandas as pd  #for working
 #import seaborn as sns
@@ -27,7 +27,7 @@ import random
 
 reload(Listz)
 
-#%%
+#%% Chunk 3 the process
 
 def F_MainLoop():
     '''
@@ -59,7 +59,7 @@ def F_MainLoop():
     
     for  i in range(SCInputz.N_Iterations):
         #i = 1
-        Iteration_In = i
+        Iteration_In = i 
         print(Iteration_In,"iteration")
         np.random.seed(i)
         reload(Inputz)
@@ -105,7 +105,7 @@ def F_MainLoop():
         
         
         
-        ##################BEGGINING OF THE MODEL ###########################
+        ##################BEGINNING OF THE MODEL ###########################
         
         #Adding Contmination to the Field if Contmination Event Occurs Before Pre-Harvest
         
@@ -164,28 +164,30 @@ def F_MainLoop():
         LV_Die_off_Total = Funz.F_Simple_DieOff(Inputz.Time_CE_H)
         LV_Die_Off_CE_PHS = ((Inputz.Time_CE_PHS)/Inputz.Time_CE_H)*LV_Die_off_Total
 
-        df = Funz.Applying_dieoff(df=df, Dieoff=LV_Die_Off_CE_PHS ) #Applying Die off to CFU Column in the DF
+        #Applying Die off to CFU Column in the DF
+        df = Funz.Applying_dieoff(df=df, Dieoff=LV_Die_Off_CE_PHS ) 
 
-            
-        LO_Cont_B_PH = sum(df.CFU) #Contamination before rejection sampling
-
+        #Collecting Contamination before rejection sampling   
+        LO_Cont_B_PH = sum(df.CFU) 
+        
+        #Collecting weight before rejection sampling   
         LO_Weight_B_PH = sum(df.Weight)
         
 
-        
-        #Contprog Before Pre-Harvest Sampling
+        #Collecting Contprog Before Pre-Harvest Sampling
         df_Output_Contprog =  Dictionariez.Output_Collection_Prog(df = df,
                                                      outputDF = df_Output_Contprog,
                                                      Step_Column = "Bef Pre-Harvest Samp", 
                                                      i =Iteration_In )
         
-        #PropoContaminated
+        # Collecting PropoContaminated
         df_Output_Propprog = Dictionariez.Pop_Output_Colection(df = df, 
                                                                outputDF =df_Output_Propprog, 
                                                                Step_Column =  "PropCont_B_PHS", 
                                                                i = Iteration_In)
         
-        Listz.List_BPHS_CFU.append( LO_Cont_B_PH) #List of contamination before sampling
+        #List of contamination before sampling
+        Listz.List_BPHS_CFU.append( LO_Cont_B_PH) 
 
         
         #Sampling at Pre-Harvest
@@ -212,13 +214,13 @@ def F_MainLoop():
             df=Funz.F_Rejection_Rule3(df =df, Test_Unit = SCInputz.RR_PH_Trad, limit = SCInputz.Limit_PH) 
            
         
-        #Contprog After Pre-Harvest Sampling
+        # Collecting Contprog After Pre-Harvest Sampling
         df_Output_Contprog =  Dictionariez.Output_Collection_Prog(df = df,
                                                      outputDF = df_Output_Contprog,
                                                      Step_Column = "Aft Pre-Harvest Samp", 
                                                      i =Iteration_In )
         
-        #PropoContaminated
+        # Collecting PropoContaminated
         df_Output_Propprog = Dictionariez.Pop_Output_Colection(df = df, 
                                                                outputDF =df_Output_Propprog, 
                                                                Step_Column =  "PropCont_A_PHS", 
@@ -235,9 +237,8 @@ def F_MainLoop():
                                                             Niterations = SCInputz.N_Iterations)
         
         
+        #Adding camination if contamination event happens after PHS
         if Inputz.Time_CE_PHS==0:
-        
-            
             #Adding Contamination depending on challenge Pre-harvest challenges
             if df["Weight"].sum() != 50:
                 if ScenCondz.Contamination_Scenario in [1,2,3]:
@@ -251,12 +252,12 @@ def F_MainLoop():
             LV_Initial_CFU= sum(df.CFU) #Initial Contamination 
             Listz.List_Initial_CFU.append(LV_Initial_CFU) #Adding Initial Contamintion to List
             
-            #Contprog Initial
+            # Collecting Contprog Initial
             df_Output_Contprog =  Dictionariez.Output_Collection_Prog(df = df,
                                                          outputDF = df_Output_Contprog,
                                                          Step_Column = "Contam Event After PHS", 
                                                          i =Iteration_In )
-            #PropoContaminated
+            # CollectingPropoContaminated
             df_Output_Propprog = Dictionariez.Pop_Output_Colection(df = df, 
                                                                    outputDF =df_Output_Propprog, 
                                                                    Step_Column =  "PropCont_CE_A_PHS", 
@@ -265,9 +266,11 @@ def F_MainLoop():
         
         #STEP 2 HARVEST ---------------------------------------------------------------------------------------------------------------------
         
-        #Die-off
+        # Applying Die-off from Step 2 to Harvest
         LV_Die_Off_PHS_HS=LV_Die_off_Total - LV_Die_Off_CE_PHS
-        df = Funz.Applying_dieoff(df=df, Dieoff =LV_Die_Off_PHS_HS ) #Updating Contmination to Show Total DieOff
+        
+        #Updating Contmination to Show Total DieOff
+        df = Funz.Applying_dieoff(df=df, Dieoff =LV_Die_Off_PHS_HS ) 
         
         
         #Harvest Sampling
@@ -279,6 +282,7 @@ def F_MainLoop():
                                              Samp_Size =SCInputz.sample_size_H, 
                                              Partition_Weight =SCInputz.Partition_Weight, 
                                              NoGrab =SCInputz.No_Grabs_H )
+            #not in model, in case aggregative sampling. 
             elif ScenCondz.HS_Agg==True:
                df = Funz.F_Sampling_2(df =df,Test_Unit =SCInputz.test_unit_H, 
                                                NSamp_Unit = SCInputz.n_samples_slot_H, 
@@ -289,11 +293,10 @@ def F_MainLoop():
         
 
             
-        #Before pre harvest sampling
+        # Collecting contamintion and wieight Before pre harvest sampling
         LO_Cont_B_H = sum(df.CFU) #Contamination before sampling
         LO_Weight_B_H = sum(df.Weight)
         
-        ##Listz.List_BHS_CFU.append(LO_Cont_B_H) #List of contaminations before sampling
         
         #Contprog Before Harvest
         df_Output_Contprog =  Dictionariez.Output_Collection_Prog(df = df,
@@ -326,7 +329,7 @@ def F_MainLoop():
                                                                Step_Column =   "PropCont_A_PHS", 
                                                                i = Iteration_In)
 
-        
+        #Collecting the rejection after sampling
         df_Output_H = Dictionariez.Output_Collection_Final(df = df, 
                                                     outputDF = df_Output_H, 
                                                     Step = "H", 
@@ -336,22 +339,24 @@ def F_MainLoop():
                                                     Niterations = SCInputz.N_Iterations)
         
         
-   
+        #This chunk adds processing steps, at some point field pack was included
         if (ScenCondz.Field_Pack == False):
+            
             #STEP 3 RECEIVING ---------------------------------------------------------------------------------------------------------------------
-            #Time Between Harvest and Pre-Cooling KoseKi. 
+            #Time Between Harvest and Pre-Cooling KoseKi. Growth between Harvest and Precooling 
             GrowthOutsH_PC = Funz.Growth_Function_Lag(DF =df, 
                                                     Temperature = Inputz.Temperature_H_PreCooling, 
                                                     Time = Inputz.Time_H_PreCooling, 
                                                     Lag_Consumed_Prev  = Inputz.Lag_Consumed_Prev)
             
+            #intermediate outpus for partial lag consumption
             df = GrowthOutsH_PC[0]
             Inputz.Lag_Consumed_Prev = GrowthOutsH_PC[1]
 
             
-            LV_bef_precool = sum(df.CFU)
+            #LV_bef_precool = sum(df.CFU)
             
-            #Pre_Cooling
+            #Pre_Cooling cools down, and prevent growth based on the temperature of precooling
             if SCInputz.Pre_CoolingYN == True:
                 #Aggresive Temperature Change. Reset Lag Time
                 Inputz.Lag_Consumed_Prev = 0 #Reseting Lag Consumed.
@@ -362,7 +367,7 @@ def F_MainLoop():
                                                 Lag_Consumed_Prev  = Inputz.Lag_Consumed_Prev)
                 df = GrowthOutsPC[0]
                 Inputz.Lag_Consumed_Prev = GrowthOutsPC[1]
-            LV_af_precool = sum(df.CFU) 
+            #LV_af_precool = sum(df.CFU) 
             #print(LV_af_precool-LV_bef_precool, "pre-cool effect")
             
             
@@ -377,7 +382,6 @@ def F_MainLoop():
             df = GrowthOutsSto_R[0]
             Inputz.Lag_Consumed_Prev = GrowthOutsSto_R[1]
             
-            #print("lag consumed after sto",Inputz.Lag_Consumed_Prev )
             
             #Paletization
             df = Funz.F_Palletization(df=df,
@@ -387,12 +391,10 @@ def F_MainLoop():
                                       )
             
         
-            #LV_Time_Agg = LV_Time_Agg + Inputz.Time_H_RS #Cummulative time so far in the process. 
             
             LO_Cont_B_R = sum(df.CFU)
             LO_Weight_B_R = sum(df.Weight)
             
-            #Listz.List_BRS_CFU.append(LO_Cont_B_R) #Contamination before receiving sampling
             
             #Contprog Before Receiving
             df_Output_Contprog =  Dictionariez.Output_Collection_Prog(df = df,
@@ -405,7 +407,7 @@ def F_MainLoop():
                                                                    outputDF =df_Output_Propprog, 
                                                                    Step_Column =   "PropCont_B_RS", 
                                                                    i = Iteration_In)
-            
+            #Recieivng samplinng
             if ScenCondz.R_Sampling == True:
                 #Sampling at Reception
                 df = Funz.F_Sampling_2(df =df,Test_Unit =SCInputz.test_unit_R, 
@@ -414,7 +416,7 @@ def F_MainLoop():
                                                Partition_Weight =SCInputz.Partition_Weight, 
                                                NoGrab =SCInputz.No_Grabs_R )
             
-            #Rejecting Inidividual pallets if 1 positive
+            #Applying rejection rule is anythin is found positive from sampling
             df = Funz.F_Rejection_Rule3 (df =df, Test_Unit = SCInputz.RR_R_Trad, limit = SCInputz.Limit_R ) 
             
             
@@ -430,7 +432,7 @@ def F_MainLoop():
                                                                    Step_Column =    "PropCont_A_RS", 
                                                                    i = Iteration_In)
             
-            
+            #Collecting rejection rule outputs
             df_Output_R = Dictionariez.Output_Collection_Final(df = df, 
                                             outputDF = df_Output_R, 
                                             Step = "R", 
@@ -440,6 +442,7 @@ def F_MainLoop():
                                             Niterations = SCInputz.N_Iterations)
 
             #STEP 4 Value Addition ---------------------------------------------------------------------------------------------------------------------
+            
             #Splitting pallets into processing lines. 
             gb2 = Funz.F_ProLineSplitting(df =df, Processing_Lines = Inputz.Processing_Lines)
 
@@ -469,8 +472,7 @@ def F_MainLoop():
             if SCInputz.Spray_WashYN == True:
                 gb2 = Funz.F_Simple_Reduction_PLines(gb2, Inputz.Harvest_Cspray_red)
             
-            #Contamination event, if it happens
-            #Pending
+
                         
             #2 Shredder --------------------------------------------------------
             df_gb2_bs = (pd.concat(gb2))
@@ -489,9 +491,8 @@ def F_MainLoop():
                                                                    outputDF =df_Output_Propprog, 
                                                                    Step_Column =    "PropCont_B_Shredding", 
                                                                    i = Iteration_In)
-            #Contamination event, if it happens
-            #Pending
-                
+
+            #shredding step  
             ShredderOuts = Funz.F_CrossContProLine(gb2 =gb2, 
                                                    Tr_P_S = Inputz.Tr_P_Sh, 
                                                    Tr_S_P= Inputz.Tr_Sh_P,
@@ -517,9 +518,8 @@ def F_MainLoop():
                                                                    Step_Column =    "PropCont_B_CBelt", 
                                                                    i = Iteration_In)
             
-            #Contamination event, if it happens
-            #Pending
-                
+
+            #conveyor belt process 
             CVOuts = Funz.F_CrossContProLine(gb2 = gb2, 
                                              Tr_P_S = Inputz.Tr_P_Cv, 
                                              Tr_S_P = Inputz.Tr_Cv_P,
@@ -559,7 +559,7 @@ def F_MainLoop():
             if SCInputz.Washing_YN == True: 
                 gb2 = Funz.F_Washing_ProcLines3(List_GB3 =gb2, Wash_Rate = Inputz.Wash_Rate, Cdf =  Inputz.DF_Chlevels)
             
-            #5Shaker Table ----------------------------------------------------
+
             df_gb2_bst = (pd.concat(gb2))
             
             #Total Reduction Wash
@@ -571,7 +571,7 @@ def F_MainLoop():
             #Splitting Processing Lines into Mini Batches
             gb2 = Funz.F_Partitioning_ProcLines(gb3 = gb2 , NPartitions = int(Inputz.Pallet_Weight/SCInputz.Partition_Weight))
             
-            
+            #5 Shaker Table ----------------------------------------------------
             df_Output_Contprog =  Dictionariez.Output_Collection_Prog(df = df_gb2_bst,
                    outputDF = df_Output_Contprog,
                    Step_Column =  "Bef Shaker Table", 
@@ -583,9 +583,8 @@ def F_MainLoop():
                                                                    Step_Column =    "PropCont_B_ST", 
                                                                    i = Iteration_In)
             
-            #Contamination event, if it happens
-            #Pending
-                
+
+               
             StOuts = Funz.F_CrossContProLine(gb2 =gb2, 
                                              Tr_P_S = Inputz.Tr_P_St, 
                                              Tr_S_P= Inputz.Tr_St_P,
@@ -597,9 +596,7 @@ def F_MainLoop():
             #print(sum(StCont))
             
             #6 Centrifuge-----------------------------------------------------
-            
-
-            
+        
             df_gb2_bcf = (pd.concat(gb2))
             
             df_Output_Contprog =  Dictionariez.Output_Collection_Prog(df = df_gb2_bcf,
@@ -679,8 +676,7 @@ def F_MainLoop():
                 
             
             df=(pd.concat(gb2))
-            #df["Accept"] = True
-            #df['PositiveSamples'] = [list() for x in range(len(df.index))]
+
 
             df["PositiveSamples"] =""
             df["PositiveSamples"] = [list() for x in range(len(df.index))]
@@ -704,7 +700,7 @@ def F_MainLoop():
             
             
             
-            #Sampling Step
+            #Sampling Step FPS
             if ScenCondz.FP_Sampling == True:
                 if ScenCondz.FPS_Trad ==True:
                     df["FP_Strat"]=np.concatenate([([i]*int(len(df["HourProd"])/SCInputz.N_Strat_FP)) for i in list(range(1,(SCInputz.N_Strat_FP+1)))], axis=0)
@@ -884,7 +880,7 @@ def F_MainLoop():
                                                                    i = Iteration_In)
             
             
-            
+            #customer sampling occurs here
             if ScenCondz.C_Sampling == True:
                 df["FP_Strat"]=np.concatenate([([i]*int(len(df["HourProd"])/SCInputz.N_Strat_CS)) for i in list(range(1,(SCInputz.N_Strat_CS+1)))], axis=0)
                 df =Funz.F_Sampling_2(df =df,
