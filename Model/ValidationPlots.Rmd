@@ -43,6 +43,9 @@ ggplot(data = GPS_2) +
   theme(text = element_text(size = 15)) 
     #geom_point(data =CPS,  aes(x=param, y = mean), color = "blue", alpha=0.7, shape = 15)
 
+ggsave("Figure S3 - Validation PS.tiff", width = 30, height = 16, units = "cm", dpi = 600)
+ggsave("Figure S3 - Validation PS.jpeg", width = 30, height = 16, units = "cm", dpi = 600)
+
 
 ```
 
@@ -81,8 +84,10 @@ ggplot(data = GUN_2) +
   geom_pointrange(data =CPSU,  aes(x=param,y = mean, ymin=q2.5, ymax=q97.5 ) ,color ="royalblue1"  , alpha=0.8, size=0.5, shape = 15)+
   ggtitle("Uniform Contamination: Model Validation") +
   theme(plot.title = element_text(hjust = 0.5))+
-  theme(text = element_text(size = 15))    
+  theme(text = element_text(size = 15))
 
+ggsave("Figure S3 - Validation Unif.tiff", width = 30, height = 16, units = "cm", dpi = 600)
+ggsave("Figure S3 - Validation Unif.jpeg", width = 30, height = 16, units = "cm", dpi = 600)
 
 ```
 

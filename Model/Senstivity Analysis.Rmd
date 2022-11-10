@@ -181,8 +181,8 @@ ggplot(data = Sens_DF, aes(x=fct_reorder(rownames(Sens_DF), abs(original)),y=ori
   geom_errorbar(aes(ymin=minci, ymax=maxci), width=.1,col="blue")+
   ylab("Partial Correlation Coefficient")+
   xlab("Model Input")+
-  ggtitle("Sensitivity Analysis Cells in System at Consumer")+
   coord_flip()+
+  theme_bw()+
   theme(plot.title = element_text(hjust = 0.5))+
   theme(text = element_text(size=26), axis.text = element_text(size = 24))+
   theme(legend.text=element_text(size=16),legend.title=element_text(size=20))
@@ -190,5 +190,7 @@ ggplot(data = Sens_DF, aes(x=fct_reorder(rownames(Sens_DF), abs(original)),y=ori
 setwd("C:/Users/gareyes3/Box/CPS Project- Farm to Facility/Papers/CSV Data/Review 2")
 
 ggsave(filename= "SensitivityPlot.jpeg", height = 15, width =20, dpi = 600)
+ggsave(filename= "SensitivityPlot.tiff", height = 15, width =20, dpi = 600)
+
 ```
 

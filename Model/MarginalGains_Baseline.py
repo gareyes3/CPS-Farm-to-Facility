@@ -1394,7 +1394,7 @@ powers_df_3["ContS"] = "1% Cluster"
 
 Power_For_Plot = pd.concat([powers_df_1,powers_df_2,powers_df_3])
 
-Power_For_Plot.to_csv("C:\\Users\\gareyes3\\Box\\CPS Project- Farm to Facility\\Papers\\CSV Data\\Review 2\\Powers.csv")
+Power_For_Plot.to_csv("C:\\Users\\gareyes3\\Box\\CPS Project- Farm to Facility\\Papers\\CSV Data\\Review 2\\PowersR2.csv")
 
 
 #%%
@@ -1516,7 +1516,7 @@ Sampling_Loc_Melt_PC["Process"] = "No Precooling"
 Contam_Samp_Point =pd.concat([Sampling_Loc_Melt,Sampling_Loc_Melt_AI,Sampling_Loc_Melt_W,
            Sampling_Loc_Melt_PW,Sampling_Loc_Melt_H,Sampling_Loc_Melt_S,Sampling_Loc_Melt_PC])
 
-Contam_Samp_Point.to_csv("C:\\Users\\gareyes3\\Box\\CPS Project- Farm to Facility\\Papers\\CSV Data\\Review 2\\ContSampPoint.csv")
+Contam_Samp_Point.to_csv("C:\\Users\\gareyes3\\Box\\CPS Project- Farm to Facility\\Papers\\CSV Data\\Review 2\\ContSampPointR2.csv")
 
 
 #%% Consumer Exposure
@@ -1660,7 +1660,7 @@ N3_PC=Outputs_Df_NI_PC_3[["Final_CFU_Acc_Portion_mean","Prevalence_Acc_Mean","Pr
 
 Exposure_Chart_df= pd.concat([A1,A2,A3,N1,N2,N3,N1_W,N2_W,N3_W,N1_PW,N2_PW,N3_PW,N1_H,N2_H,N3_H,N1_S,N2_S,N3_S,N1_PC,N2_PC,N3_PC ])
 
-Exposure_Chart_df.to_csv("C:\\Users\\gareyes3\\Box\\CPS Project- Farm to Facility\\Papers\\CSV Data\\Review 2\\Exposure_Chart_df-Final2.csv")
+Exposure_Chart_df.to_csv("C:\\Users\\gareyes3\\Box\\CPS Project- Farm to Facility\\Papers\\CSV Data\\Review 2\\Exposure_Chart_df-FinalR2.csv")
 
 #%%END
 #%%

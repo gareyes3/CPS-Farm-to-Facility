@@ -27,7 +27,7 @@ Used to get the efficacy of each individual intervention.
 
 ##Powers
 ```{r}
-Powers_df<-read_csv("Powers.csv")
+Powers_df<-read_csv("PowersR2.csv")
 
 Powers_df<- Powers_df %>%
   filter(Type != "None")
@@ -66,8 +66,8 @@ Powers_df %>%
   facet_wrap(~ContS)+
   theme_bw()+
   labs(y = "Sampling Plan Power", x = "Sampling Stage", fill = "Process System", color =  "Process System")
-ggsave("Powers3.tiff", width = 30, height = 16, units = "cm", dpi = 600)
-ggsave("Powers3.jpeg", width = 30, height = 16, units = "cm", dpi = 600)
+ggsave("Figure 4 - Powers.tiff", width = 30, height = 16, units = "cm", dpi = 600)
+ggsave("Figure 4 - Powers.jpeg", width = 30, height = 16, units = "cm", dpi = 600)
 
 
 ```
@@ -328,11 +328,8 @@ ggplot(data = Binded_Con, aes(x = variable, y =value, fill = `Cont Scenario`))+
 
 ggsave("Cont_Sampling-Final.tiff", width = 40, height = 30, units = "cm", dpi = 600)
 
-#ALL Binded: this used to compared all other interventions
-Cont_Samp_Point_Binded<-read_csv("ContSampPoint.csv")
-
-
-
+#ALL Binded: this used to compared all other interventions Review 2
+Cont_Samp_Point_Binded<-read_csv("ContSampPointR2.csv")
 
 Order_ConS<-unique(Cont_Samp_Point_Binded$variable)
 Cont_Samp_Point_Binded$variable<-factor(Cont_Samp_Point_Binded$variable, levels=Order_ConS)
@@ -364,11 +361,22 @@ ggplot(data = Cont_Samp_Point_Binded, aes(x = Process, y =value, fill = `Cont Sc
   facet_wrap(~variable)+
   scale_fill_discrete(name = "Contamination Scenario")
 
-ggsave("Cont_Sampling Point.tiff", width = 40, height = 30, units = "cm", dpi = 600)
+ggsave("Figure S2 - Contamination Samp Points.tiff", width = 40, height = 30, units = "cm", dpi = 600)
+ggsave("Figure S2 - Contamination Samp Points.jpeg", width = 40, height = 30, units = "cm", dpi = 600)
+
+
+Conts_At_SP<- Cont_Samp_Point_Binded %>% 
+  group_by(variable, Process) %>% 
+  summarise(mean = mean(value), q5 = quantile(value, 0.05), q95 = quantile(value, 0.95)) 
+
+write.csv(Conts_At_SP,file ="Conts_At_SP.csv" )
+
 
 Conts_SP<- Cont_Samp_Point_Binded %>% 
   group_by(variable, Process,`Cont Scenario`) %>% 
   summarise(mean = mean(value), q5 = quantile(value, 0.05), q95 = quantile(value, 0.95))
+
+
 
 X<-split(Conts_SP, Conts_SP$`Cont Scenario`)
 
@@ -470,7 +478,7 @@ ggsave("Relative Prevalence.tiff", width = 40, height = 28, units = "cm", dpi = 
 #Exposure Comparison with more in between scenarios
 
 ```{r}
-Exposure_Chart<-read_csv("Exposure_Chart_df-Final2.csv")
+Exposure_Chart<-read_csv("Exposure_Chart_df-FinalR2.csv")
 Exposure_Chart<-Exposure_Chart[-1]
 
 Exposure_Chart$MeanComparison = 1-Exposure_Chart$MeanComparison
@@ -501,8 +509,8 @@ ggplot(data = Exposure_Chart,aes(x = factor(Sampling_Plan, levels =levels_1 ) ,y
   #geom_col(data = Exposure_Chart, aes(x =factor(Sampling_Plan, levels =levels_2), y = log10cont))+
   facet_wrap(~Cont_Spread)+
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))+
-  labs(y= "Relative Difference: Endpoint TAC", x = "Sampling Plan", color= "Process System", fill = "Process System")+
-  scale_y_continuous(labels = percent)+
+  labs(y= "Relative Efficacy: Endpoint TAC", x = "Sampling Plan", color= "Process System", fill = "Process System")+
+  scale_y_continuous(labels = percent)
   #geom_line(aes(group = Sampling_Plan),color="black",alpha = 0.7 ,arrow = arrow(length=unit(0.3,"cm"), ends="last", type #= "closed"))+
   #ggtitle("Relative TAC Exposure")+
   #geom_hline(aes(yintercept = 0.2258976, linetype = "Maximum effect NI system"), size = 1, alpha = 0.5)+
@@ -510,8 +518,8 @@ ggplot(data = Exposure_Chart,aes(x = factor(Sampling_Plan, levels =levels_1 ) ,y
   #scale_linetype_manual(name ="", values = c('dotted','dashed')) 
 
 
-ggsave("Relative Exposure-Final.tiff", width = 30, height = 16, units = "cm", dpi = 600)
-ggsave("Relative Exposure-Final.jpeg", width = 30, height = 16, units = "cm", dpi = 600)
+ggsave("Figure 5 - Efficacy.tiff", width = 30, height = 16, units = "cm", dpi = 600)
+ggsave("Figure 5 - Efficacy.jpeg", width = 30, height = 16, units = "cm", dpi = 600)
 
 
 ggplot(data = Exposure_Chart,aes(x = factor(Sampling_Plan, levels =levels_1 ) ,y = MeanComparison, group = Cont_Spread,fill = Cont_Spread))+
