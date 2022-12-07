@@ -1,0 +1,169 @@
+,Type,variable,value,ContS
+0,None,No Intervention,0.0,Random Uniform Unclustered
+1,PHS4D,No Intervention,0.2313,Random Uniform Unclustered
+2,PHS4H,No Intervention,0.0765,Random Uniform Unclustered
+3,PHSInt,No Intervention,0.1506,Random Uniform Unclustered
+4,HS,No Intervention,0.0622,Random Uniform Unclustered
+5,RS,No Intervention,0.0701,Random Uniform Unclustered
+6,FPS,No Intervention,0.0727,Random Uniform Unclustered
+7,CS,No Intervention,0.0399,Random Uniform Unclustered
+8,None,All Intervention,0.0,Random Uniform Unclustered
+9,PHS4D,All Intervention,0.2956,Random Uniform Unclustered
+10,PHS4H,All Intervention,0.0171,Random Uniform Unclustered
+11,PHSInt,All Intervention,0.0428,Random Uniform Unclustered
+12,HS,All Intervention,0.0135,Random Uniform Unclustered
+13,RS,All Intervention,0.0159,Random Uniform Unclustered
+14,FPS,All Intervention,0.0,Random Uniform Unclustered
+15,CS,All Intervention,0.0,Random Uniform Unclustered
+16,None,No Washing,0.0,Random Uniform Unclustered
+17,PHS4D,No Washing,0.2957,Random Uniform Unclustered
+18,PHS4H,No Washing,0.0153,Random Uniform Unclustered
+19,PHSInt,No Washing,0.0436,Random Uniform Unclustered
+20,HS,No Washing,0.0112,Random Uniform Unclustered
+21,RS,No Washing,0.0145,Random Uniform Unclustered
+22,FPS,No Washing,0.0008,Random Uniform Unclustered
+23,CS,No Washing,0.0002,Random Uniform Unclustered
+24,None,No Prewash,0.0,Random Uniform Unclustered
+25,PHS4D,No Prewash,0.2926,Random Uniform Unclustered
+26,PHS4H,No Prewash,0.0169,Random Uniform Unclustered
+27,PHSInt,No Prewash,0.0468,Random Uniform Unclustered
+28,HS,No Prewash,0.0133,Random Uniform Unclustered
+29,RS,No Prewash,0.0153,Random Uniform Unclustered
+30,FPS,No Prewash,0.0007,Random Uniform Unclustered
+31,CS,No Prewash,0.0003,Random Uniform Unclustered
+32,None,No Holding,0.0,Random Uniform Unclustered
+33,PHS4D,No Holding,0.224,Random Uniform Unclustered
+34,PHS4H,No Holding,0.0729,Random Uniform Unclustered
+35,PHSInt,No Holding,0.1548,Random Uniform Unclustered
+36,HS,No Holding,0.0644,Random Uniform Unclustered
+37,RS,No Holding,0.0743,Random Uniform Unclustered
+38,FPS,No Holding,0.0003,Random Uniform Unclustered
+39,CS,No Holding,0.0003,Random Uniform Unclustered
+40,None,No Sanitation,0.0,Random Uniform Unclustered
+41,PHS4D,No Sanitation,0.2922,Random Uniform Unclustered
+42,PHS4H,No Sanitation,0.0154,Random Uniform Unclustered
+43,PHSInt,No Sanitation,0.0453,Random Uniform Unclustered
+44,HS,No Sanitation,0.0123,Random Uniform Unclustered
+45,RS,No Sanitation,0.014,Random Uniform Unclustered
+46,FPS,No Sanitation,0.0001,Random Uniform Unclustered
+47,CS,No Sanitation,0.0,Random Uniform Unclustered
+48,None,No Precooling,0.0,Random Uniform Unclustered
+49,PHS4D,No Precooling,0.2903,Random Uniform Unclustered
+50,PHS4H,No Precooling,0.015,Random Uniform Unclustered
+51,PHSInt,No Precooling,0.0451,Random Uniform Unclustered
+52,HS,No Precooling,0.0137,Random Uniform Unclustered
+53,RS,No Precooling,0.0155,Random Uniform Unclustered
+54,FPS,No Precooling,0.0001,Random Uniform Unclustered
+55,CS,No Precooling,0.0,Random Uniform Unclustered
+0,None,No Intervention,0.0,10% Cluster
+1,PHS4D,No Intervention,0.2142,10% Cluster
+2,PHS4H,No Intervention,0.0668,10% Cluster
+3,PHSInt,No Intervention,0.1514,10% Cluster
+4,HS,No Intervention,0.0592,10% Cluster
+5,RS,No Intervention,0.0728,10% Cluster
+6,FPS,No Intervention,0.0734,10% Cluster
+7,CS,No Intervention,0.0395,10% Cluster
+8,None,All Intervention,0.0,10% Cluster
+9,PHS4D,All Intervention,0.2844,10% Cluster
+10,PHS4H,All Intervention,0.0152,10% Cluster
+11,PHSInt,All Intervention,0.047,10% Cluster
+12,HS,All Intervention,0.0138,10% Cluster
+13,RS,All Intervention,0.0149,10% Cluster
+14,FPS,All Intervention,0.0,10% Cluster
+15,CS,All Intervention,0.0,10% Cluster
+16,None,No Washing,0.0,10% Cluster
+17,PHS4D,No Washing,0.2799,10% Cluster
+18,PHS4H,No Washing,0.0143,10% Cluster
+19,PHSInt,No Washing,0.0485,10% Cluster
+20,HS,No Washing,0.0117,10% Cluster
+21,RS,No Washing,0.0136,10% Cluster
+22,FPS,No Washing,0.0007,10% Cluster
+23,CS,No Washing,0.0001,10% Cluster
+24,None,No Prewash,0.0,10% Cluster
+25,PHS4D,No Prewash,0.282,10% Cluster
+26,PHS4H,No Prewash,0.0148,10% Cluster
+27,PHSInt,No Prewash,0.0454,10% Cluster
+28,HS,No Prewash,0.013,10% Cluster
+29,RS,No Prewash,0.0157,10% Cluster
+30,FPS,No Prewash,0.0011,10% Cluster
+31,CS,No Prewash,0.0004,10% Cluster
+32,None,No Holding,0.0,10% Cluster
+33,PHS4D,No Holding,0.2132,10% Cluster
+34,PHS4H,No Holding,0.072,10% Cluster
+35,PHSInt,No Holding,0.1509,10% Cluster
+36,HS,No Holding,0.0635,10% Cluster
+37,RS,No Holding,0.0674,10% Cluster
+38,FPS,No Holding,0.0004,10% Cluster
+39,CS,No Holding,0.0001,10% Cluster
+40,None,No Sanitation,0.0,10% Cluster
+41,PHS4D,No Sanitation,0.2821,10% Cluster
+42,PHS4H,No Sanitation,0.0138,10% Cluster
+43,PHSInt,No Sanitation,0.0422,10% Cluster
+44,HS,No Sanitation,0.0134,10% Cluster
+45,RS,No Sanitation,0.014,10% Cluster
+46,FPS,No Sanitation,0.0001,10% Cluster
+47,CS,No Sanitation,0.0001,10% Cluster
+48,None,No Precooling,0.0,10% Cluster
+49,PHS4D,No Precooling,0.2948,10% Cluster
+50,PHS4H,No Precooling,0.0154,10% Cluster
+51,PHSInt,No Precooling,0.0403,10% Cluster
+52,HS,No Precooling,0.0109,10% Cluster
+53,RS,No Precooling,0.0155,10% Cluster
+54,FPS,No Precooling,0.0,10% Cluster
+55,CS,No Precooling,0.0,10% Cluster
+0,None,No Intervention,0.0,1% Cluster
+1,PHS4D,No Intervention,0.1408,1% Cluster
+2,PHS4H,No Intervention,0.0544,1% Cluster
+3,PHSInt,No Intervention,0.1344,1% Cluster
+4,HS,No Intervention,0.0435,1% Cluster
+5,RS,No Intervention,0.0549,1% Cluster
+6,FPS,No Intervention,0.0695,1% Cluster
+7,CS,No Intervention,0.0373,1% Cluster
+8,None,All Intervention,0.0,1% Cluster
+9,PHS4D,All Intervention,0.1795,1% Cluster
+10,PHS4H,All Intervention,0.0141,1% Cluster
+11,PHSInt,All Intervention,0.0409,1% Cluster
+12,HS,All Intervention,0.0126,1% Cluster
+13,RS,All Intervention,0.015,1% Cluster
+14,FPS,All Intervention,0.0001,1% Cluster
+15,CS,All Intervention,0.0,1% Cluster
+16,None,No Washing,0.0,1% Cluster
+17,PHS4D,No Washing,0.18,1% Cluster
+18,PHS4H,No Washing,0.0132,1% Cluster
+19,PHSInt,No Washing,0.0418,1% Cluster
+20,HS,No Washing,0.0125,1% Cluster
+21,RS,No Washing,0.0123,1% Cluster
+22,FPS,No Washing,0.0011,1% Cluster
+23,CS,No Washing,0.0004,1% Cluster
+24,None,No Prewash,0.0,1% Cluster
+25,PHS4D,No Prewash,0.1789,1% Cluster
+26,PHS4H,No Prewash,0.0166,1% Cluster
+27,PHSInt,No Prewash,0.0438,1% Cluster
+28,HS,No Prewash,0.0119,1% Cluster
+29,RS,No Prewash,0.0135,1% Cluster
+30,FPS,No Prewash,0.0009,1% Cluster
+31,CS,No Prewash,0.0008,1% Cluster
+32,None,No Holding,0.0,1% Cluster
+33,PHS4D,No Holding,0.1407,1% Cluster
+34,PHS4H,No Holding,0.0529,1% Cluster
+35,PHSInt,No Holding,0.134,1% Cluster
+36,HS,No Holding,0.0473,1% Cluster
+37,RS,No Holding,0.0539,1% Cluster
+38,FPS,No Holding,0.0003,1% Cluster
+39,CS,No Holding,0.0001,1% Cluster
+40,None,No Sanitation,0.0,1% Cluster
+41,PHS4D,No Sanitation,0.1763,1% Cluster
+42,PHS4H,No Sanitation,0.0132,1% Cluster
+43,PHSInt,No Sanitation,0.0425,1% Cluster
+44,HS,No Sanitation,0.0122,1% Cluster
+45,RS,No Sanitation,0.0137,1% Cluster
+46,FPS,No Sanitation,0.0,1% Cluster
+47,CS,No Sanitation,0.0001,1% Cluster
+48,None,No Precooling,0.0,1% Cluster
+49,PHS4D,No Precooling,0.1814,1% Cluster
+50,PHS4H,No Precooling,0.0163,1% Cluster
+51,PHSInt,No Precooling,0.0442,1% Cluster
+52,HS,No Precooling,0.0109,1% Cluster
+53,RS,No Precooling,0.0144,1% Cluster
+54,FPS,No Precooling,0.0001,1% Cluster
+55,CS,No Precooling,0.0,1% Cluster

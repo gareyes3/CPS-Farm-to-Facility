@@ -1,0 +1,57 @@
+,FS,Name,System
+0,0.0,Baseline NI,Baseline NI
+1,-0.02270676012430594,Baseline NI PHS4D,Baseline NI
+2,-0.17531266959513447,Baseline NI PHS4H,Baseline NI
+3,-0.4942904036902834,Baseline NI PHS Int,Baseline NI
+4,-0.1451260159722742,Baseline NI HS,Baseline NI
+5,-0.15870049705155775,Baseline NI RS,Baseline NI
+6,-0.268549870546101,Baseline NI FPS,Baseline NI
+7,-0.00041755397220110156,Baseline NI CS,Baseline NI
+8,-1.3200459575829269,Washing Only,Washing Only
+9,-1.330372108503076,Washing Only PHS4D,Washing Only
+10,-1.4729445305084563,Washing Only PHS4H,Washing Only
+11,-1.8313322760011317,Washing Only PHS Int,Washing Only
+12,-1.4527297490544155,Washing Only HS,Washing Only
+13,-1.4710034973516535,Washing Only RS,Washing Only
+14,-1.3393203077950453,Washing Only FPS,Washing Only
+15,-2.3019189757507035,Washing Only CS,Washing Only
+16,-0.8055647706511421,Holding Only,Holding Only
+17,-0.884777811631674,Holding Only PHS4D,Holding Only
+18,-0.8529279867788307,Holding Only PHS4H,Holding Only
+19,-0.9625580614565458,Holding Only PHS Int,Holding Only
+20,-0.845929350413487,Holding Only HS,Holding Only
+21,-0.8545754970060707,Holding Only RS,Holding Only
+22,-0.8586149875772588,Holding Only FPS,Holding Only
+23,-0.8062158401809459,Holding Only CS,Holding Only
+24,-1.2690104769892316,PreWash Only,PreWash Only
+25,-1.2789011447234622,PreWash Only PHS4D,PreWash Only
+26,-1.5749030915860167,PreWash Only PHS4H,PreWash Only
+27,-1.7925892478712466,PreWash Only PHS Int,PreWash Only
+28,-1.4143554419134978,PreWash Only HS,PreWash Only
+29,-1.429925041374808,PreWash Only RS,PreWash Only
+30,-1.283979132747611,PreWash Only FPS,PreWash Only
+31,-1.268786089691391,PreWash Only CS,PreWash Only
+32,0.015250638896354179,Precooling Only,Precooling Only
+33,-0.0012655996036998603,Precooling Only PHS4D,Precooling Only
+34,-0.3137735515697143,Precooling Only PHS4H,Precooling Only
+35,-0.6500101809262367,Precooling Only PHS Int,Precooling Only
+36,-0.21822958768065637,Precooling Only HS,Precooling Only
+37,-0.3169454866847921,Precooling Only RS,Precooling Only
+38,-0.3111211710096709,Precooling Only FPS,Precooling Only
+39,0.015011790829429642,Precooling Only CS,Precooling Only
+40,-0.05368493033233885,Sanitation Only,Sanitation Only
+41,-0.0681829102861998,Sanitation Only PHS4D,Sanitation Only
+42,-0.3588737174073098,Sanitation Only PHS4H,Sanitation Only
+43,-0.569350381223482,Sanitation Only PHS Int,Sanitation Only
+44,-0.20277143721606605,Sanitation Only HS,Sanitation Only
+45,-0.20220333556342882,Sanitation Only RS,Sanitation Only
+46,-0.32357831708348667,Sanitation Only FPS,Sanitation Only
+47,-0.05383368854499324,Sanitation Only CS,Sanitation Only
+48,-3.415434311122203,Baseline  AI,Baseline  AI
+49,-3.481206224608763,Baseline  AI PHS4D,Baseline  AI
+50,-3.466524449662285,Baseline  AI PHS4H,Baseline  AI
+51,-3.570815270549875,Baseline  AI PHS Int,Baseline  AI
+52,-3.445774574912605,Baseline  AI HS,Baseline  AI
+53,-3.484788226831311,Baseline  AI RS,Baseline  AI
+54,-3.422841118952609,Baseline  AI FPS,Baseline  AI
+55,-3.407661179276673,Baseline  AI CS,Baseline  AI
