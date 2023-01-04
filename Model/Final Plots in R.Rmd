@@ -251,10 +251,10 @@ FSdf$System<-factor(FSdf$System, levels=c("Baseline No-Intervention", "Baseline 
 hline_data <- data.frame(y = c(0,-3.416,-2.5970,-3.412,-2.1759,-1.3206,-3.373), 
 System = factor(c("Baseline No-Intervention", "Baseline All-Intervention","No Holding", "No Precooling", "No Prewash", "No Washing", "No Sanitation" ), levels =c("Baseline No-Intervention", "Baseline All-Intervention","No Holding", "No Precooling", "No Prewash", "No Washing", "No Sanitation" ) ), stringsAsFactors = FALSE)
 
-hline_data2 <- data.frame(y = c(0),Baseline_System = factor(c("Baseline")), 
+hline_data2 <- data.frame(y = c(-3.416),Baseline_System = factor(c("Baseline")), 
                          stringsAsFactors = FALSE)
 
-FSdf <- FSdf %>% mutate(ints3 = rep(c(0,-3.41,-0.805564771,0.015250639
+FSdf <- FSdf %>% mutate(ints3 = rep(c(0,-3.416,-0.805564771,0.015250639
 ,-1.250976121,-0.012333977,
 -1.320045958
 ), each =8))
@@ -268,7 +268,7 @@ ggplot(data= FSdf, aes(x = fct_reorder(Name, abs(FS)), y = FS, fill = System))+
   xlab("Scenario or Intervention")+
   geom_hline(data = hline_data, aes(yintercept = y, linetype = System),size =1)+
   #geom_hline(data = hline_data2, aes(yintercept = y, linetype = Baseline_System),size =2, color = "red")+
-  geom_hline(aes(yintercept = 0),size =1, color = "red", alpha = 0.5)+
+  geom_hline(aes(yintercept = -3.416),size =1, color = "red", alpha = 0.5)+
   theme_bw()
   #theme(text = element_text(size=16), axis.text = element_text(size = 16))+
   #theme(legend.text=element_text(size=20),legend.title=element_text(size=20))
