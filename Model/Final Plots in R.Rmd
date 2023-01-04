@@ -13,10 +13,11 @@ library(ggplot2)
 library(scales)
 library(forcats)
 
-setwd("C:/Users/gareyes3/Box/CPS Project- Farm to Facility/Papers/CSV Data/Review 2")
+
+#setwd("C:/Users/gareyes3/Box/CPS Project- Farm to Facility/Papers/CSV Data/Review 2")
 #setwd("C:/Users/reyes/Box Sync/CPS Project- Farm to Facility/Papers/CSV Data")
 #setwd("C:/Users/gareyes3/Box/CPS Project- Farm to Facility/Papers/CSV Data")
-#setwd("C:/Users/Gustavo Reyes/Box/CPS Project- Farm to Facility/Papers/CSV Data/Review 2")
+setwd("C:/Users/Gustavo Reyes/Box/CPS Project- Farm to Facility/Papers/CSV Data/Review 2")
 ```
 
 Contamination progression around the system.
