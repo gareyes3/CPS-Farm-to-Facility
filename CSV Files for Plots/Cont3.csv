@@ -1,0 +1,50 @@
+"","X1..Cluster.variable","X1..Cluster.Process","X1..Cluster.Cont.Scenario","X1..Cluster.mean","X1..Cluster.q5","X1..Cluster.q95"
+"1","Before PHS4d","No Intervention","1% Cluster",13097.7005,588,70371.3499999999
+"2","Before PHS4d","No Holding","1% Cluster",13026.2758,587,69865.6499999999
+"3","Before PHS4d","No Precooling","1% Cluster",17443.0068,579,78183.85
+"4","Before PHS4d","No Sanitation","1% Cluster",17481.958,554.8,78000.7
+"5","Before PHS4d","No Prewash","1% Cluster",17443.0068,579,78183.85
+"6","Before PHS4d","No Washing","1% Cluster",17395.9064,569.95,78086.0499999999
+"7","Before PHS4d","All Intervention","1% Cluster",17458.3567,576,77998.6499999998
+"8","Before PHS4h","No Intervention","1% Cluster",3417.0458,0,18612.55
+"9","Before PHS4h","No Holding","1% Cluster",3398.2441,0,19040.45
+"10","Before PHS4h","No Precooling","1% Cluster",497.7679,0,2530.05
+"11","Before PHS4h","No Sanitation","1% Cluster",496.922,0,2506.44999999999
+"12","Before PHS4h","No Prewash","1% Cluster",497.7679,0,2530.05
+"13","Before PHS4h","No Washing","1% Cluster",497.7033,0,2558.34999999999
+"14","Before PHS4h","All Intervention","1% Cluster",501.375,0,2551
+"15","Before PHS Int","No Intervention","1% Cluster",2685.9965,0,14854.8499999999
+"16","Before PHS Int","No Holding","1% Cluster",2661.8546,0,14915.4999999999
+"17","Before PHS Int","No Precooling","1% Cluster",404.0131,0,2051.05
+"18","Before PHS Int","No Sanitation","1% Cluster",403.2486,0,2040.05
+"19","Before PHS Int","No Prewash","1% Cluster",404.0131,0,2051.05
+"20","Before PHS Int","No Washing","1% Cluster",403.6608,0,2082.1
+"21","Before PHS Int","All Intervention","1% Cluster",406.5395,0,2073.44999999999
+"22","Before HS","No Intervention","1% Cluster",2687.5907,0,14921.2
+"23","Before HS","No Holding","1% Cluster",2662.0763,0,14770.2999999999
+"24","Before HS","No Precooling","1% Cluster",403.7614,0,2037.05
+"25","Before HS","No Sanitation","1% Cluster",403.1967,0,2029.59999999999
+"26","Before HS","No Prewash","1% Cluster",403.7614,0,2037.05
+"27","Before HS","No Washing","1% Cluster",403.5832,0,2073.05
+"28","Before HS","All Intervention","1% Cluster",406.3325,0,2064.49999999999
+"29","Before RS","No Intervention","1% Cluster",3293.5362,0,18170.05
+"30","Before RS","No Holding","1% Cluster",3204.8481,0,17789.75
+"31","Before RS","No Precooling","1% Cluster",496.9292,0,2471.49999999999
+"32","Before RS","No Sanitation","1% Cluster",486.3827,0,2442.59999999999
+"33","Before RS","No Prewash","1% Cluster",483.5492,0,2473
+"34","Before RS","No Washing","1% Cluster",485.4575,0,2477.1
+"35","Before RS","All Intervention","1% Cluster",488.7673,0,2470.15
+"36","Before FPS","No Intervention","1% Cluster",3292.1848,0,18111.15
+"37","Before FPS","No Holding","1% Cluster",8.7846,0,40
+"38","Before FPS","No Precooling","1% Cluster",1.3333,0,7
+"39","Before FPS","No Sanitation","1% Cluster",1.2372,0,6
+"40","Before FPS","No Prewash","1% Cluster",23.3583,0,109
+"41","Before FPS","No Washing","1% Cluster",26.266,0,134.049999999999
+"42","Before FPS","All Intervention","1% Cluster",1.3163,0,7
+"43","Before CS","No Intervention","1% Cluster",1585.0839,0,8469.69999999999
+"44","Before CS","No Holding","1% Cluster",4.0272,0,17
+"45","Before CS","No Precooling","1% Cluster",0.6456,0,4
+"46","Before CS","No Sanitation","1% Cluster",0.5375,0,3
+"47","Before CS","No Prewash","1% Cluster",10.4751,0,49
+"48","Before CS","No Washing","1% Cluster",11.8965,0,57
+"49","Before CS","All Intervention","1% Cluster",0.6077,0,3

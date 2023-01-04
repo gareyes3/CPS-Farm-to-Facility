@@ -1,0 +1,57 @@
+,FS,Name,System
+0,0.0,Baseline NI,Baseline NI
+1,-0.012041740291088116,Baseline NI PHS4D,Baseline NI
+2,-0.16627097282805825,Baseline NI PHS4H,Baseline NI
+3,-0.49066298938866965,Baseline NI PHS Int,Baseline NI
+4,-0.15638968960422403,Baseline NI HS,Baseline NI
+5,-0.1679861572809447,Baseline NI RS,Baseline NI
+6,-0.26461832135806446,Baseline NI FPS,Baseline NI
+7,-4.7441555938678755e-05,Baseline NI CS,Baseline NI
+8,-1.3206108056103014,No Washing,No Washing
+9,-1.3252331079144146,No Washing PHS4D,No Washing
+10,-1.4861005167863666,No Washing PHS4H,No Washing
+11,-1.814133620066643,No Washing PHS Int,No Washing
+12,-1.4617348799079013,No Washing HS,No Washing
+13,-1.492114816192754,No Washing RS,No Washing
+14,-1.3503955977816606,No Washing FPS,No Washing
+15,-1.3262339367004583,No Washing CS,No Washing
+16,-2.5970276324733117,No Holding,No Holding
+17,-2.603461095184697,No Holding PHS4D,No Holding
+18,-2.778881629038485,No Holding PHS4H,No Holding
+19,-3.261826414300305,No Holding PHS Int,No Holding
+20,-2.899360642861834,No Holding HS,No Holding
+21,-2.9355151358283336,No Holding RS,No Holding
+22,-2.5989073923568675,No Holding FPS,No Holding
+23,-2.5960853854441273,No Holding CS,No Holding
+24,-2.1759038196246707,No PreWash,No PreWash
+25,-2.2596271971248116,No PreWash PHS4D,No PreWash
+26,-2.230218725178131,No PreWash PHS4H,No PreWash
+27,-2.3324399132504854,No PreWash PHS Int,No PreWash
+28,-2.2298089123250113,No PreWash HS,No PreWash
+29,-2.2283219351904244,No PreWash RS,No PreWash
+30,-2.1781958121866896,No PreWash FPS,No PreWash
+31,-2.176673338415278,No PreWash CS,No PreWash
+32,-3.41216389473693,No Precooling,No Precooling
+33,-3.5262135137908173,No Precooling PHS4D,No Precooling
+34,-3.504125983827979,No Precooling PHS4H,No Precooling
+35,-3.5437887926839493,No Precooling PHS Int,No Precooling
+36,-3.4773081166870403,No Precooling HS,No Precooling
+37,-3.4826908038236173,No Precooling RS,No Precooling
+38,-3.4491096835231554,No Precooling FPS,No Precooling
+39,-3.4429070120960463,No Precooling CS,No Precooling
+40,-3.373361205241944,No Sanitation,No Sanitation
+41,-3.4610731829462216,No Sanitation PHS4D,No Sanitation
+42,-3.4582284490944093,No Sanitation PHS4H,No Sanitation
+43,-3.528429777917006,No Sanitation PHS Int,No Sanitation
+44,-3.435668603172127,No Sanitation HS,No Sanitation
+45,-3.427300149782164,No Sanitation RS,No Sanitation
+46,-3.4082150948441634,No Sanitation FPS,No Sanitation
+47,-3.380678012175105,No Sanitation CS,No Sanitation
+48,-3.416005974516848,Baseline  AI,Baseline  AI
+49,-3.4697209251646086,Baseline  AI PHS4D,Baseline  AI
+50,-3.455011147587278,Baseline  AI PHS4H,Baseline  AI
+51,-3.5760325035079594,Baseline  AI PHS Int,Baseline  AI
+52,-3.452983188347504,Baseline  AI HS,Baseline  AI
+53,-3.469316742276521,Baseline  AI RS,Baseline  AI
+54,-3.4036762415170148,Baseline  AI FPS,Baseline  AI
+55,-3.4042323164737844,Baseline  AI CS,Baseline  AI

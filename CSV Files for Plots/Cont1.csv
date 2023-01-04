@@ -1,0 +1,50 @@
+"","Random.Uniform.Unclustered.variable","Random.Uniform.Unclustered.Process","Random.Uniform.Unclustered.Cont.Scenario","Random.Uniform.Unclustered.mean","Random.Uniform.Unclustered.q5","Random.Uniform.Unclustered.q95"
+"1","Before PHS4d","No Intervention","Random Uniform Unclustered",13097.7005,588,70371.3499999999
+"2","Before PHS4d","No Holding","Random Uniform Unclustered",13026.2758,587,69865.6499999999
+"3","Before PHS4d","No Precooling","Random Uniform Unclustered",17443.0068,579,78183.85
+"4","Before PHS4d","No Sanitation","Random Uniform Unclustered",17481.958,554.8,78000.7
+"5","Before PHS4d","No Prewash","Random Uniform Unclustered",17443.0068,579,78183.85
+"6","Before PHS4d","No Washing","Random Uniform Unclustered",17395.9064,569.95,78086.0499999999
+"7","Before PHS4d","All Intervention","Random Uniform Unclustered",17458.3567,576,77998.6499999998
+"8","Before PHS4h","No Intervention","Random Uniform Unclustered",3417.0458,0,18612.55
+"9","Before PHS4h","No Holding","Random Uniform Unclustered",3398.2441,0,19040.45
+"10","Before PHS4h","No Precooling","Random Uniform Unclustered",497.7679,0,2530.05
+"11","Before PHS4h","No Sanitation","Random Uniform Unclustered",496.922,0,2506.44999999999
+"12","Before PHS4h","No Prewash","Random Uniform Unclustered",497.7679,0,2530.05
+"13","Before PHS4h","No Washing","Random Uniform Unclustered",497.7033,0,2558.34999999999
+"14","Before PHS4h","All Intervention","Random Uniform Unclustered",501.375,0,2551
+"15","Before PHS Int","No Intervention","Random Uniform Unclustered",2685.9965,0,14854.8499999999
+"16","Before PHS Int","No Holding","Random Uniform Unclustered",2661.8546,0,14915.4999999999
+"17","Before PHS Int","No Precooling","Random Uniform Unclustered",404.0131,0,2051.05
+"18","Before PHS Int","No Sanitation","Random Uniform Unclustered",403.2486,0,2040.05
+"19","Before PHS Int","No Prewash","Random Uniform Unclustered",404.0131,0,2051.05
+"20","Before PHS Int","No Washing","Random Uniform Unclustered",403.6608,0,2082.1
+"21","Before PHS Int","All Intervention","Random Uniform Unclustered",406.5395,0,2073.44999999999
+"22","Before HS","No Intervention","Random Uniform Unclustered",2687.5907,0,14921.2
+"23","Before HS","No Holding","Random Uniform Unclustered",2662.0763,0,14770.2999999999
+"24","Before HS","No Precooling","Random Uniform Unclustered",403.7614,0,2037.05
+"25","Before HS","No Sanitation","Random Uniform Unclustered",403.1967,0,2029.59999999999
+"26","Before HS","No Prewash","Random Uniform Unclustered",403.7614,0,2037.05
+"27","Before HS","No Washing","Random Uniform Unclustered",403.5832,0,2073.05
+"28","Before HS","All Intervention","Random Uniform Unclustered",406.3325,0,2064.49999999999
+"29","Before RS","No Intervention","Random Uniform Unclustered",3291.9137,0,18175.1
+"30","Before RS","No Holding","Random Uniform Unclustered",3205.4396,0,17873.15
+"31","Before RS","No Precooling","Random Uniform Unclustered",497.2487,0,2500.3
+"32","Before RS","No Sanitation","Random Uniform Unclustered",486.7874,0,2460.2
+"33","Before RS","No Prewash","Random Uniform Unclustered",483.9222,0,2455.39999999999
+"34","Before RS","No Washing","Random Uniform Unclustered",485.6969,0,2495.59999999999
+"35","Before RS","All Intervention","Random Uniform Unclustered",488.5949,0,2476.05
+"36","Before FPS","No Intervention","Random Uniform Unclustered",3290.2196,0,18067.8
+"37","Before FPS","No Holding","Random Uniform Unclustered",8.8864,0,41
+"38","Before FPS","No Precooling","Random Uniform Unclustered",1.3145,0,7
+"39","Before FPS","No Sanitation","Random Uniform Unclustered",1.2832,0,6
+"40","Before FPS","No Prewash","Random Uniform Unclustered",23.4374,0,110
+"41","Before FPS","No Washing","Random Uniform Unclustered",26.3963,0,138.049999999999
+"42","Before FPS","All Intervention","Random Uniform Unclustered",1.3261,0,7
+"43","Before CS","No Intervention","Random Uniform Unclustered",1583.7745,0,8498.84999999997
+"44","Before CS","No Holding","Random Uniform Unclustered",4.0477,0,18
+"45","Before CS","No Precooling","Random Uniform Unclustered",0.6436,0,4
+"46","Before CS","No Sanitation","Random Uniform Unclustered",0.5586,0,3
+"47","Before CS","No Prewash","Random Uniform Unclustered",10.4974,0,49
+"48","Before CS","No Washing","Random Uniform Unclustered",11.8482,0,58
+"49","Before CS","All Intervention","Random Uniform Unclustered",0.6139,0,3
