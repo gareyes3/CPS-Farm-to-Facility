@@ -14,10 +14,10 @@ library(scales)
 library(forcats)
 
 
-#setwd("C:/Users/gareyes3/Box/CPS Project- Farm to Facility/Papers/CSV Data/Review 2")
+setwd("C:/Users/gareyes3/Box/CPS Project- Farm to Facility/Papers/CSV Data/Review 2")
 #setwd("C:/Users/reyes/Box Sync/CPS Project- Farm to Facility/Papers/CSV Data")
 #setwd("C:/Users/gareyes3/Box/CPS Project- Farm to Facility/Papers/CSV Data")
-setwd("C:/Users/Gustavo Reyes/Box/CPS Project- Farm to Facility/Papers/CSV Data/Review 2")
+#setwd("C:/Users/Gustavo Reyes/Box/CPS Project- Farm to Facility/Papers/CSV Data/Review 2")
 ```
 
 Contamination progression around the system.
@@ -160,7 +160,7 @@ ggsave("Contamination_Progression.jpeg", width = 45, height = 25, units = "cm", 
 ## Factor Sensitivity plot
 
 ```{r}
-FSdf<-read_csv("FSdf-Final.csv")
+FSdf<-read_csv("FSdf-Final-1-5.csv")
 ```
 
 ```{r}
@@ -249,7 +249,7 @@ FSdf$System <-str_replace("No PreWash", string = FSdf$System, replacement = "No 
 FSdf$System<-factor(FSdf$System, levels=c("Baseline No-Intervention", "Baseline All-Intervention","No Holding", "No Precooling", "No Prewash", "No Washing", "No Sanitation" ))
 
 
-hline_data <- data.frame(y = c(0,-3.416,-2.5970,-3.412,-2.1759,-1.3206,-3.373), 
+hline_data <- data.frame(y = c(0,-3.416,-2.5970,-3.412,-2.1759,-2.12,-3.373), 
 System = factor(c("Baseline No-Intervention", "Baseline All-Intervention","No Holding", "No Precooling", "No Prewash", "No Washing", "No Sanitation" ), levels =c("Baseline No-Intervention", "Baseline All-Intervention","No Holding", "No Precooling", "No Prewash", "No Washing", "No Sanitation" ) ), stringsAsFactors = FALSE)
 
 hline_data2 <- data.frame(y = c(-3.416),Baseline_System = factor(c("Baseline")), 
