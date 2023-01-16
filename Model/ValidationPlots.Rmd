@@ -33,18 +33,18 @@ CPS<-CPS_1 %>%
 
 ggplot(data = GPS_2) +
     geom_ribbon(aes(x = Grabs, ymin = q2.5, ymax = q97.5 ), alpha = 0.3)+
-    geom_line(aes(x =Grabs , y = mean_2 )) +
-    geom_point(aes(x =Grabs , y = mean_2))+
+    geom_line(aes(x =Grabs , y = mean_2 ) ,size = 0.3) +
+    geom_point(aes(x =Grabs , y = mean_2), size = 1)+
     labs(x = "Number of 3g Sample Point", y = "Probability of acceptance (2.5th - 97.5th percentile)")+
     theme_bw()+
-    geom_pointrange(data =CPS,  aes(x=param,y = mean, ymin=q2.5, ymax=q97.5) ,colour="royalblue1", alpha=1, size=0.5, shape = 15)+
+    geom_pointrange(data =CPS,  aes(x=param,y = mean, ymin=q2.5, ymax=q97.5) ,colour="royalblue1", alpha=1, size=0.3, shape = 15)+
   ggtitle("Point Source Contamination: Model Validation") +
   theme(plot.title = element_text(hjust = 0.5))+
-  theme(text = element_text(size = 15)) 
+  theme(text = element_text(size = 7)) 
     #geom_point(data =CPS,  aes(x=param, y = mean), color = "blue", alpha=0.7, shape = 15)
 
-ggsave("Figure S3 - Validation PS.tiff", width = 30, height = 16, units = "cm", dpi = 600)
-ggsave("Figure S3 - Validation PS.jpeg", width = 30, height = 16, units = "cm", dpi = 600)
+ggsave("Figure S3 - Validation PS.tiff", width = 3.4, height = 2.5, units = "in", dpi = 600)
+ggsave("Figure S3 - Validation PS.jpeg", width = 3.4, height = 2.5, units = "in", dpi = 600)
 
 
 ```
@@ -77,17 +77,19 @@ GUN_2<-Gustavo_UN %>%
 
 ggplot(data = GUN_2) +
     geom_ribbon(aes(x = Grabs, ymin = q2.5, ymax = q97.5, fill =Cont_Level  ),alpha = 0.3)+
-    geom_line(aes(x =Grabs , y = mean_2, color = Cont_Level ),size = 0.8) +
-    geom_point(aes(x =Grabs , y = mean_2,color = Cont_Level), size = 2.5)+
-    labs(x = "Number of 3g Sample Point", y = "Probability of acceptance (2.5th - 97.5th percentile)")+
+    geom_line(aes(x =Grabs , y = mean_2, color = Cont_Level ),size = 0.3) +
+    geom_point(aes(x =Grabs , y = mean_2,color = Cont_Level), size = 1)+
+    labs(x = "Number of 3g Sample Point", y = "Probability of acceptance (2.5th - 97.5th percentile)", fill = "Contamination \nLevels", color ="Contamination \nLevels" )+
     theme_bw()+
-  geom_pointrange(data =CPSU,  aes(x=param,y = mean, ymin=q2.5, ymax=q97.5 ) ,color ="royalblue1"  , alpha=0.8, size=0.5, shape = 15)+
+  geom_pointrange(data =CPSU,  aes(x=param,y = mean, ymin=q2.5, ymax=q97.5 ) ,color ="royalblue1"  , alpha=0.8, size=0.3, shape = 15)+
   ggtitle("Uniform Contamination: Model Validation") +
   theme(plot.title = element_text(hjust = 0.5))+
-  theme(text = element_text(size = 15))
+  theme(text = element_text(size = 7),legend.title=element_text(size=7))+
+  theme(legend.key.size = unit(0.6,"line"))
+  
 
-ggsave("Figure S3 - Validation Unif.tiff", width = 30, height = 16, units = "cm", dpi = 600)
-ggsave("Figure S3 - Validation Unif.jpeg", width = 30, height = 16, units = "cm", dpi = 600)
+ggsave("Figure S3 - Validation Unif.tiff", width = 3.4, height = 2.5, units = "in", dpi = 600)
+ggsave("Figure S3 - Validation Unif.jpeg", width = 3.4, height = 2.5, units = "in", dpi = 600)
 
 ```
 

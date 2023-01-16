@@ -62,13 +62,18 @@ ggsave("Powers2.tiff", width = 35, height = 22, units = "cm", dpi = 600)
 Powers_df %>% 
   ggplot(aes(x = Type, y = value, group = variable, fill = variable))+
   #geom_col(position = position_dodge())+
-  geom_line( position = position_dodge(width = 0) ,size = 1, alpha = 0.5, aes(color = variable))+
-  geom_point(size = 3, position = position_dodge(width = 0),shape = 21) +
+  geom_line( position = position_dodge(width = 0) ,size = 0.7, alpha = 0.5, aes(color = variable))+
+  geom_point(size = 2, position = position_dodge(width = 0),shape = 21) +
   facet_wrap(~ContS)+
   theme_bw()+
-  labs(y = "Sampling Plan Power", x = "Sampling Stage", fill = "Process System", color =  "Process System")
-ggsave("Figure 4 - Powers.tiff", width = 30, height = 16, units = "cm", dpi = 600)
-ggsave("Figure 4 - Powers.jpeg", width = 30, height = 16, units = "cm", dpi = 600)
+  scale_y_continuous(labels = scales::percent)+
+  labs(y = "Sampling Plan Power", x = "Sampling Stage", fill = "Process System", color =  "Process System")+
+  theme(text = element_text(size=7))+
+  theme(legend.key.size = unit(0.8,"line"))+
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
+
+ggsave("Figure 4 - Powers.tiff", width = 6.8, height = 3.7, units = "in", dpi = 600)
+ggsave("Figure 4 - Powers.jpeg", width = 6.8, height = 3.7, units = "in", dpi = 600)
 
 
 ```
@@ -138,8 +143,8 @@ Binded_all$Type<-factor(Binded_all$Type, levels=c("Baseline No-Intervention", "B
 
 
 ggplot(data= Binded_all, aes(x= variable,y = mean, group= Type, color = Type, linetype=Type, fill = Type))+
-  geom_line(size = 0.75)+
-  geom_ribbon(aes(ymin = l95, ymax = h95), alpha = 0.2)+
+  geom_line(size = 0.3)+
+  geom_ribbon(aes(ymin = l95, ymax = h95), alpha = 0.2, size = 0.3)+
    scale_y_continuous(trans='log10',
                       labels = trans_format("log10", math_format(10^.x)))+
   labs(y= "Total Adulterant Cells in System", x="Process Stage")+
@@ -148,10 +153,12 @@ ggplot(data= Binded_all, aes(x= variable,y = mean, group= Type, color = Type, li
   labs(color = "Interventions", fill = "Interventions", linetype = "Interventions")+
   theme_bw()+
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))+
-  theme(text = element_text(size=24))
+  theme(text = element_text(size=7))+
+  theme(legend.key.size = unit(1,"line"))
 
-ggsave("Contamination_Progression.tiff", width = 45, height = 25, units = "cm", dpi = 600)
-ggsave("Contamination_Progression.jpeg", width = 45, height = 25, units = "cm", dpi = 600)
+
+ggsave("Figure 3-Contamination_Progression.tiff", width = 6.8, height = 3.7, units = "in", dpi = 600)
+ggsave("Figure 3-Contamination_Progression.jpeg", width = 6.8, height = 3.7, units = "in", dpi = 600)
 
 
 ```
@@ -266,16 +273,17 @@ ggplot(data= FSdf, aes(x = fct_reorder(Name, abs(FS)), y = FS, fill = System))+
   coord_flip()+
   facet_wrap(~System,scales = "free_y")  +
   ylab("Factor Sensitivity Index")+
-  xlab("Scenario or Intervention")+
-  geom_hline(data = hline_data, aes(yintercept = y, linetype = System),size =1)+
+  xlab("Processing system + Sampling Plan")+
+  geom_hline(data = hline_data, aes(yintercept = y, linetype = System),size =0.7)+
   #geom_hline(data = hline_data2, aes(yintercept = y, linetype = Baseline_System),size =2, color = "red")+
-  geom_hline(aes(yintercept = -3.416),size =1, color = "red", alpha = 0.5)+
-  theme_bw()
-  #theme(text = element_text(size=16), axis.text = element_text(size = 16))+
+  geom_hline(aes(yintercept = -3.416),size =0.7, color = "red", alpha = 0.5)+
+  theme_bw()+
+  theme(text = element_text(size=6.5), axis.text = element_text(size = 6))+
+  theme(legend.key.size = unit(0.8,"line"))
   #theme(legend.text=element_text(size=20),legend.title=element_text(size=20))
   
-  ggsave("FS-R2.jpeg", width = 30, height = 16, units = "cm", dpi = 600)
-   ggsave("FS-R2.tiff", width = 30, height = 16, units = "cm", dpi = 600)
+  ggsave("Figure 6- Factor Sensitivity.jpeg", width = 6.8, height = 3.7, units = "in", dpi = 600)
+  ggsave("Figure 6- Factor Sensitivity.tiff", width = 6.8, height = 3.7, units = "in", dpi = 600)
 
 pfs
 
@@ -353,17 +361,18 @@ ggsave("Cont_Sampling Point.tiff", width = 40, height = 30, units = "cm", dpi = 
 ggsave("Cont_Sampling Point.jpeg", width = 40, height = 30, units = "cm", dpi = 600)
 
 ggplot(data = Cont_Samp_Point_Binded, aes(x = Process, y =value, fill = `Cont Scenario`))+
-  geom_boxplot()+
+  geom_boxplot(size = 0.2,outlier.size=0.2)+
    scale_y_continuous(trans='log10',
                       labels = trans_format("log10", math_format(10^.x)))+
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))+
-  theme(text = element_text(size=24), legend.text=element_text(size=18),legend.title=element_text(size=22))+
+  theme(text = element_text(size=7))+
+  theme(legend.key.size = unit(0.8,"line"))+
   labs(x= "Sampling Step", y = "Total Adulterant Cells in System")+
   facet_wrap(~variable)+
   scale_fill_discrete(name = "Contamination Scenario")
 
-ggsave("Figure S2 - Contamination Samp Points.tiff", width = 40, height = 30, units = "cm", dpi = 600)
-ggsave("Figure S2 - Contamination Samp Points.jpeg", width = 40, height = 30, units = "cm", dpi = 600)
+ggsave("Figure S2 - Contamination Samp Points.tiff", width = 6.8, height = 4.5, units = "in", dpi = 600)
+ggsave("Figure S2 - Contamination Samp Points.jpeg", width = 6.8, height = 4.5, units = "in", dpi = 600)
 
 
 Conts_At_SP<- Cont_Samp_Point_Binded %>% 
@@ -452,7 +461,8 @@ ggplot(data = Exposure_Chart,aes(x = factor(Sampling_Plan, levels =levels_1 ) ,y
   geom_hline(aes(yintercept = 0.7794872, linetype = "Maximum effect AI system"), size = 2)+
   scale_linetype_manual(name ="", values = c('dotted','dashed')) 
 
-ggsave("Relative Prevalence.tiff", width = 40, height = 28, units = "cm", dpi = 600)
+ggsave("Relative Prevalence.tiff", width = 6.8, height = 4.5, units = "in",  dpi = 600)
+
   
   
 #Cont 
@@ -503,24 +513,22 @@ Exposure_Chart$Baseline_Scenario<-factor(Exposure_Chart$Baseline_Scenario, level
 #Exposure.
 ggplot(data = Exposure_Chart,aes(x = factor(Sampling_Plan, levels =levels_1 ) ,y = MeanComparison, group = Baseline_Scenario,fill = Baseline_Scenario))+
   theme_bw()+
-  geom_line(aes(color =Baseline_Scenario), size  =1, alpha = 0.5)+
-  geom_point(size = 3, position = position_dodge(width = 0),shape = 21, alpha = 1)+
+  geom_line(aes(color =Baseline_Scenario), size  =0.7, alpha = 0.5)+
+  geom_point(size = 2, position = position_dodge(width = 0),shape = 21, alpha = 1)+
   #theme(text = element_text(size=26), axis.text = element_text(size = 24))+
   #theme(legend.text=element_text(size=16),legend.title=element_text(size=20))+
   #geom_col(data = Exposure_Chart, aes(x =factor(Sampling_Plan, levels =levels_2), y = log10cont))+
   facet_wrap(~Cont_Spread)+
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))+
   labs(y= "Relative Efficacy: Endpoint TAC", x = "Sampling Plan", color= "Process System", fill = "Process System")+
-  scale_y_continuous(labels = percent)
-  #geom_line(aes(group = Sampling_Plan),color="black",alpha = 0.7 ,arrow = arrow(length=unit(0.3,"cm"), ends="last", type #= "closed"))+
-  #ggtitle("Relative TAC Exposure")+
-  #geom_hline(aes(yintercept = 0.2258976, linetype = "Maximum effect NI system"), size = 1, alpha = 0.5)+
-  #geom_hline(aes(yintercept = 0.6890373, linetype = "Maximum effect AI system"), size = 1,alpha = 0.5)+
-  #scale_linetype_manual(name ="", values = c('dotted','dashed')) 
+  scale_y_continuous(labels = percent)+
+  theme(text = element_text(size=7))+
+  theme(legend.key.size = unit(0.8,"line"))
 
 
-ggsave("Figure 5 - Efficacy.tiff", width = 30, height = 16, units = "cm", dpi = 600)
-ggsave("Figure 5 - Efficacy.jpeg", width = 30, height = 16, units = "cm", dpi = 600)
+ggsave("Figure 5 - Efficacy.tiff", width = 6.8, height = 3.7, units = "in", dpi = 600)
+ggsave("Figure 5 - Efficacy.jpeg", width = 6.8, height = 3.7, units = "in", dpi = 600)
+
 
 
 ggplot(data = Exposure_Chart,aes(x = factor(Sampling_Plan, levels =levels_1 ) ,y = MeanComparison, group = Cont_Spread,fill = Cont_Spread))+
