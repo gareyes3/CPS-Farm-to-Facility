@@ -30,12 +30,15 @@ Used to get the efficacy of each individual intervention.
 ```{r}
 Powers_df<-read_csv("PowersR2.csv")
 
+Powers_df$ContS<-str_replace("Random Uniform Unclustered", string = Powers_df$ContS, replacement = "Random Uniform (Widespread 100% Cluster)")
+
+
 Powers_df<- Powers_df %>%
   filter(Type != "None")
 
 Powers_df$Type<-factor(Powers_df$Type, levels = c("PHS4D" ,"PHS4H", "PHSInt", "HS", "RS", "FPS", "CS"))
 Powers_df$variable<-factor(Powers_df$variable, levels = c("No Intervention","All Intervention","No Holding","No Precooling", "No Prewash","No Washing","No Sanitation" ))
-Powers_df$ContS<-factor(Powers_df$ContS, levels = c("Random Uniform Unclustered", "10% Cluster", "1% Cluster"))
+Powers_df$ContS<-factor(Powers_df$ContS, levels = c("Random Uniform (Widespread 100% Cluster)", "10% Cluster", "1% Cluster"))
 
 Powers_df %>% 
   ggplot(aes(x = Type, y = value, group = variable, fill = variable))+
@@ -96,7 +99,7 @@ margin_calc<-function(x){
 NI_Summ<-NI_1_ProgInt %>% 
   group_by(Type,variable ) %>% 
   summarize(mean= mean(value),h95 =mean + margin_calc(value),l95 =mean - margin_calc(value)) %>% 
-  mutate(ContScen = "Random Contamination") %>% 
+  mutate(ContScen = "Random Uniform (Widespread 100% Cluster)") %>% 
   drop_na()
 #10%
 NI_Summ_3<-NI_3_ProgInt %>% 
@@ -137,7 +140,7 @@ order_progression2<-str_replace("Pre-Harvest", string = order_progression, repla
 
 Binded_all$variable<-factor(Binded_all$variable, levels=order_progression2)
 Binded_all$ContScen<-str_replace("Random Contamination", string = Binded_all$ContScen, replacement = "Random unclustered")
-Binded_all$ContScen<-factor(Binded_all$ContScen, levels=c("Random unclustered","10% Clustered Contamination","1% Clustered Contamination"))
+Binded_all$ContScen<-factor(Binded_all$ContScen, levels=c("Random Uniform (Widespread 100% Cluster)","10% Clustered Contamination","1% Clustered Contamination"))
 
 Binded_all$Type<-factor(Binded_all$Type, levels=c("Baseline No-Intervention", "Baseline All-Intervention","Preharvest Holding", "Precooling", "Prewash", "Washing", "Sanitation" ))
 
@@ -340,9 +343,11 @@ ggsave("Cont_Sampling-Final.tiff", width = 40, height = 30, units = "cm", dpi = 
 #ALL Binded: this used to compared all other interventions Review 2
 Cont_Samp_Point_Binded<-read_csv("ContSampPointR2.csv")
 
+Cont_Samp_Point_Binded$`Cont Scenario`<-str_replace("Random Uniform Unclustered", string = Cont_Samp_Point_Binded$`Cont Scenario`, replacement = "Random Uniform (Widespread 100% Cluster)")
+
 Order_ConS<-unique(Cont_Samp_Point_Binded$variable)
 Cont_Samp_Point_Binded$variable<-factor(Cont_Samp_Point_Binded$variable, levels=Order_ConS)
-Cont_Samp_Point_Binded$`Cont Scenario`<-factor(Cont_Samp_Point_Binded$`Cont Scenario`, levels = c("Random Uniform Unclustered", "10% Cluster", "1% Cluster"))
+Cont_Samp_Point_Binded$`Cont Scenario`<-factor(Cont_Samp_Point_Binded$`Cont Scenario`, levels = c("Random Uniform (Widespread 100% Cluster)", "10% Cluster", "1% Cluster"))
 Cont_Samp_Point_Binded$Process<-factor(Cont_Samp_Point_Binded$Process, levels = c("No Intervention","No Holding","No Precooling","No Sanitation", "No Prewash","No Washing" , "All Intervention"))
 
 
@@ -404,11 +409,13 @@ write.csv(X[3],file ="Cont3.csv" )
 Exposure_Chart<-read_csv("Exposure_Chart_df-Final.csv")
 Exposure_Chart<-Exposure_Chart[-1]
 
+Exposure_Chart$Cont_Spread<-str_replace("Random", string = Exposure_Chart$Cont_Spread, replacement = "Random Uniform (Widespread 100% Cluster)")
+
 unique(Exposure_Chart$Cont_Spread)
 levels_1<-c("Baseline", "PHS4D", "PHS4H", "PHSInt", "HTrad", "RSTrad", "FPSTrad", "CS")
 levels_2<-c("Baseline", "CS", "PHS4D", "HTrad", "RSTrad","PHS4H", "FPSTrad", "PHSInt")
 
-Exposure_Chart$Cont_Spread<-factor(Exposure_Chart$Cont_Spread, levels = c("Random", "10% Cluster", "1% Cluster"))
+Exposure_Chart$Cont_Spread<-factor(Exposure_Chart$Cont_Spread, levels = c("Random Uniform (Widespread 100% Cluster)", "10% Cluster", "1% Cluster"))
 
 
 Exposure_Chart<-Exposure_Chart %>% 
@@ -498,7 +505,9 @@ unique(Exposure_Chart$Cont_Spread)
 levels_1<-c("Baseline", "PHS4D", "PHS4H", "PHSInt", "HTrad", "RSTrad", "FPSTrad", "CS")
 levels_2<-c("Baseline", "CS", "PHS4D", "HTrad", "RSTrad","PHS4H", "FPSTrad", "PHSInt")
 
-Exposure_Chart$Cont_Spread<-factor(Exposure_Chart$Cont_Spread, levels = c("Random Uniform Unclustered", "10% Cluster", "1% Cluster"))
+Exposure_Chart$Cont_Spread<-str_replace("Random Uniform Unclustered", string = Exposure_Chart$Cont_Spread, replacement = "Random Uniform (Widespread 100% Cluster)")
+
+Exposure_Chart$Cont_Spread<-factor(Exposure_Chart$Cont_Spread, levels = c("Random Uniform (Widespread 100% Cluster)", "10% Cluster", "1% Cluster"))
 
 
 Exposure_Chart<-Exposure_Chart %>% 
