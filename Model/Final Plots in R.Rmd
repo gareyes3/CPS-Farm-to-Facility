@@ -14,8 +14,8 @@ library(scales)
 library(forcats)
 
 
-setwd("C:/Users/gareyes3/Box/CPS Project- Farm to Facility/Papers/CSV Data/Review 2")
-#setwd("C:/Users/reyes/Box Sync/CPS Project- Farm to Facility/Papers/CSV Data")
+#setwd("C:/Users/gareyes3/Box/CPS Project- Farm to Facility/Papers/CSV Data/Review 2")
+setwd("C:/Users/reyes/Box Sync/CPS Project- Farm to Facility/Papers/CSV Data/Review 2")
 #setwd("C:/Users/gareyes3/Box/CPS Project- Farm to Facility/Papers/CSV Data")
 #setwd("C:/Users/Gustavo Reyes/Box/CPS Project- Farm to Facility/Papers/CSV Data/Review 2")
 ```
@@ -75,8 +75,8 @@ Powers_df %>%
   theme(legend.key.size = unit(0.8,"line"))+
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
 
-ggsave("Figure 4 - Powers.tiff", width = 6.8, height = 3.7, units = "in", dpi = 600)
-ggsave("Figure 4 - Powers.jpeg", width = 6.8, height = 3.7, units = "in", dpi = 600)
+ggsave("Figure 4 - Powers.tiff", width = 6.8, height = 3.7, units = "in", dpi = 300)
+ggsave("Figure 4 - Powers.jpeg", width = 6.8, height = 3.7, units = "in", dpi = 300)
 
 
 ```
@@ -160,8 +160,8 @@ ggplot(data= Binded_all, aes(x= variable,y = mean, group= Type, color = Type, li
   theme(legend.key.size = unit(1,"line"))
 
 
-ggsave("Figure 3-Contamination_Progression.tiff", width = 6.8, height = 3.7, units = "in", dpi = 600)
-ggsave("Figure 3-Contamination_Progression.jpeg", width = 6.8, height = 3.7, units = "in", dpi = 600)
+ggsave("Figure 3-Contamination_Progression.tiff", width = 6.8, height = 3.7, units = "in", dpi = 300)
+ggsave("Figure 3-Contamination_Progression.jpeg", width = 6.8, height = 3.7, units = "in", dpi = 300)
 
 
 ```
@@ -248,7 +248,7 @@ pfs = ggplot(data= FSdf, aes(x = fct_reorder(Name, abs(FS)), y = FS, fill = Syst
     scale_linetype_manual(values = c("No Intervention" = "dotted", "All Intervention" = "dashed"), 
                         name = "")
 
-  ggsave("FS-Final.png", width = 40, height = 30, units = "cm", dpi = 600)
+  ggsave("FS-Final.png", width = 40, height = 30, units = "cm", dpi = 300)
   
   
 ##NEW###
@@ -285,8 +285,8 @@ ggplot(data= FSdf, aes(x = fct_reorder(Name, abs(FS)), y = FS, fill = System))+
   theme(legend.key.size = unit(0.8,"line"))
   #theme(legend.text=element_text(size=20),legend.title=element_text(size=20))
   
-  ggsave("Figure 6- Factor Sensitivity.jpeg", width = 6.8, height = 3.7, units = "in", dpi = 600)
-  ggsave("Figure 6- Factor Sensitivity.tiff", width = 6.8, height = 3.7, units = "in", dpi = 600)
+  ggsave("Figure 6- Factor Sensitivity.jpeg", width = 6.8, height = 3.7, units = "in", dpi = 300)
+  ggsave("Figure 6- Factor Sensitivity.tiff", width = 6.8, height = 3.7, units = "in", dpi = 300)
 
 pfs
 
@@ -376,8 +376,8 @@ ggplot(data = Cont_Samp_Point_Binded, aes(x = Process, y =value, fill = `Cont Sc
   facet_wrap(~variable)+
   scale_fill_discrete(name = "Contamination Scenario")
 
-ggsave("Figure S2 - Contamination Samp Points.tiff", width = 6.8, height = 4.5, units = "in", dpi = 600)
-ggsave("Figure S2 - Contamination Samp Points.jpeg", width = 6.8, height = 4.5, units = "in", dpi = 600)
+ggsave("Figure S2 - Contamination Samp Points.tiff", width = 6.8, height = 4.5, units = "in", dpi = 300)
+ggsave("Figure S2 - Contamination Samp Points.jpeg", width = 6.8, height = 4.5, units = "in", dpi = 300)
 
 
 Conts_At_SP<- Cont_Samp_Point_Binded %>% 
@@ -468,7 +468,7 @@ ggplot(data = Exposure_Chart,aes(x = factor(Sampling_Plan, levels =levels_1 ) ,y
   geom_hline(aes(yintercept = 0.7794872, linetype = "Maximum effect AI system"), size = 2)+
   scale_linetype_manual(name ="", values = c('dotted','dashed')) 
 
-ggsave("Relative Prevalence.tiff", width = 6.8, height = 4.5, units = "in",  dpi = 600)
+ggsave("Relative Prevalence.tiff", width = 6.8, height = 4.5, units = "in",  dpi = 300)
 
   
   
@@ -535,8 +535,8 @@ ggplot(data = Exposure_Chart,aes(x = factor(Sampling_Plan, levels =levels_1 ) ,y
   theme(legend.key.size = unit(0.8,"line"))
 
 
-ggsave("Figure 5 - Efficacy.tiff", width = 6.8, height = 3.7, units = "in", dpi = 600)
-ggsave("Figure 5 - Efficacy.jpeg", width = 6.8, height = 3.7, units = "in", dpi = 600)
+ggsave("Figure 5 - Efficacy.tiff", width = 6.8, height = 3.7, units = "in", dpi = 300)
+ggsave("Figure 5 - Efficacy.jpeg", width = 6.8, height = 3.7, units = "in", dpi = 300)
 
 
 
