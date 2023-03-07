@@ -1,14 +1,12 @@
-# Share-Table-QMRA
-	This is a Share Table QMRA created by the Stasiewicz Lab at the University of Illinois Urbana-Champaign. 
+# Farm to Facility Process Model
+	This is a Process model for leafy greens created by the Stasiewicz Lab at the University of Illinois Urbana-Champaign. 
 
 # Goal
-	Model share table process and associated food safety risks
-	Assess management strategies for Risk Reduction
+	The goal of this model is to assess the effect of test-and-reject sampling plans in the context of differenr process systems. 
 
 # How to Use
+	The main repository contains a word document with intruction on the basic use of the model. "Model Files Explanation.doc"
 
-	The /R Folder contains the files that are relevant to the model. 
-	the / R/Main Model contains the main file to run the model. Other files are just scenarios built from it. 
-	the R/ Main Loops, contains the loops for the model
-	the R/ Student loops, contains the process model for 1 student that goes through the line.
-# 2
+# Raw model data
+	The raw model data for all scenarios is contained in the spydata.py model. The data "Combined Data 147 Scenarios.spydata" contains the data for all 147 scenarios. Use the file MarginalGains_Baseline.py to obtain the results. 
+	The already processed csv files are found in the outer folder title CSV Files for Plots. Use the "Final Plots in R" Scrcipt to reproduce the plots from the already processed data. 
