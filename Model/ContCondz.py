@@ -20,4 +20,3 @@ PE_C = False
 PE_Cont_Loc = 0,#2,3,4,5
 #1 = Shredder, #2 = Belt, #3 = Washing, #4 Shaker, #5Centrifuge
 Pack_C= False
-
