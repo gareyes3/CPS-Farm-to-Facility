@@ -1662,6 +1662,31 @@ Exposure_Chart_df= pd.concat([A1,A2,A3,N1,N2,N3,N1_W,N2_W,N3_W,N1_PW,N2_PW,N3_PW
 
 Exposure_Chart_df.to_csv("C:\\Users\\gareyes3\\Box\\CPS Project- Farm to Facility\\Papers\\CSV Data\\Review 2\\Exposure_Chart_df-FinalR2.csv")
 
+#%% Confirming No Iterations
+
+#For baseline AI system
+mean_AI= np.mean(Baseline_AI_1[1]["After CS Samp"])
+sd_AI = np.std(Baseline_AI_1[1]["After CS Samp"])
+
+#10% from the mean
+Margin_Error = mean_AI*0.1
+
+#1.96 is the 5% CI  Z value for a normal distrubution
+(1.96*sd_AI/Margin_Error)**2
+
+
+
+#For Baseline No Interventions
+#For baseline AI system
+mean_NI= np.mean(Baseline_NI_1[1]["After CS Samp"])
+sd_NI = np.std(Baseline_NI_1[1]["After CS Samp"])
+
+#10% from the mean
+Margin_Error_NI = mean_NI*0.1
+
+#1.96 is the 5% CI  Z value for a normal distrubution
+(1.96*sd_NI/Margin_Error_NI)**2
+
 #%%END
 #%%
 #%%
@@ -1969,7 +1994,6 @@ Exposure_Chart_df.to_csv("C:\\Users\\Gustavo Reyes\\Box\\CPS Project- Farm to Fa
 
 
 
-
 #Sampling Results:
 
 def sampling_power(df,Step_Acc):
@@ -2060,6 +2084,23 @@ plt.yticks([1,10,100,1000,10000,100000])
 plt.title("All Interventions: System contamination before sampling steps")
 plt.xticks(rotation=-90)
 
+#%% Confirming number of iterations needed
+
+
+
+
+#%% NOT PART OF PUBLISHED ANALYSES EXTRA CODE #################################
+
+##################################################################
+##################################################################
+##################################################################
+##################################################################
+##################################################################
+##################################################################
+##################################################################
+##################################################################
+##################################################################
+##################################################################
 
 
 #Noramlized Contamination
@@ -2112,7 +2153,7 @@ sns.scatterplot(data=Outputs_Df, x="Final_CFU_Acc_Portion_mean", y="Ratio_Produc
 
 #Pooled CFU_g, 
 
-
+Baseline_NI
 
 
 
@@ -2357,7 +2398,7 @@ h.map(specs,"value" )
 
 
 
-#%%
+#%% Not used
 
 sns.barplot(data = Baseline_NI[1])
 plt.xticks(rotation=-80)

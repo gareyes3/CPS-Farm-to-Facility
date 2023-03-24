@@ -277,8 +277,7 @@ def F_Washing_ProcLines (df , Wash_Rate, Cdf):
         #AvCont_CFU = df.at[i,"CFU"]
         #AvContAfter = AvCont*10**-0.8
         C = float(Cdf.loc[Cdf['Time'] == i, 'C'])
-        Bws =Timeint*((((AvCont)-(AvCont*Xs))*(Rate*1000))/V)
-        #Bws = ((AvCont- AvContAfter)*Rate)/V
+        Bws =Timeint*((((AvCont)-(AvCont*Xs))*(Rate*1000))/V) #mult by 1000 because of volume to match rate to g per min
         #print(Bws)
         CXWfirst = Bws - (Blw*Xw*(L/V))
         CXw =  CXWfirst - (alphablw*Xw*C)
