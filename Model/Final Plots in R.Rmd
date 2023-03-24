@@ -15,9 +15,9 @@ library(forcats)
 
 
 #setwd("C:/Users/gareyes3/Box/CPS Project- Farm to Facility/Papers/CSV Data/Review 2")
-setwd("C:/Users/reyes/Box Sync/CPS Project- Farm to Facility/Papers/CSV Data/Review 2")
+#setwd("C:/Users/reyes/Box Sync/CPS Project- Farm to Facility/Papers/CSV Data/Review 2")
 #setwd("C:/Users/gareyes3/Box/CPS Project- Farm to Facility/Papers/CSV Data")
-#setwd("C:/Users/Gustavo Reyes/Box/CPS Project- Farm to Facility/Papers/CSV Data/Review 2")
+setwd("C:/Users/Gustavo Reyes/Box/CPS Project- Farm to Facility/Leafy Green Paper/CSV Data/Review 2")
 ```
 
 Contamination progression around the system.
@@ -152,7 +152,7 @@ ggplot(data= Binded_all, aes(x= variable,y = mean, group= Type, color = Type, li
                       labels = trans_format("log10", math_format(10^.x)))+
   labs(y= "Total Adulterant Cells in System", x="Process Stage")+
   #ggtitle("1) Random Contamination")+
-  facet_wrap(~ ContScen, ncol = 3)+
+  #facet_wrap(~ ContScen, ncol = 3)+
   labs(color = "Interventions", fill = "Interventions", linetype = "Interventions")+
   theme_bw()+
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))+
@@ -163,6 +163,24 @@ ggplot(data= Binded_all, aes(x= variable,y = mean, group= Type, color = Type, li
 ggsave("Figure 3-Contamination_Progression.tiff", width = 6.8, height = 3.7, units = "in", dpi = 300)
 ggsave("Figure 3-Contamination_Progression.jpeg", width = 6.8, height = 3.7, units = "in", dpi = 300)
 
+
+#For Presentations Same plot but binded
+ggplot(data= Binded_all, aes(x= variable,y = mean, group= Type, color = Type, linetype=Type, fill = Type))+
+  geom_line(size = 0.5)+
+  geom_ribbon(aes(ymin = l95, ymax = h95), alpha = 0.2, size = 0.5)+
+   scale_y_continuous(trans='log10',
+                      labels = trans_format("log10", math_format(10^.x)))+
+  labs(y= "Total Adulterant Cells in System", x="Process Stage")+
+  #ggtitle("1) Random Contamination")+
+  #facet_wrap(~ ContScen, ncol = 3)+
+  labs(color = "Interventions", fill = "Interventions", linetype = "Interventions")+
+  theme_bw()+
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))+
+  theme(text = element_text(size=7))+
+  theme(legend.key.size = unit(0.5,"line"))+
+  theme(legend.position="top")+
+  theme(axis.text.x=element_text(size=8),axis.text.y=element_text(size=8))
+ggsave("Progression-For-Presentations.jpeg", width = 4, height = 5, units = "in", dpi = 300)
 
 ```
 
@@ -544,8 +562,26 @@ ggplot(data = Exposure_Chart,aes(x = factor(Sampling_Plan, levels =levels_1 ) ,y
   geom_col(position = position_dodge2())+
   theme_bw()+
   facet_wrap(~Baseline_Scenario)
-  
 
+
+## For Presentation
+Exposure_Chart %>% 
+  filter(Cont_Spread == "Random Uniform (Widespread 100% Cluster)") %>% 
+  ggplot(aes(x = factor(Sampling_Plan, levels =levels_1 ) ,y = MeanComparison, group = Baseline_Scenario,fill = Baseline_Scenario))+
+  theme_bw()+
+  geom_line(aes(color =Baseline_Scenario), size  =0.7, alpha = 0.5)+
+  geom_point(size = 2, position = position_dodge(width = 0),shape = 21, alpha = 1)+
+  #theme(text = element_text(size=26), axis.text = element_text(size = 24))+
+  #theme(legend.text=element_text(size=16),legend.title=element_text(size=20))+
+  #geom_col(data = Exposure_Chart, aes(x =factor(Sampling_Plan, levels =levels_2), y = log10cont))+
+  #facet_wrap(~Cont_Spread)+
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))+
+  labs(y= "Relative Efficacy: Endpoint TAC", x = "Sampling Plan", color= "Process System", fill = "Process System")+
+  scale_y_continuous(labels = percent)+
+  theme(text = element_text(size=7))+
+  theme(legend.key.size = unit(0.8,"line"))
+  
+ggsave("Relative Efficacy-Presentation.jpeg", width = 4, height = 4, units = "in", dpi = 300)
 ```
 
 
