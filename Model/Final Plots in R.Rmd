@@ -17,7 +17,7 @@ library(forcats)
 #setwd("C:/Users/gareyes3/Box/CPS Project- Farm to Facility/Papers/CSV Data/Review 2")
 #setwd("C:/Users/reyes/Box Sync/CPS Project- Farm to Facility/Papers/CSV Data/Review 2")
 #setwd("C:/Users/gareyes3/Box/CPS Project- Farm to Facility/Papers/CSV Data")
-setwd("C:/Users/Gustavo Reyes/Box/CPS Project- Farm to Facility/Leafy Green Paper/CSV Data/Review 2")
+setwd("C:/Users/gareyes3/Box/CPS Project- Farm to Facility/Leafy Green Paper/CSV Data/Review 2")
 ```
 
 Contamination progression around the system.
@@ -138,6 +138,12 @@ Binded_all$Type<-str_replace("Washing", string = Binded_all$Type, replacement = 
 Binded_all$variable<-str_replace("Pre-Harvest", string = Binded_all$variable, replacement = "Preharvest")
 order_progression2<-str_replace("Pre-Harvest", string = order_progression, replacement = "Preharvest")
 
+Binded_all$variable<-str_replace("Bef ", string = Binded_all$variable, replacement = "Before ")
+order_progression2<-str_replace("Bef ", string = order_progression2, replacement = "Before ")
+
+Binded_all$variable<-str_replace("Aft ", string = Binded_all$variable, replacement = "After ")
+order_progression2<-str_replace("Aft ", string = order_progression2, replacement = "After ")
+
 Binded_all$variable<-factor(Binded_all$variable, levels=order_progression2)
 Binded_all$ContScen<-str_replace("Random Contamination", string = Binded_all$ContScen, replacement = "Random unclustered")
 Binded_all$ContScen<-factor(Binded_all$ContScen, levels=c("Random Uniform (Widespread 100% Cluster)","10% Clustered Contamination","1% Clustered Contamination"))
@@ -152,7 +158,7 @@ ggplot(data= Binded_all, aes(x= variable,y = mean, group= Type, color = Type, li
                       labels = trans_format("log10", math_format(10^.x)))+
   labs(y= "Total Adulterant Cells in System", x="Process Stage")+
   #ggtitle("1) Random Contamination")+
-  #facet_wrap(~ ContScen, ncol = 3)+
+  facet_wrap(~ ContScen, ncol = 3)+
   labs(color = "Interventions", fill = "Interventions", linetype = "Interventions")+
   theme_bw()+
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))+
@@ -515,12 +521,20 @@ ggsave("Relative Prevalence.tiff", width = 6.8, height = 4.5, units = "in",  dpi
 
 ```{r}
 Exposure_Chart<-read_csv("Exposure_Chart_df-FinalR2.csv")
+Exposure_Chart$Sampling_Plan <-str_replace("PHS4D", string = Exposure_Chart$Sampling_Plan, replacement = "PHS 4D")
+Exposure_Chart$Sampling_Plan <-str_replace("HTrad", string = Exposure_Chart$Sampling_Plan, replacement = "HS")
+Exposure_Chart$Sampling_Plan <-str_replace("PHS4H", string = Exposure_Chart$Sampling_Plan, replacement = "PHS 4H")
+Exposure_Chart$Sampling_Plan <-str_replace("PHSInt", string = Exposure_Chart$Sampling_Plan, replacement = "PHS Int")
+Exposure_Chart$Sampling_Plan <-str_replace("RSTrad", string = Exposure_Chart$Sampling_Plan, replacement = "RS")
+Exposure_Chart$Sampling_Plan <-str_replace("FPSTrad", string = Exposure_Chart$Sampling_Plan, replacement = "FPS")
+
+
 Exposure_Chart<-Exposure_Chart[-1]
 
 Exposure_Chart$MeanComparison = 1-Exposure_Chart$MeanComparison
 
 unique(Exposure_Chart$Cont_Spread)
-levels_1<-c("Baseline", "PHS4D", "PHS4H", "PHSInt", "HTrad", "RSTrad", "FPSTrad", "CS")
+levels_1<-c("Baseline", "PHS 4D", "PHS 4H", "PHS Int", "HS", "RS", "FPS", "CS")
 levels_2<-c("Baseline", "CS", "PHS4D", "HTrad", "RSTrad","PHS4H", "FPSTrad", "PHSInt")
 
 Exposure_Chart$Cont_Spread<-str_replace("Random Uniform Unclustered", string = Exposure_Chart$Cont_Spread, replacement = "Random Uniform (Widespread 100% Cluster)")
