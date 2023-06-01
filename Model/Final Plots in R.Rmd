@@ -295,6 +295,8 @@ FSdf <- FSdf %>% mutate(ints3 = rep(c(0,-3.416,-0.805564771,0.015250639
 ), each =8))
 
 
+FSdf$Name<-str_replace("Baseline NI", string = FSdf$System, replacement = "Baseline No-Intervention")
+
 ggplot(data= FSdf, aes(x = fct_reorder(Name, abs(FS)), y = FS, fill = System))+
   geom_col()+
   coord_flip()+
@@ -313,6 +315,63 @@ ggplot(data= FSdf, aes(x = fct_reorder(Name, abs(FS)), y = FS, fill = System))+
   ggsave("Figure 6- Factor Sensitivity.tiff", width = 6.8, height = 3.7, units = "in", dpi = 300)
 
 pfs
+
+#####Plots for CPS PResentation 2023
+
+
+FS_AI<-FSdf %>% 
+  filter(System == "Baseline All-Intervention") %>% 
+  filter(Name != "Baseline  AI")
+
+unique(FS_AI$Name)
+
+FS_AI$Name <-str_replace("Baseline  AI PHS4D", string = FS_AI$Name, replacement = "Preharvest 4 days")
+FS_AI$Name <-str_replace("Baseline  AI PHS4H", string = FS_AI$Name, replacement = "Preharvest 4 Hours")
+FS_AI$Name <-str_replace("Baseline  AI PHS Int", string = FS_AI$Name, replacement = "Intensive Preharvest")
+FS_AI$Name <-str_replace("Baseline  AI HS", string = FS_AI$Name, replacement = "Harvest")
+FS_AI$Name <-str_replace("Baseline  AI RS", string = FS_AI$Name, replacement = "Receiving")
+FS_AI$Name <-str_replace("Baseline  AI FPS", string = FS_AI$Name, replacement = "Finished Product")
+FS_AI$Name <-str_replace("Baseline  AI CS", string = FS_AI$Name, replacement = "Customer")
+
+
+  
+ggplot(data = FS_AI,aes(x = fct_reorder(Name, abs(FS)), y = FS))+
+geom_col(fill = "#E69F00")+
+coord_flip()+
+ylab("Factor Sensitivity Index")+
+xlab("")+
+geom_hline(aes(yintercept = -3.416 ),linetype = "dashed",size =0.7)+
+geom_hline(aes(yintercept = -3.416),size =0.7, color = "red", alpha = 0.5)
+
+ggsave("Factor Sensitivity AI CPS23 Presentation.jpeg", width = 3, height = 2, units = "in", dpi = 300)
+
+
+FS_NI<-FSdf %>% 
+  filter(System == "Baseline No-Intervention") %>% 
+  filter(Name != "Baseline NI")
+
+unique(FS_NI$Name)
+
+FS_NI$Name <-str_replace("Baseline NI PHS4D", string = FS_NI$Name, replacement = "Preharvest 4 days")
+FS_NI$Name <-str_replace("Baseline NI PHS4H", string = FS_NI$Name, replacement = "Preharvest 4 Hours")
+FS_NI$Name <-str_replace("Baseline NI PHS Int", string = FS_NI$Name, replacement = "Intensive Preharvest")
+FS_NI$Name <-str_replace("Baseline NI HS", string = FS_NI$Name, replacement = "Harvest")
+FS_NI$Name <-str_replace("Baseline NI RS", string = FS_NI$Name, replacement = "Receiving")
+FS_NI$Name <-str_replace("Baseline NI FPS", string = FS_NI$Name, replacement = "Finished Product")
+FS_NI$Name <-str_replace("Baseline NI CS", string = FS_NI$Name, replacement = "Customer")
+
+
+  
+ggplot(data = FS_NI,aes(x = fct_reorder(Name, abs(FS)), y = FS))+
+geom_col(fill = "skyblue")+
+coord_flip()+
+ylab("Factor Sensitivity Index")+
+xlab("")+
+geom_hline(aes(yintercept = 0 ),size =0.7)+
+geom_hline(aes(yintercept = -3.416),size =0.7, color = "red", alpha = 0.5)
+
+ggsave("Factor Sensitivity NI CPS23 Presentation.jpeg", width = 3, height = 2, units = "in", dpi = 300)
+
 
 ```
 
